@@ -40,6 +40,23 @@ npm run build
 npm run lint
 ```
 
+Deploying the application using Docker:
+
+1) Ensure that Docker and Docker Compose are installed on your system.
+
+2) In the root directory of the project, create an ".env" file. In the ".env" file, copy all the variables from the ".env.sample" file and give them values
+
+3) Build the Docker images:
+
+       docker-compose build
+4) Start the containers:
+
+       docker-compose up
+5) You can now open a web browser and see the application in action at the following address.
+
+       http://localhost:8080/
+
+
 License:
 
 Copyright (c) 2023-present, Kostiantyn Kondratenko
