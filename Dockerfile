@@ -13,8 +13,11 @@ RUN npm install
 # copy the project to the working directory
 COPY . .
 
+# port on which the application will be launched
+EXPOSE 8080
+
 # building a Vue application
 RUN npm run build
 
 # start app
-CMD npm run serve
+CMD ["npm", "run", "serve"]
