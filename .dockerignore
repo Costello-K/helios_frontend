@@ -1,0 +1,34 @@
+# ignore .git and .cash folders
+.git
+.cache
+
+# ignore all Docker files
+.dockerignore
+Dockerfile
+docker-compose.yml
+
+# ignore all markdown files (md)
+*.md
+
+# ignore WebStorm files
+.idea
+
+# ignore sensitive files
+.env
+**/.env
+.env.sample
+
+# ignore JS files
+node_modules
+build
+dist
+*.log
+*.pot
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+.cache
+.parcel-cache
+test/
