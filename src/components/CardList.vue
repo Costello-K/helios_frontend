@@ -4,7 +4,7 @@
     <v-row>
       <v-col
           v-for="item in data"
-          :key="item?.id"
+          :key="item.id"
           cols="7"
           class="mx-auto"
       >

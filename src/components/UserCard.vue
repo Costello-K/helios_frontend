@@ -1,24 +1,20 @@
 <template>
   <v-card height="120" class="card-hover pa-5">
-    <router-link
-        :to="'/users/' + user?.id"
-        style="text-decoration: none; color: #198ae3;"
-    >
-      {{ user?.name }} {{ user?.lastname }}
-    </router-link>
-
-    <v-card-text>
-      <p>
-        <strong>Email:</strong>
-        {{ user?.email }}
-      </p>
-    </v-card-text>
+    <BaseLink :to="`/users/${user?.id}`" :text="`${user?.name} ${user?.lastname}`"/>
+    <CardInfoLine label="Email" :value="user?.email"/>
   </v-card>
 </template>
 
 <script>
+import BaseLink from '@/components/BaseLink';
+import CardInfoLine from '@/components/CardInfoLine';
+
 export default {
   name: 'UserCard',
+  components: {
+    BaseLink,
+    CardInfoLine,
+  },
   props: {
     user: Object
   },

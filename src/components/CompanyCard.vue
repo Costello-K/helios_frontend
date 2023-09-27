@@ -1,25 +1,22 @@
 <template>
   <v-card height="120" class="card-hover pa-5">
-    <router-link
-        :to="'/companies/' + company?.id"
-        style="text-decoration: none; color: #198ae3;"
-    >
-      {{ company?.name }}
-    </router-link>
-    <v-card-text>
-      <p>
-        <strong>Owner:</strong>
-        {{ company?.owner }}
-      </p>
-    </v-card-text>
+    <BaseLink :to="`/companies/${company?.id}`" :text="company?.name"/>
+    <CardInfoLine label="Owner" :value="company?.owner"/>
   </v-card>
 </template>
 
 <script>
+import BaseLink from '@/components/BaseLink'
+import CardInfoLine from '@/components/CardInfoLine'
+
 export default {
   name: 'CompanyCard',
+  components: {
+    BaseLink,
+    CardInfoLine,
+  },
   props: {
-    company: Object
+    company: Object,
   },
 };
 </script>
