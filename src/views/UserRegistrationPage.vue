@@ -2,49 +2,49 @@
   <v-sheet width="400" class="mx-auto mt-15">
     <v-form @submit.prevent>
       <v-text-field
-          label="Username"
+          :label="$t('placeholders.username')"
           :rules="usernameRules"
       />
 
       <v-text-field
-          label="First name"
+          :label="$t('placeholders.firstName')"
           :rules="firstNameRules"
       />
 
       <v-text-field
-          label="Last name"
+          :label="$t('placeholders.lastName')"
       />
 
       <v-text-field
-          label="E-mail"
+          :label="$t('placeholders.email')"
           :rules="emailRules"
       />
 
       <v-text-field
-          v-model="password"
-          label="Password"
+          :label="$t('placeholders.password')"
           type="password"
           :rules="passwordRules"
       />
 
       <v-text-field
-          v-model="confirmPassword"
-          label="Confirm password"
+          :label="$t('placeholders.confirmPassword')"
           type="password"
-          :rules="confirmPasswordRules"
+          :rules="passwordRules"
       />
 
       <BaseButton
           type="submit"
           class="mt-2"
           block
-          button-name="Registration"
+          :button-name="$t('buttons.registration')"
       />
     </v-form>
   </v-sheet>
 </template>
 
 <script>
+import { useI18n } from "vue-i18n/dist/vue-i18n";
+import { ref } from "vue";
 import BaseButton from '@/components/BaseButton';
 
 export default {
@@ -52,24 +52,18 @@ export default {
   components: {
     BaseButton,
   },
-  data: function () {
-    return {
-      usernameRules: [val => !!val || 'Username is required'],
-      firstNameRules: [val => !!val || 'First name is required'],
-      emailRules: [
-        val => !!val || 'E-mail is required',
-        val => /.+@.+\..+/.test(val) || 'E-mail must be valid',
-      ],
-      password: '',
-      confirmPassword: '',
-      passwordRules: [val => !!val || 'Password is required'],
-      confirmPasswordRules: [val => (val === this.password) || 'Passwords must match'],
-    }
-  },
-  methods: {
-    registration() {
+  setup() {
+    const { t } = useI18n({useScope: 'global'});
 
-    },
-  },
+    const usernameRules = ref([val => !!val || t('validations.usernameRequired')]);
+    const firstNameRules = ref([val => !!val || t('validations.firstNameRequired')]);
+    const passwordRules = ref([val => !!val || t('validations.passwordRequired')]);
+    const emailRules = ref([
+      val => !!val || t('validations.emailRequired'),
+      val => /.+@.+\..+/.test(val) || t('validations.emailNotValid'),
+    ])
+
+    return { t, usernameRules, firstNameRules, emailRules, passwordRules };
+  }
 };
 </script>

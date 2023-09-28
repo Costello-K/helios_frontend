@@ -1,9 +1,9 @@
 <template>
   <v-container>
-    <h1 class="mb-5">User settings</h1>
+    <h1 class="mb-5">{{ $t('titles.userSettings') }}</h1>
     <v-card max-width="600" class="elevation-0 mx-auto">
       <v-card-title class="text-left">
-        Username:
+        {{ $t('placeholders.username') }}:
         <strong>
           {{ user?.username }}
         </strong>
@@ -11,24 +11,24 @@
 
       <v-form @submit.prevent="updateUserProfile">
         <v-text-field
-            label="First Name"
+            :label="$t('placeholders.firstName')"
             v-model="firstName"
         />
 
         <v-text-field
-            label="Last Name"
+            :label="$t('placeholders.lastName')"
             v-model="lastName"
         />
 
         <v-text-field
-            label="Email"
+            :label="$t('placeholders.email')"
             v-model="email"
         />
 
         <BaseButton
             type="submit"
             class="mb-5"
-            button-name="Save profile"
+            :button-name="$t('buttons.saveProfile')"
         />
       </v-form>
     </v-card>
