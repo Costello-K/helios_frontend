@@ -1,5 +1,5 @@
 <template>
-  <CardList title="Users" :data=users>
+  <CardList :title="$t('titles.users')" :data=users>
     <template v-slot:default="{ item }">
       <UserCard :user="item"/>
     </template>
@@ -13,12 +13,14 @@ import UserCard from '@/components/UserCard';
 
 export default {
   name: 'UserListPage',
-  data: () => ({
-    users: data.users,
-  }),
   components: {
     CardList,
     UserCard,
+  },
+  setup() {
+    const users = data.users;
+
+    return { users }
   },
 };
 </script>

@@ -1,7 +1,7 @@
 <template>
   <v-img alt="logo" height="200" class="mt-10" src="@/assets/logo.png"></v-img>
   <h1 class='project-title'>HELIOS</h1>
-  <h1>Welcome to Quizzes</h1>
+  <h1>{{ $t('welcome') }}</h1>
 </template>
 
 <script>

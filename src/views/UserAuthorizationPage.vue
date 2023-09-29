@@ -2,13 +2,13 @@
   <v-sheet width="350" class="mx-auto mt-15">
     <v-form @submit.prevent>
       <v-text-field
-          label="Username"
+          :label="$t('placeholders.username')"
           :rules="usernameRules"
       ></v-text-field>
 
       <v-text-field
-          label="Password"
-          :rules="passwordRules"
+          :label="$t('placeholders.password')"
+          :rules="passwordNRules"
           type="password"
       ></v-text-field>
 
@@ -16,28 +16,29 @@
           type="submit"
           class="mt-2"
           block
-          button-name="Login"
+          :button-name="$t('buttons.login')"
       />
     </v-form>
   </v-sheet>
 </template>
 
 <script>
-import BaseButton from '@/components/BaseButton';
+import { useI18n } from "vue-i18n/dist/vue-i18n";
+import { ref } from "vue";
+import BaseButton from "@/components/BaseButton";
 
 export default {
-  name: 'UserAuthorizationPage',
+  name: "UserAuthorizationPage",
   components: {
     BaseButton,
   },
-  data: () => ({
-    usernameRules: [val => !!val || 'Username is required'],
-    passwordRules: [val => !!val || 'Password is required'],
-  }),
-  methods: {
-    login() {
+  setup() {
+    const { t } = useI18n({ useScope: "global" });
 
-    },
+    const usernameRules = ref([val => !!val || t('validations.usernameRequired')]);
+    const passwordNRules = ref([val => !!val || t('validations.passwordRequired')]);
+
+    return { t, usernameRules, passwordNRules };
   },
 };
 </script>

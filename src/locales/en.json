@@ -1,0 +1,67 @@
+{
+  "language": "EN",
+  "welcome": "Welcome to Quizzes",
+  "navbar": {
+    "home": "Home",
+    "users": "Users",
+    "companies": "Companies",
+    "about": "About"
+  },
+  "buttons": {
+    "login": "Login",
+    "registration": "Registration",
+    "myProfile": "My profile",
+    "settings": "Settings",
+    "logout": "Logout",
+    "saveProfile": "Save profile"
+  },
+  "validations": {
+    "usernameRequired": "Username is required",
+    "passwordRequired": "Password is required",
+    "firstNameRequired": "First name is required",
+    "emailRequired": "E-mail is required",
+    "emailNotValid": "E-mail must be valid",
+    "passwordNotMatch": "Passwords must match"
+  },
+  "placeholders": {
+    "username": "Username",
+    "password": "Password",
+    "confirmPassword": "Confirm password",
+    "email": "E-mail",
+    "firstName": "First name",
+    "lastName": "Last name"
+  },
+  "titles": {
+    "users": "Username",
+    "companies": "Companies",
+    "about": "About Us",
+    "userProfile": "User Profile",
+    "companyProfile": "Company Profile",
+    "userSettings": "User settings",
+    "pageNotFound": "Page Not Found"
+  },
+  "fields": {
+    "email": "E-mail",
+    "owner": "Owner",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "company": "Company"
+  },
+  "links": {
+    "goHome": "Go Back to Home"
+  },
+  "texts": {
+    "about": {
+      "aboutArrayLength": "6",
+      "context": [
+        "Welcome to HELOS - your trusted partner in the market for many years.",
+        "We provide an innovative platform for business owners and employees, where they can create and conduct quizzes.",
+        "Our goal is to equip our clients with all the necessary tools for successful quiz creation and productivity enhancement.",
+        "We take pride in our clients satisfaction with our services and the results they achieve.",
+        "Our office is located in the city of Kiev.",
+        "For inquiries, please reach out to our team at:"
+      ]
+    },
+    "notFound": "Sorry, the requested page does not exist."
+  }
+}

@@ -1,7 +1,17 @@
 <template>
-  <v-card height="120" class="card-hover pa-5">
-    <BaseLink :to="`/companies/${company?.id}`" :text="company?.name"/>
-    <CardInfoLine label="Owner" :value="company?.owner"/>
+  <v-card
+      v-if="company"
+      height="120"
+      class="card-hover pa-5"
+  >
+    <BaseLink
+      :to="`/companies/${company.id}`"
+      :text="company.name"
+    />
+    <CardInfoLine
+      :label="$t('fields.owner')"
+      :value="company.owner"
+    />
   </v-card>
 </template>
 

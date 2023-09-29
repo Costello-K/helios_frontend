@@ -1,5 +1,5 @@
 <template>
-  <CardList title="Company" :data=companies>
+  <CardList :title="$t('titles.companies')" :data=companies>
     <template v-slot:default="{ item }">
       <CompanyCard :company="item" />
     </template>
@@ -13,12 +13,14 @@ import CardList from '@/components/CardList';
 
 export default {
   name: 'CompanyListPage',
-  data: () => ({
-    companies: data.companies,
-  }),
   components: {
     CardList,
     CompanyCard,
+  },
+  setup() {
+    const companies = data.companies;
+
+    return { companies }
   },
 };
 </script>
