@@ -1,9 +1,20 @@
 <template>
   <v-container>
-    <h1 class="display-2 mb-5">{{ $t('titles.companyProfile') }}</h1>
-    <v-card class="text-left elevation-0">
-      <InfoLine :label="$t('fields.company')" :value="company?.name"/>
-      <InfoLine :label="$t('fields.owner')" :value="company?.owner"/>
+    <h1 class="display-2 mb-5">
+      {{ $t('titles.companyProfile') }}
+    </h1>
+    <v-card
+      v-if="company"
+      class="text-left elevation-0"
+    >
+      <InfoLine
+        :label="$t('fields.company')"
+        :value="company.name"
+      />
+      <InfoLine
+        :label="$t('fields.owner')"
+        :value="company.owner"
+      />
     </v-card>
   </v-container>
 </template>

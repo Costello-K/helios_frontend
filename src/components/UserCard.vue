@@ -1,7 +1,16 @@
 <template>
-  <v-card height="120" class="card-hover pa-5">
-    <BaseLink :to="`/users/${user?.id}`" :text="`${user?.name} ${user?.lastname}`"/>
-    <CardInfoLine :label="$t('fields.email')" :value="user?.email"/>
+  <v-card
+      height="120"
+      class="card-hover pa-5">
+    <BaseLink
+        v-if="user"
+        :to="`/users/${user.id}`"
+        :text="`${user.name} ${user.lastname}`"
+    />
+    <CardInfoLine
+        :label="$t('fields.email')"
+        :value="user.email"
+    />
   </v-card>
 </template>
 
