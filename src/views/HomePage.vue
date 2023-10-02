@@ -13,13 +13,19 @@
 </template>
 
 <script>
+import { ref, onMounted } from 'vue';
 import { testApiRequest } from "@/api";
 
 export default {
   name: 'HomePage',
-  async setup() {
-    const data = await testApiRequest();
+  setup() {
+    const data = ref({})
     const getStatusTextColor = statusCode => statusCode === 200 ? 'green-text' : 'red-text';
+    const getServerData = async () => {
+      data.value = await testApiRequest()
+    };
+
+    onMounted(async () => await getServerData());
 
     return { data, getStatusTextColor };
   }
