@@ -35,32 +35,44 @@ export default {
     const setValue = ref(0);
     const asyncValue = ref(0);
 
+    const count = computed(() => store.state.testCount.testCount);
+    const doubleCount = computed(() => store.getters['testCount/doubleTestCount']);
+    const strCount = computed(() => store.getters['testCount/strTestCount']);
+
+    const incrementAsync = () => store.dispatch('testCount/incrementAsyncTestCount');
+    const decrementAsync = () => store.dispatch('testCount/decrementAsyncTestCount');
+    const setCountAsync = () => {
+      const value = parseInt(asyncValue.value)
+      if (!isNaN(value)) {
+        store.dispatch('testCount/setAsyncTestCount', value)
+        asyncValue.value = 0
+      }
+    };
+
+    const increment = () => store.commit('testCount/incrementTestCount');
+    const decrement = () => store.commit('testCount/decrementTestCount');
+    const reset = () => store.commit('testCount/removeTestCount');
+    const setCount = () => {
+      const value = parseInt(setValue.value)
+      if (!isNaN(value)) {
+        store.commit('testCount/setTestCount', value)
+        setValue.value = 0
+      }
+    };
+
     return {
-      count: computed(() => store.state.testCount.testCount),
-      doubleCount: computed(() => store.getters['testCount/doubleTestCount']),
-      strCount: computed(() => store.getters['testCount/strTestCount']),
-      increment: () => store.commit('testCount/incrementTestCount'),
-      decrement: () => store.commit('testCount/decrementTestCount'),
-      incrementAsync: () => store.dispatch('testCount/incrementAsyncTestCount'),
-      decrementAsync: () => store.dispatch('testCount/decrementAsyncTestCount'),
-      reset: () => store.commit('testCount/removeTestCount'),
+      count,
+      doubleCount,
+      strCount,
       setValue,
       asyncValue,
-      setCount: () => {
-        const value = parseInt(setValue.value)
-        if (!isNaN(value)) {
-          store.commit('testCount/setTestCount', value)
-          setValue.value = 0
-        }
-      },
-      setCountAsync: () => {
-        const value = parseInt(asyncValue.value)
-        if (!isNaN(value)) {
-          store.dispatch('testCount/setAsyncTestCount', value)
-          asyncValue.value = 0
-        }
-      },
-
+      increment,
+      decrement,
+      setCount,
+      incrementAsync,
+      decrementAsync,
+      setCountAsync,
+      reset,
     }
   },
 };

@@ -5,18 +5,12 @@ export default {
   state: () => ({
     testCount: 0,
   }),
-  mutations: {
-    removeTestCount(state) {
-      state.testCount = 0;
+  getters: {
+    doubleTestCount(state) {
+      return state.testCount * 2;
     },
-    incrementTestCount(state) {
-      state.testCount++;
-    },
-    decrementTestCount(state) {
-      state.testCount--;
-    },
-    setTestCount(state, payload) {
-      state.testCount = payload;
+    strTestCount(state) {
+      return `Now count = ${state.testCount}`;
     },
   },
   actions: {
@@ -30,12 +24,18 @@ export default {
       setTimeout(() => commit('setTestCount', payload), 1000);
     },
   },
-  getters: {
-    doubleTestCount(state) {
-      return state.testCount * 2;
+  mutations: {
+    removeTestCount(state) {
+      state.testCount = 0;
     },
-    strTestCount(state) {
-      return `Now count = ${state.testCount}`;
+    incrementTestCount(state) {
+      state.testCount++;
+    },
+    decrementTestCount(state) {
+      state.testCount--;
+    },
+    setTestCount(state, payload) {
+      state.testCount = payload;
     },
   },
 };
