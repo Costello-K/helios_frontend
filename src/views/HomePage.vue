@@ -2,17 +2,32 @@
   <v-img alt="logo" height="200" class="mt-10" src="@/assets/logo.png"></v-img>
   <h1 class='project-title'>HELIOS</h1>
   <h1>{{ $t('welcome') }}</h1>
-<!--  TestCounter will be used only for the FE-5 branch  -->
-  <TestCounter/>
+  <!--  Server status will be used only for the FE-6 branch  -->
+  <h1 :class="getStatusTextColor(data.status_code)">
+    Server {{ data.result }}
+  </h1>
+  <h1 :class="getStatusTextColor(data.status_code)">
+    Status code: {{ data.status_code }}
+  </h1>
+  <!--  Server status will be used only for the FE-6 branch  -->
 </template>
 
 <script>
-import TestCounter from "@/components/TestCounter";
+import { ref, onMounted } from 'vue';
+import { testApiRequest } from "@/api";
 
 export default {
   name: 'HomePage',
-  components: {
-    TestCounter,
+  setup() {
+    const data = ref({})
+    const getStatusTextColor = statusCode => statusCode === 200 ? 'green-text' : 'red-text';
+    const getServerData = async () => {
+      data.value = await testApiRequest()
+    };
+
+    onMounted(async () => await getServerData());
+
+    return { data, getStatusTextColor };
   }
 };
 </script>
@@ -22,5 +37,11 @@ export default {
   font-size: 42px;
   margin-top: 50px;
   margin-bottom: 50px;
+}
+.green-text {
+  color: green;
+}
+.red-text {
+  color: red;
 }
 </style>

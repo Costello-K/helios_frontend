@@ -57,7 +57,9 @@
   </div>
 
   <v-container class="main pv-0">
-    <router-view/>
+    <Suspense>
+      <router-view/>
+    </Suspense>
   </v-container>
 </template>
 
