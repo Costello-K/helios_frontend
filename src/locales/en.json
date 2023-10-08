@@ -13,7 +13,11 @@
     "myProfile": "My profile",
     "settings": "Settings",
     "logout": "Logout",
-    "saveProfile": "Save profile"
+    "saveProfile": "Save profile",
+    "reset": "Reset",
+    "username": "username",
+    "password": "password",
+    "applyNew": "Apply new"
   },
   "validations": {
     "usernameRequired": "Username is required",
@@ -21,10 +25,13 @@
     "firstNameRequired": "First name is required",
     "emailRequired": "E-mail is required",
     "emailNotValid": "E-mail must be valid",
-    "passwordNotMatch": "Passwords must match"
+    "passwordNotMatch": "Passwords must match",
+    "avatarSize": "Avatar size should be less than",
+    "fileExtensions": "Accepted file extensions"
   },
   "placeholders": {
     "username": "Username",
+    "avatar": "Avatar",
     "password": "Password",
     "confirmPassword": "Confirm password",
     "email": "E-mail",
@@ -32,10 +39,12 @@
     "lastName": "Last name"
   },
   "titles": {
-    "users": "Username",
+    "users": "Users",
     "companies": "Companies",
     "about": "About Us",
     "userProfile": "User Profile",
+    "myProfile": "My Profile",
+    "socialLogin": "Login via social networks",
     "companyProfile": "Company Profile",
     "userSettings": "User settings",
     "pageNotFound": "Page Not Found"
@@ -45,10 +54,15 @@
     "owner": "Owner",
     "firstName": "First name",
     "lastName": "Last name",
-    "company": "Company"
+    "company": "Company",
+    "username": "Username",
+    "avatar": "Avatar"
   },
   "links": {
-    "goHome": "Go Back to Home"
+    "goHome": "Go Back to Home",
+    "clickHereToLogin": "Click here to login.",
+    "forgotYourPassword": "Forgot your password?",
+    "forgotYourUsername": "Forgot your username?"
   },
   "texts": {
     "about": {
@@ -62,6 +76,14 @@
         "For inquiries, please reach out to our team at:"
       ]
     },
-    "notFound": "Sorry, the requested page does not exist."
+    "notFound": "Sorry, the requested page does not exist.",
+    "accountNotActivated": "Your account has not been activated. Try again.",
+    "accountActivated": "Your account is activated!",
+    "goToEmailConfirm": "Go to your email and confirm the reset of your",
+    "password": "password | password",
+    "username": "username | username",
+    "hasBeenChanged": "has been changed.",
+    "receiveAnEmail": "To activate your account, you should receive an email.",
+    "afterConfirmationActivation": "After confirmation of activation"
   }
 }

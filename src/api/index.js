@@ -1,10 +1,5 @@
-import { axiosInstance } from "@/axios";
+import * as authApi from './auth';
+import * as usersApi from './users';
+import * as socialAuthApi from './socialAuth';
 
-export const testApiRequest = async () => {
-  try {
-    const response = await axiosInstance.get('/');
-    return response.data;
-  } catch (err) {
-    console.error(err)
-  }
-}
+export { authApi, usersApi, socialAuthApi };
