@@ -1,35 +1,26 @@
 import { axiosInstance } from '@/axios';
+import { BaseApiClient } from '@/api/baseApiClient';
 
-/**
- * Get the currently authenticated user's profile.
- */
-export const getMyUser = async () => {
-  try {
-    return await axiosInstance.get(`/auth/users/me/`);
-  } catch (err) {
-    console.error(err);
+class UsersApiClient {
+  constructor(baseApiClient) {
+    this.baseApiClient = baseApiClient;
   }
-};
 
-/**
- * Get the profile of a specific user by their ID.
- * @param {number} id - The ID of the user whose profile is to be retrieved.
- */
-export const getUserProfile = async (id) => {
-  try {
-    return await axiosInstance.get(`/v1/users/${id}/`);
-  } catch (err) {
-    console.error(err);
+  async getMyUser() {
+    const path = '/auth/users/me/';
+    return this.baseApiClient.makeRequest('GET', path);
   }
-};
 
-/**
- * Get a list of all users.
- */
-export const getListUsers = async () => {
-  try {
-    return await axiosInstance.get(`/v1/users/`);
-  } catch (err) {
-    console.error(err);
+  async getUserProfile(id) {
+    const path = `/v1/users/${id}/`;
+    return this.baseApiClient.makeRequest('GET', path);
   }
-};
+
+  async getListUsers() {
+    const path = '/v1/users/';
+    return this.baseApiClient.makeRequest('GET', path);
+  }
+}
+
+const usersApiClient = new BaseApiClient(axiosInstance);
+export const usersApi = new UsersApiClient(usersApiClient);

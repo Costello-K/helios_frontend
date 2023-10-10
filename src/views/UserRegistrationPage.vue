@@ -47,7 +47,7 @@
 <script>
 import { useI18n } from 'vue-i18n/dist/vue-i18n';
 import { ref } from 'vue';
-import { authApi } from '@/api';
+import { authUserApi } from '@/api';
 import { objUtils } from '@/utils';
 import { FIELDS_FORM_REGISTRATION, VALIDATION_RULES } from '@/constants';
 import BaseButton from '@/components/BaseButton';
@@ -122,7 +122,7 @@ export default {
 
       try {
         const multipartFormData = createMultipartFormData(formData);
-        const res = await authApi.registerUser(multipartFormData);
+        const res = await authUserApi.registerUser(multipartFormData);
         registration.value.done = res.status === 201;
       } catch (err) {
         errors.value = objUtils.createEmptyObject(errors.value);

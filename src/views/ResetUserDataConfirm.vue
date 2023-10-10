@@ -58,7 +58,7 @@
 import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n/dist/vue-i18n';
 import { ref } from 'vue';
-import { authApi } from '@/api';
+import { authUserApi } from '@/api';
 import { objUtils } from '@/utils';
 import BaseLink from '@/components/BaseLink';
 import BaseButton from '@/components/BaseButton';
@@ -110,7 +110,7 @@ export default {
 
       try {
         const clearForm = objUtils.createObjectWithoutEmptyValues(formData.value);
-        const res = await authApi.resetUserDataConfirm(clearForm, property);
+        const res = await authUserApi.resetUserDataConfirm(clearForm, property);
         confirmResetProperty.value = res.status === 204;
       } catch (err) {
         const data = err.response.data;

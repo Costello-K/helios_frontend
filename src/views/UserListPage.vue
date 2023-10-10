@@ -25,9 +25,13 @@ export default {
     const users = ref([]);
 
     const getUsers = async () => {
-      const res = await usersApi.getListUsers();
-      return res.data.results;
-    }
+      try {
+        const res = await usersApi.getListUsers();
+        return res.data.results;
+      } catch (err) {
+        console.error(err);
+      }
+    };
 
     onMounted(async () => {
       users.value = await getUsers();

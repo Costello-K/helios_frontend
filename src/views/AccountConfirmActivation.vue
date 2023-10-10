@@ -16,7 +16,7 @@
 <script>
 import { useRouter } from 'vue-router';
 import { ref, onMounted } from 'vue';
-import { authApi } from '@/api';
+import { authUserApi } from '@/api';
 import BaseLink from '@/components/BaseLink';
 
 export default {
@@ -34,7 +34,7 @@ export default {
     };
 
     const sendActivationRequest = async () => {
-      const res = await authApi.activationUserAccount(formData);
+      const res = await authUserApi.activationUserAccount(formData);
       activation.value = res.status === 204;
     };
 

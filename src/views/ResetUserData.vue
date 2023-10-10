@@ -35,7 +35,7 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n/dist/vue-i18n';
-import { authApi } from '@/api';
+import { authUserApi } from '@/api';
 import { objUtils } from '@/utils';
 import { VALIDATION_RULES } from "@/constants";
 import BaseButton from '@/components/BaseButton';
@@ -62,7 +62,7 @@ export default {
       }
 
       try {
-        const res = await authApi.resetUserData(formData.value, property);
+        const res = await authUserApi.resetUserData(formData.value, property);
         confirmEmail.value = res.status === 204;
       } catch (err) {
         errors.value.detail = err.response.data[0] || err.response.data.email[0];

@@ -1,5 +1,5 @@
-import * as authApi from './auth';
-import * as usersApi from './users';
-import * as socialAuthApi from './socialAuth';
+import { authUserApi } from './auth';
+import { usersApi } from './users';
+import { socialAuthUserApi } from './socialAuth';
 
-export { authApi, usersApi, socialAuthApi };
+export { authUserApi, usersApi, socialAuthUserApi };

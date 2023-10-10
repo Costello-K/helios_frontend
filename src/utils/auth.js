@@ -1,4 +1,4 @@
-import { NAME_ACCESS_TOKEN, NAME_REFRESH_TOKEN } from '@/constants';
+import { NAME_ACCESS_TOKEN, NAME_REFRESH_TOKEN, TYPE_SOCIAL_AUTH } from '@/constants';
 import store from '@/store';
 
 // Set the access and refresh tokens in local storage
@@ -12,6 +12,7 @@ export const setTokens = data => {
 export const removeTokens = () => {
   localStorage.removeItem(NAME_ACCESS_TOKEN);
   localStorage.removeItem(NAME_REFRESH_TOKEN);
+  localStorage.removeItem(TYPE_SOCIAL_AUTH);
 };
 
 // Logout the currently authenticated user by removing tokens and user data from storage

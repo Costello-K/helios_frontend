@@ -112,7 +112,7 @@
 </template>
 
 <script>
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
@@ -123,10 +123,10 @@ export default {
   setup() {
     const store = useStore();
     const router = useRouter();
-    const isAuthorized = ref(computed(() => store.getters['authUser/isAuthorized']));
-    const authUserId = ref(computed(() => store.getters['authUser/getUserId']));
-    const userFirstName = ref(computed(() => store.getters['authUser/getUserFirstName']));
-    const userEmail = ref(computed(() => store.getters['authUser/getUserEmail']));
+    const isAuthorized = computed(() => store.getters['authUser/isAuthorized']);
+    const authUserId = computed(() => store.getters['authUser/getUserId']);
+    const userFirstName = computed(() => store.getters['authUser/getUserFirstName']);
+    const userEmail = computed(() => store.getters['authUser/getUserEmail']);
     const {t, locale} = useI18n({useScope: 'global'});
 
     const logout = () => {
