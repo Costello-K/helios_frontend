@@ -124,3 +124,13 @@ export const COMPANY_INFO_FIELDS = [
   { name: 'fields.company', value: 'name' },
   { name: 'fields.owner', value: 'owner' },
 ];
+
+// Immutable fields in user settings
+export const NON_CHANGEABLE_USER_SETTINGS_FIELDS = ['username', 'email'];
+
+// Password change fields
+export const CHANGE_PASSWORD_FIELDS = [
+  { field: 'current_password',  label: 'currentPassword' },
+  { field: 'new_password',  label: 'newPassword' },
+  { field: 're_new_password',  label: 'confirmNewPassword' },
+];
