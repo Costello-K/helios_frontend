@@ -1,9 +1,9 @@
 import { axiosInstance } from '@/axios';
-import { BaseApiClient } from './baseApiClient';
+import { BaseApiController } from './BaseApiController';
 
-class UserApiClient {
-  constructor(baseApiClient) {
-    this.baseApiClient = baseApiClient;
+class UserApiController {
+  constructor(ApiController) {
+    this.baseApiClient = ApiController;
   }
 
   async registerUser(formData) {
@@ -41,5 +41,5 @@ class UserApiClient {
   }
 }
 
-const userApiClient = new BaseApiClient(axiosInstance);
-export const authUserApi = new UserApiClient(userApiClient);
+const userApiController = new BaseApiController(axiosInstance);
+export const authUserApi = new UserApiController(userApiController);

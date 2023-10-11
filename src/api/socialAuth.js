@@ -1,9 +1,9 @@
 import { axiosInstance } from '@/axios';
-import { BaseApiClient } from '@/api/baseApiClient';
+import { BaseApiController } from '@/api/BaseApiController';
 
-class SocialAuthApiClient {
-  constructor(baseApiClient) {
-    this.baseApiClient = baseApiClient;
+class SocialAuthApiController {
+  constructor(ApiController) {
+    this.baseApiClient = ApiController;
   }
 
   // Get the URL for authentication through OAuth2.
@@ -26,5 +26,5 @@ class SocialAuthApiClient {
   }
 }
 
-const socialAuthApiClient = new BaseApiClient(axiosInstance);
-export const socialAuthUserApi = new SocialAuthApiClient(socialAuthApiClient);
+const socialAuthApiController = new BaseApiController(axiosInstance);
+export const socialAuthUserApi = new SocialAuthApiController(socialAuthApiController);

@@ -1,4 +1,4 @@
-export class BaseApiClient {
+export class BaseApiController {
   constructor(axiosInstance) {
     this.axios = axiosInstance;
   }
@@ -12,10 +12,7 @@ export class BaseApiClient {
         ...config,
       });
 
-      return {
-        data: response.data,
-        status: response.status,
-      };
+      return { ...response };
     } catch (err) {
       console.error(err);
       throw err;
