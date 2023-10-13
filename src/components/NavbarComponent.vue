@@ -7,18 +7,23 @@
       >
 
         <v-toolbar-items>
-          <div
-            v-for="(item, i) in HEADER_NAVBAR_ITEMS"
-            :key="i"
-            class="h-100"
-          >
+          <v-btn @click="$router.push('/')">
+            {{ $t('navbar.home') }}
+          </v-btn>
+
+          <template v-if="isAuthorized">
             <v-btn
-              v-if="item.auth && isAuthorized || !item.auth && !isAuthorized"
-              @click="$router.push(`${item.path}`)"
+                v-for="(item, i) in HEADER_NAVBAR_AUTHORIZED_USER"
+                :key="i"
+                @click="$router.push(`${item.path}`)"
             >
               {{ $t(item.title) }}
             </v-btn>
-          </div>
+          </template>
+
+          <v-btn @click="$router.push('/about')">
+            {{ $t('navbar.about') }}
+          </v-btn>
         </v-toolbar-items>
 
         <v-card
@@ -66,19 +71,28 @@
                 <v-app-bar-nav-icon v-bind="props"/>
               </template>
 
-              <v-list>
-                <div
-                  v-for="(item, i) in HEADER_DROPDOWN_MENU_ITEMS"
-                  :key="i"
-                >
+              <v-list class="dropdown-menu-container">
+                <template v-if="!isAuthorized">
                   <v-btn
-                    v-if="item.auth && isAuthorized || !item.auth && !isAuthorized"
+                    v-for="(item, i) in HEADER_DROPDOWN_MENU_NON_AUTHORIZED_USER"
+                    :key="i"
                     @click="$router.push(item.path)"
                     class="elevation-0 w-100"
                   >
                     {{ $t(item.title) }}
                   </v-btn>
-                </div>
+                </template>
+
+                <template v-if="isAuthorized">
+                  <v-btn
+                      v-for="(item, i) in HEADER_DROPDOWN_MENU_AUTHORIZED_USER"
+                      :key="i"
+                      @click="$router.push(item.path)"
+                      class="elevation-0 w-100"
+                  >
+                    {{ $t(item.title) }}
+                  </v-btn>
+                </template>
 
                 <v-btn
                   v-if="isAuthorized"
@@ -117,7 +131,12 @@ import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { auth } from '@/utils';
-import { HEADER_NAVBAR_ITEMS, HEADER_DROPDOWN_MENU_ITEMS, I18N_LANGUAGES } from '@/constants';
+import {
+  HEADER_NAVBAR_AUTHORIZED_USER,
+  HEADER_DROPDOWN_MENU_AUTHORIZED_USER,
+  HEADER_DROPDOWN_MENU_NON_AUTHORIZED_USER,
+  I18N_LANGUAGES,
+} from '@/constants';
 
 export default {
   setup() {
@@ -144,8 +163,9 @@ export default {
     return {
       t,
       locale,
-      HEADER_NAVBAR_ITEMS,
-      HEADER_DROPDOWN_MENU_ITEMS,
+      HEADER_NAVBAR_AUTHORIZED_USER,
+      HEADER_DROPDOWN_MENU_AUTHORIZED_USER,
+      HEADER_DROPDOWN_MENU_NON_AUTHORIZED_USER,
       I18N_LANGUAGES,
       userFirstName,
       userEmail,
@@ -179,5 +199,9 @@ export default {
 }
 .transparent {
   background-color: transparent;
+}
+.dropdown-menu-container {
+  display: flex;
+  flex-direction: column;
 }
 </style>
