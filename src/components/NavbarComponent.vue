@@ -1,51 +1,113 @@
 <template>
   <div class="header">
     <v-container class="header-container pa-0">
-      <v-toolbar color="transparent" title="HELIOS">
+      <v-toolbar
+        color="transparent"
+        title="HELIOS"
+      >
 
         <v-toolbar-items>
-          <v-btn
-              v-for="(item, i) in navbarItems"
-              @click="$router.push(`${item.path}`)"
-              :key="i"
-          >
-            {{ $t(`${item.title}`) }}
+          <v-btn @click="$router.push('/')">
+            {{ $t('navbar.home') }}
           </v-btn>
 
-          <router-link to="/companies/:id"/>
-          <router-link to="/users/:id"/>
+          <template v-if="isAuthorized">
+            <v-btn
+                v-for="(item, i) in HEADER_NAVBAR_AUTHORIZED_USER"
+                :key="i"
+                @click="$router.push(`${item.path}`)"
+            >
+              {{ $t(item.title) }}
+            </v-btn>
+          </template>
+
+          <v-btn @click="$router.push('/about')">
+            {{ $t('navbar.about') }}
+          </v-btn>
         </v-toolbar-items>
 
-        <v-card color="transparent" class="elevation-0">
+        <v-card
+          v-if="userEmail || userFirstName"
+          class="elevation-0 text-center user-title mx-5 transparent"
+        >
+          <p>{{ userEmail }}</p>
+          <p>{{ userFirstName }}</p>
+        </v-card>
+
+        <v-card class="elevation-0 transparent">
           <v-card-title>
             <v-menu>
 
               <template v-slot:activator="{ props }">
-                <v-btn :block="true" v-bind="props" class="elevation-0">{{ locale }}</v-btn>
+                <v-btn
+                  v-bind="props"
+                  class="elevation-0 v-100"
+                >
+                  {{ locale }}
+                </v-btn>
               </template>
 
               <v-list>
-                <v-list-item v-for="(lang, i) in language" :key="i">
-                  <v-btn :block="true" class="elevation-0" @click="switchLang(lang.local)">{{ lang.title }}</v-btn>
-                </v-list-item>
+                <v-btn
+                  v-for="(lang, i) in I18N_LANGUAGES"
+                  :key="i"
+                  :block="true"
+                  @click="switchLang(lang.local)"
+                  class="elevation-0"
+                >
+                  {{ lang.title }}
+                </v-btn>
               </v-list>
 
             </v-menu>
           </v-card-title>
         </v-card>
 
-        <v-card color="transparent" class="elevation-0">
+        <v-card class="elevation-0 transparent">
           <v-card-title>
             <v-menu>
 
               <template v-slot:activator="{ props }">
-                <v-app-bar-nav-icon v-bind="props"></v-app-bar-nav-icon>
+                <v-app-bar-nav-icon v-bind="props"/>
               </template>
 
-              <v-list>
-                <v-list-item v-for="(item, i) in menuItems" :key="i">
-                  <v-btn :block="true" class="elevation-0" @click="$router.push(item.path)">{{ $t(`${item.title}`) }}</v-btn>
-                </v-list-item>
+              <v-list class="dropdown-menu-container">
+                <template v-if="!isAuthorized">
+                  <v-btn
+                    v-for="(item, i) in HEADER_DROPDOWN_MENU_NON_AUTHORIZED_USER"
+                    :key="i"
+                    @click="$router.push(item.path)"
+                    class="elevation-0 w-100"
+                  >
+                    {{ $t(item.title) }}
+                  </v-btn>
+                </template>
+
+                <template v-if="isAuthorized">
+                  <v-btn
+                      v-for="(item, i) in HEADER_DROPDOWN_MENU_AUTHORIZED_USER"
+                      :key="i"
+                      @click="$router.push(item.path)"
+                      class="elevation-0 w-100"
+                  >
+                    {{ $t(item.title) }}
+                  </v-btn>
+                </template>
+
+                <v-btn
+                  v-if="isAuthorized"
+                  @click="myProfile"
+                  class="elevation-0 w-100"
+                >
+                  {{ $t('buttons.myProfile') }}
+                </v-btn>
+                <v-btn
+                  v-if="isAuthorized"
+                  @click="logout"
+                  class="elevation-0 w-100"
+                >
+                  {{ $t('buttons.logout') }}
+                </v-btn>
               </v-list>
 
             </v-menu>
@@ -64,22 +126,55 @@
 </template>
 
 <script>
+import { computed } from 'vue';
+import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
-import { HEADER_NAVBAR_ITEMS, HEADER_DROPDOWN_MENU_ITEMS, I18N_LANGUAGES } from '@/constants'
+import { auth } from '@/utils';
+import {
+  HEADER_NAVBAR_AUTHORIZED_USER,
+  HEADER_DROPDOWN_MENU_AUTHORIZED_USER,
+  HEADER_DROPDOWN_MENU_NON_AUTHORIZED_USER,
+  I18N_LANGUAGES,
+} from '@/constants';
 
 export default {
   setup() {
-    const { t, locale } = useI18n({useScope: 'global'});
-    const navbarItems = HEADER_NAVBAR_ITEMS;
-    const menuItems = HEADER_DROPDOWN_MENU_ITEMS;
-    const language = I18N_LANGUAGES;
+    const store = useStore();
+    const router = useRouter();
+    const isAuthorized = computed(() => store.getters['authUser/isAuthorized']);
+    const authUserId = computed(() => store.getters['authUser/getUserId']);
+    const userFirstName = computed(() => store.getters['authUser/getUserFirstName']);
+    const userEmail = computed(() => store.getters['authUser/getUserEmail']);
+    const {t, locale} = useI18n({useScope: 'global'});
+
+    const logout = () => {
+      auth.logoutUser();
+      router.push('/');
+    };
+
+    const myProfile = () => router.push(`/users/${authUserId.value}`);
 
     const switchLang = newLang => {
       locale.value = newLang;
       localStorage.setItem('currentLanguage', newLang);
     };
 
-    return { t, locale, navbarItems, menuItems, language, switchLang };
+    return {
+      t,
+      locale,
+      HEADER_NAVBAR_AUTHORIZED_USER,
+      HEADER_DROPDOWN_MENU_AUTHORIZED_USER,
+      HEADER_DROPDOWN_MENU_NON_AUTHORIZED_USER,
+      I18N_LANGUAGES,
+      userFirstName,
+      userEmail,
+      isAuthorized,
+      authUserId,
+      logout,
+      myProfile,
+      switchLang,
+    };
   }
 };
 </script>
@@ -98,5 +193,15 @@ export default {
   min-width: 480px;
   max-width: 1200px;
   text-align: center;
+}
+.user-title {
+  font-size: 12px;
+}
+.transparent {
+  background-color: transparent;
+}
+.dropdown-menu-container {
+  display: flex;
+  flex-direction: column;
 }
 </style>

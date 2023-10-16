@@ -13,7 +13,11 @@
     "myProfile": "Мій профіль",
     "settings": "Налаштування",
     "logout": "Вийти",
-    "saveProfile": "Зберегти профіль"
+    "saveProfile": "Зберегти профіль",
+    "reset": "Скинути",
+    "username": "юзернейм",
+    "password": "пароль",
+    "applyNew": "Застосувати новий"
   },
   "validations": {
     "usernameRequired": "Поле юзернейм є обов'язковим",
@@ -21,10 +25,13 @@
     "firstNameRequired": "Ім'я обов'язкове",
     "emailRequired": "Поле емейл є обов'язковим",
     "emailNotValid": "Емейл має бути валідним",
-    "passwordNotMatch": "Паролі не співпадають"
+    "passwordNotMatch": "Паролі не співпадають",
+    "avatarSize": "Аватар має бути менше",
+    "fileExtensions": "Дозволені розширення файлів"
   },
   "placeholders": {
     "username": "Юзернейм",
+    "avatar": "Аватар",
     "password": "Пароль",
     "confirmPassword": "Підтвердити пароль",
     "email": "Емейл",
@@ -36,6 +43,8 @@
     "companies": "Компанії",
     "about": "Про нас",
     "userProfile": "Профіль користувача",
+    "myProfile": "Мій профіль",
+    "socialLogin": "Увійти за допомогою соціальних мереж",
     "companyProfile": "Профіль компанії",
     "userSettings": "Налаштування користувача",
     "pageNotFound": "Сторінку не знайдено"
@@ -45,10 +54,15 @@
     "owner": "Власник",
     "firstName": "Ім'я",
     "lastName": "Прізвище",
-    "company": "Назва компанії"
+    "company": "Назва компанії",
+    "username": "Юзернейм",
+    "avatar": "Аватар"
   },
   "links": {
-    "goHome": "Повернутись на головну"
+    "goHome": "Повернутись на головну",
+    "clickHereToLogin": "Натисніть, щоб увійти.",
+    "forgotYourPassword": "Забули пароль?",
+    "forgotYourUsername": "Забули юзернейм?"
   },
   "texts": {
     "about": {
@@ -62,6 +76,14 @@
         "Якщо у вас єзапитання зв'яжіться з нашою командою за адресою:"
       ]
     },
-    "notFound": "Вибачте, сторінка не існує."
+    "notFound": "Вибачте, сторінка не існує.",
+    "accountNotActivated": "Ваш обліковий запис не активовано. Спробуйте знову.",
+    "accountActivated": "Ваш обліковий запис активовано!",
+    "goToEmailConfirm": "Перейдіть на електронну пошту та підтвердьте скидання",
+    "password": "Пароль | пароля",
+    "username": "Юзернейм | юзернейма",
+    "hasBeenChanged": "успішно змінено.",
+    "receiveAnEmail": "Щоб активувати обліковий запис, вам має надійти електронний лист.",
+    "afterConfirmationActivation": "Після підтвердження активації"
   }
 }

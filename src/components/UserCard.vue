@@ -1,20 +1,34 @@
 <template>
   <v-card
-      height="120"
-      class="card-hover pa-5">
-    <BaseLink
-        v-if="user"
-        :to="`/users/${user.id}`"
-        :text="`${user.name} ${user.lastname}`"
-    />
-    <CardInfoLine
+      v-if="userData"
+      :height=120
+      class="card-hover d-flex align-center pa-5"
+  >
+    <v-avatar
+        class="mx-3 my-1"
+        size="70"
+    >
+      <v-img
+        :src="`${BASE_URL}${userData.avatar}`"
+        :cover="true"
+      />
+    </v-avatar>
+    <div class="px-5">
+      <BaseLink
+        :to="`/users/${userData.id}`"
+        :text="`${userData.first_name} ${userData.last_name}`"
+      />
+      <CardInfoLine
         :label="$t('fields.email')"
-        :value="user.email"
-    />
+        :value="userData.email"
+      />
+    </div>
   </v-card>
 </template>
 
 <script>
+import { ref } from 'vue';
+import { BASE_URL } from '@/constants';
 import BaseLink from '@/components/BaseLink';
 import CardInfoLine from '@/components/CardInfoLine';
 
@@ -27,7 +41,12 @@ export default {
   props: {
     user: Object
   },
-};
+  setup(props) {
+    const userData = ref(props.user);
+
+    return { userData, BASE_URL };
+  },
+}
 </script>
 
 <style scoped>
