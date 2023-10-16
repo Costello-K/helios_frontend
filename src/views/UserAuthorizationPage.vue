@@ -52,7 +52,7 @@ import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n/dist/vue-i18n';
 import { ref } from 'vue';
-import { authApi, usersApi } from '@/api';
+import { authUserApi, usersApi } from '@/api';
 import { auth, objUtils } from '@/utils';
 import { TYPE_SOCIAL_AUTH, VALIDATION_RULES } from '@/constants';
 import BaseButton from '@/components/BaseButton';
@@ -95,7 +95,7 @@ export default {
       }
 
       try {
-        const response = await authApi.jwtCreate(formData.value);
+        const response = await authUserApi.jwtCreate(formData.value);
         auth.setTokens(response.data);
 
         const res = await usersApi.getMyUser();

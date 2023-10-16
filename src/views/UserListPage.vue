@@ -34,10 +34,14 @@ export default {
     const users = computed(() => store.state.userList.users);
 
     const getUsers = async (page) => {
-      const res = await usersApi.getListUsers(page);
-      totalPages.value = res.data.total_pages;
-      return res.data.results;
-    }
+      try {
+        const res = await usersApi.getListUsers(page);
+        totalPages.value = res.data.total_pages;
+        return res.data.results;
+      } catch (err) {
+        console.error(err);
+      }
+    };
 
     const handlePageChange = async (newPage) => {
       const newUsersData = await getUsers(newPage);

@@ -42,8 +42,12 @@ export default {
     const authUserId = ref(computed(()=> store.getters['authUser/getUserId']));
 
     const getUserData = async (userId) => {
-      const res = await usersApi.getUserProfile(userId);
-      return res.data;
+      try {
+        const res = await usersApi.getUserProfile(userId);
+        return res.data;
+      } catch (err) {
+        console.error(err);
+      }
     };
 
     const getUsers = async (userId) => {

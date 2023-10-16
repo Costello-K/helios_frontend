@@ -1,8 +1,9 @@
 import axios from 'axios';
 import i18n from './i18n';
-import { authApi } from '@/api';
+import { authUserApi } from '@/api';
 import { auth } from '@/utils';
-import { BASE_URL, NAME_ACCESS_TOKEN, NAME_REFRESH_TOKEN} from '@/constants';
+import { BASE_URL, NAME_ACCESS_TOKEN, NAME_REFRESH_TOKEN } from '@/constants';
+import router from '@/router';
 
 // Create an instance of Axios
 export const axiosInstance = axios.create({
@@ -20,7 +21,7 @@ const updateAccessToken = async () => {
 
   try {
     // Request a token refresh
-    const response = await authApi.jwtRefresh(refreshToken, {'_retry': true});
+    const response = await authUserApi.jwtRefresh(refreshToken, {'_retry': true});
     const newAccessToken = response.data.access;
 
     // Update the access token in local storage
@@ -30,8 +31,9 @@ const updateAccessToken = async () => {
   } catch (err) {
     console.error('Error while updating the token:', err);
     auth.logoutUser();
+    axiosInstance.defaults.headers.common['Authorization'] = '';
     // Redirect to the authorization page
-    window.location.href = '/authorization';
+    router.push('/authorization');
   }
 };
 

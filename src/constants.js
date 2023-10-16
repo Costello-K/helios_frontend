@@ -40,19 +40,21 @@ export const ROUTER_DATA = [
   { path: '/:catchAll(.*)', pathToComponent: 'views/NotFoundPage' },
 ];
 
-// Navigation items in the header
-export const HEADER_NAVBAR_ITEMS = [
-  { path: '/', title: 'navbar.home', auth: false },
-  { path: '/users', title: 'navbar.users', auth: true },
-  { path: '/companies', title: 'navbar.companies', auth: true },
-  { path: '/about', title: 'navbar.about', auth: false },
+// Navigation items in the header for authorized user
+export const HEADER_NAVBAR_AUTHORIZED_USER = [
+  { path: '/users', title: 'navbar.users' },
+  { path: '/companies', title: 'navbar.companies' },
 ];
 
-// Dropdown menu items in the header
-export const HEADER_DROPDOWN_MENU_ITEMS = [
-  { path: '/registration', title: 'buttons.registration', auth: false },
-  { path: '/authorization', title: 'buttons.login', auth: false },
-  { path: '/settings', title: 'buttons.settings', auth: true },
+// Dropdown menu items in the header for authorized user
+export const HEADER_DROPDOWN_MENU_AUTHORIZED_USER = [
+  { path: '/settings', title: 'buttons.settings' },
+];
+
+// Dropdown menu items in the header for non-authorized user
+export const HEADER_DROPDOWN_MENU_NON_AUTHORIZED_USER = [
+  { path: '/registration', title: 'buttons.registration' },
+  { path: '/authorization', title: 'buttons.login' },
 ];
 
 // Supported languages for internationalization

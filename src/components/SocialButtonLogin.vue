@@ -17,7 +17,7 @@ import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n/dist/vue-i18n';
 import { ref, onMounted } from 'vue';
-import { socialAuthApi, usersApi } from '@/api';
+import { socialAuthUserApi, usersApi } from '@/api';
 import { auth, queryParamUtils } from '@/utils';
 import { TYPE_SOCIAL_AUTH, SOCIAL_AUTH_DATA } from '@/constants';
 
@@ -34,7 +34,7 @@ export default {
     const authState = ref(null);
     const socialData = ref(props.social);
     const getAuthUrl = async (typeSocialAuth) => {
-      const res = await socialAuthApi.getAuthUrl(typeSocialAuth);
+      const res = await socialAuthUserApi.getAuthUrl(typeSocialAuth);
       return res.data.authorization_url;
     };
 
@@ -51,13 +51,16 @@ export default {
 
       if (authCode.value && authState.value) {
         const nameSocialAuth = localStorage.getItem(TYPE_SOCIAL_AUTH);
-        const response = await socialAuthApi.getTokens(
-            nameSocialAuth,
-            authCode.value,
-            authState.value
-        );
-        auth.setTokens(response.data);
-
+        try {
+          const response = await socialAuthUserApi.getTokens(
+              nameSocialAuth,
+              authCode.value,
+              authState.value
+          );
+          auth.setTokens(response.data);
+        } catch (err) {
+          console.error(err)
+        }
         const res = await usersApi.getMyUser();
         store.commit('authUser/setUserData', res.data);
 
