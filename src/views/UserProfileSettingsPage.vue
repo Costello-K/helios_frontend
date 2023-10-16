@@ -159,7 +159,7 @@
 import { computed, ref } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
-import { changeUserPassword, changeUserProfile, deleteMyUser, updateUserAvatar } from '@/api/users';
+import { usersApi } from '@/api';
 import { useI18n } from 'vue-i18n/dist/vue-i18n';
 import { auth, objUtils, formUtils } from '@/utils';
 import { BASE_URL, VALIDATION_RULES, CHANGE_PASSWORD_FIELDS, NON_CHANGEABLE_USER_SETTINGS_FIELDS } from '@/constants';
@@ -205,8 +205,8 @@ export default {
     });
     const validationRules = ref({
       avatar: ref(VALIDATION_RULES.avatar),
-      firstName: ref(VALIDATION_RULES.firstName),
-      lastName: ref(VALIDATION_RULES.lastName),
+      first_name: ref(VALIDATION_RULES.firstName),
+      last_name: ref(VALIDATION_RULES.lastName),
       email: ref(VALIDATION_RULES.email),
       current_password: ref(VALIDATION_RULES.password),
       new_password: ref(VALIDATION_RULES.password),
@@ -240,7 +240,7 @@ export default {
         newFormData.append('avatar', avatarUpdateFormData.value.avatar[0]);
 
         try {
-          const res = await updateUserAvatar(newFormData);
+          const res = await usersApi.updateUserAvatar(newFormData);
           store.commit('authUser/setUserData', res.data);
           avatarUpdateFormData.value = objUtils.createEmptyObject(avatarUpdateFormData.value);
           switchForm('updateAvatar');
@@ -252,7 +252,7 @@ export default {
 
     const submitDeleteAvatarForm = async () => {
       try {
-        const res = await updateUserAvatar({ avatar: '' });
+        const res = await usersApi.updateUserAvatar({ avatar: '' });
         store.commit('authUser/setUserData', res.data);
       } catch (err) {
         errorHandler(errors, err);
@@ -266,7 +266,7 @@ export default {
       }
 
       try {
-        const res = await changeUserProfile(fieldData);
+        const res = await usersApi.changeUserProfile(fieldData);
         store.commit('authUser/setUserData', res.data);
         fieldData.value = objUtils.createEmptyObject(fieldData);
         switchForm(field);
@@ -282,7 +282,7 @@ export default {
       }
 
       try {
-        const res = await changeUserPassword(userPasswordUpdateFormData.value);
+        const res = await usersApi.changeUserPassword(userPasswordUpdateFormData.value);
         if (res.status === 204) {
           userPasswordUpdateFormData.value = objUtils.createEmptyObject(userPasswordUpdateFormData.value);
           switchForm('changePassword');
@@ -303,7 +303,7 @@ export default {
       }
 
       try {
-        const res = await deleteMyUser(userDeleteFormData.value);
+        const res = await usersApi.deleteMyUser(userDeleteFormData.value);
         if (res.status === 204) {
           auth.logoutUser();
           router.push('/');
