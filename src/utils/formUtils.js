@@ -1,12 +1,10 @@
 export const formValidator = (form, rules) => {
   const copyForm = { ...form.value };
-  const validationFormRules1 = { ...rules.value };
+  const validationFormRules = { ...rules.value };
 
-  for (const [key, value] of Object.entries(copyForm)) {
-    if (!validationFormRules1[key].every(rule => rule(value) === true)) {
-      return false;
-    }
-  }
-
-  return true;
+  return Object.entries(copyForm).every(
+    ([key, value]) => validationFormRules[key].every(
+      rule => rule(value) === true
+    )
+  );
 };

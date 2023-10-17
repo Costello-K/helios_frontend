@@ -204,16 +204,11 @@ export default {
       re_new_password: '',
     });
     const validationRules = ref({
-      avatar: ref(VALIDATION_RULES.avatar),
-      first_name: ref(VALIDATION_RULES.firstName),
-      last_name: ref(VALIDATION_RULES.lastName),
-      email: ref(VALIDATION_RULES.email),
-      current_password: ref(VALIDATION_RULES.password),
-      new_password: ref(VALIDATION_RULES.password),
-      re_new_password: ref([
+      ...VALIDATION_RULES,
+      re_new_password: [
         v => !!v || t('validations.passwordRequired'),
         v => v === userPasswordUpdateFormData.value.new_password || t('validations.passwordNotMatch'),
-      ])
+      ]
     });
     // constant for changeable user fields that do not require password confirmation
     const CHANGEABLE_USER_FIELDS = [
@@ -240,8 +235,8 @@ export default {
         newFormData.append('avatar', avatarUpdateFormData.value.avatar[0]);
 
         try {
-          const res = await usersApi.updateUserAvatar(newFormData);
-          store.commit('authUser/setUserData', res.data);
+          const { data } = await usersApi.updateUserAvatar(newFormData);
+          store.commit('authUser/setUserData', data);
           avatarUpdateFormData.value = objUtils.createEmptyObject(avatarUpdateFormData.value);
           switchForm('updateAvatar');
         } catch (err) {
@@ -252,8 +247,8 @@ export default {
 
     const submitDeleteAvatarForm = async () => {
       try {
-        const res = await usersApi.updateUserAvatar({ avatar: '' });
-        store.commit('authUser/setUserData', res.data);
+        const { data } = await usersApi.updateUserAvatar({ avatar: '' });
+        store.commit('authUser/setUserData', data);
       } catch (err) {
         errorHandler(errors, err);
       }
@@ -266,8 +261,8 @@ export default {
       }
 
       try {
-        const res = await usersApi.changeUserProfile(fieldData);
-        store.commit('authUser/setUserData', res.data);
+        const { data } = await usersApi.changeUserProfile(fieldData);
+        store.commit('authUser/setUserData', data);
         fieldData.value = objUtils.createEmptyObject(fieldData);
         switchForm(field);
       } catch (err) {
@@ -282,8 +277,8 @@ export default {
       }
 
       try {
-        const res = await usersApi.changeUserPassword(userPasswordUpdateFormData.value);
-        if (res.status === 204) {
+        const { status } = await usersApi.changeUserPassword(userPasswordUpdateFormData.value);
+        if (status === 204) {
           userPasswordUpdateFormData.value = objUtils.createEmptyObject(userPasswordUpdateFormData.value);
           switchForm('changePassword');
           isPasswordChanged.value = true;
@@ -303,8 +298,8 @@ export default {
       }
 
       try {
-        const res = await usersApi.deleteMyUser(userDeleteFormData.value);
-        if (res.status === 204) {
+        const { status } = await usersApi.deleteMyUser(userDeleteFormData.value);
+        if (status === 204) {
           auth.logoutUser();
           router.push('/');
         }

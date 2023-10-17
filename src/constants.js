@@ -91,13 +91,14 @@ export const SOCIAL_AUTH_DATA = {
 // Form field validation rules
 export const VALIDATION_RULES = {
   username: [v => !!v || t('validations.usernameRequired')],
+  new_username: [v => !!v || t('validations.usernameRequired')],
   email: [
     v => !!v || t('validations.emailRequired'),
     v => /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/.test(v)
       || t('validations.emailNotValid'),
   ],
-  firstName: [v => !!v || t('validations.firstNameRequired')],
-  lastName: [],
+  first_name: [v => !!v || t('validations.firstNameRequired')],
+  last_name: [],
   avatar: [
     v => !v
       || !v.length
@@ -109,16 +110,18 @@ export const VALIDATION_RULES = {
       || `${t('validations.fileExtensions')}: .png, .jpeg, .jpg`,
   ],
   password: [v => !!v || t('validations.passwordRequired')],
+  current_password: [v => !!v || t('validations.passwordRequired')],
+  new_password: [v => !!v || t('validations.passwordRequired')],
 };
 
 // Registration form fields
 export const FIELDS_FORM_REGISTRATION = {
   username: { model: 'username', label: 'placeholders.username', type: 'text' },
-  firstName: { model: 'first_name', label: 'placeholders.firstName', type: 'text' },
-  lastName: { model: 'last_name', label: 'placeholders.lastName', type: 'text' },
+  first_name: { model: 'first_name', label: 'placeholders.firstName', type: 'text' },
+  last_name: { model: 'last_name', label: 'placeholders.lastName', type: 'text' },
   email: { model: 'email', label: 'placeholders.email', type: 'email' },
   password: { model: 'password', label: 'placeholders.password', type: 'password' },
-  confirmPassword: { model: 'confirm_password', label: 'placeholders.confirmPassword', type: 'password' },
+  confirm_password: { model: 'confirm_password', label: 'placeholders.confirmPassword', type: 'password' },
 };
 
 // Company information fields

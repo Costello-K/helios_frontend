@@ -34,8 +34,8 @@ export default {
     const authState = ref(null);
     const socialData = ref(props.social);
     const getAuthUrl = async (typeSocialAuth) => {
-      const res = await socialAuthUserApi.getAuthUrl(typeSocialAuth);
-      return res.data.authorization_url;
+      const { data } = await socialAuthUserApi.getAuthUrl(typeSocialAuth);
+      return data.authorization_url;
     };
 
     const setTypeSocialAuth = async (typeSocialAuth) => {
@@ -61,11 +61,11 @@ export default {
         } catch (err) {
           console.error(err)
         }
-        const res = await usersApi.getMyUser();
-        store.commit('authUser/setUserData', res.data);
+        const { data } = await usersApi.getMyUser();
+        store.commit('authUser/setUserData', data);
 
         localStorage.removeItem(TYPE_SOCIAL_AUTH);
-        router.push(`/users/${res.data.id}`);
+        router.push(`/users/${data.id}`);
       }
     });
 

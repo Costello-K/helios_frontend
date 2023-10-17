@@ -7,24 +7,24 @@
       <v-form @submit.prevent="submitUserResetPropertyForm">
         <template v-if="property === 'password'">
           <v-text-field
-            v-model="formData.new_password"
+            v-model="passwordFormData.new_password"
             :label="$t('placeholders.password')"
-            :rules="passwordRules"
+            :rules="validationRules.new_password"
             type="password"
           />
 
           <v-text-field
-            v-model="formData.re_new_password"
+            v-model="passwordFormData.re_new_password"
             :label="$t('placeholders.confirmPassword')"
-            :rules="confirmPasswordRules"
+            :rules="validationRules.re_new_password"
             type="password"
           />
         </template>
         <template v-else>
           <v-text-field
-            v-model="formData.new_username"
+            v-model="usernameFormData.new_username"
             :label="$t('placeholders.username')"
-            :rules="usernameRules"
+            :rules="validationRules.new_username"
           />
         </template>
         <div style="position: relative" >
@@ -59,10 +59,10 @@ import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n/dist/vue-i18n';
 import { ref } from 'vue';
 import { authUserApi } from '@/api';
-import { objUtils } from '@/utils';
+import { formUtils, objUtils } from '@/utils';
+import { VALIDATION_RULES } from '@/constants';
 import BaseLink from '@/components/BaseLink';
 import BaseButton from '@/components/BaseButton';
-import { VALIDATION_RULES } from "@/constants";
 
 export default {
   name: 'ConfirmActivationAccount',
@@ -78,40 +78,37 @@ export default {
     const formData = ref({
       uid,
       token,
+    });
+    const passwordFormData = ref({
       new_password: '',
       re_new_password: '',
-      new_username: '',
     });
+    const usernameFormData = ref({ new_username: '' });
     const errors = ref({ detail: '' });
 
-    const usernameRules = ref(VALIDATION_RULES.username);
-    const passwordRules = ref(VALIDATION_RULES.password);
-    const confirmPasswordRules = ref([
-          v => !!v || t('validations.passwordRequired'),
-          v => v === formData.value.password || t('validations.passwordNotMatch')
-        ]
-    );
-
-    const isFormValid = () => {
-      if (property === 'password') {
-        return (passwordRules.value.every(rule => rule(formData.value.new_password) === true) &&
-          confirmPasswordRules.value.every(rule => rule(formData.value.re_new_password) === true))
-      } else {
-        return usernameRules.value.every(rule => rule(formData.value.new_username) === true)
-      }
-    };
+    const validationRules = ref({
+      ...VALIDATION_RULES,
+      re_new_password: [
+        v => !!v || t('validations.passwordRequired'),
+        v => v === passwordFormData.value.new_password || t('validations.passwordNotMatch')
+      ]
+    })
 
     const submitUserResetPropertyForm = async () => {
       errors.value = objUtils.createEmptyObject(errors.value);
 
-      if (!isFormValid()) {
+      const propertyFormData = property === 'password'
+          ? passwordFormData
+          : usernameFormData
+      const isFormValid = formUtils.formValidator(propertyFormData, validationRules);
+      if (!isFormValid) {
         return;
       }
 
       try {
-        const clearForm = objUtils.createObjectWithoutEmptyValues(formData.value);
-        const res = await authUserApi.resetUserDataConfirm(clearForm, property);
-        confirmResetProperty.value = res.status === 204;
+        const newFormData = { ...formData.value, ...propertyFormData.value };
+        const { status } = await authUserApi.resetUserDataConfirm(newFormData, property);
+        confirmResetProperty.value = status === 204;
       } catch (err) {
         const data = err.response.data;
         errors.value.detail = data.new_password && data.new_password[0] || data.new_username[0];
@@ -122,10 +119,9 @@ export default {
       t,
       property,
       confirmResetProperty,
-      usernameRules,
-      passwordRules,
-      confirmPasswordRules,
-      formData,
+      validationRules,
+      passwordFormData,
+      usernameFormData,
       errors,
       submitUserResetPropertyForm,
     }

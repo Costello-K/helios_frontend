@@ -41,7 +41,7 @@ class UsersApiController {
 
   async deleteMyUser(formData) {
     const path = '/auth/users/me/';
-    return this.baseApiClient.makeRequest('DELETE', path, { data: formData });
+    return this.baseApiClient.makeRequest('DELETE', path, formData);
   }
 
   async getUserProfile(id) {

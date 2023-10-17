@@ -47,6 +47,7 @@
 <script>
 import { useI18n } from 'vue-i18n/dist/vue-i18n';
 import { ref } from 'vue';
+import { formUtils } from '@/utils';
 import { authUserApi } from '@/api';
 import { objUtils } from '@/utils';
 import { FIELDS_FORM_REGISTRATION, VALIDATION_RULES } from '@/constants';
@@ -82,26 +83,12 @@ export default {
     });
 
     const validationRules = ref({
-      avatar: ref(VALIDATION_RULES.avatar),
-      username: ref(VALIDATION_RULES.username),
-      firstName: ref(VALIDATION_RULES.firstName),
-      lastName: ref(VALIDATION_RULES.lastName),
-      email: ref(VALIDATION_RULES.email),
-      password: ref(VALIDATION_RULES.password),
-      confirmPassword: ref([
+      ...VALIDATION_RULES,
+      confirm_password: [
         v => !!v || t('validations.passwordRequired'),
         v => v === formData.value.password || t('validations.passwordNotMatch')
-      ])
-    });
-
-    const isFormValid = () => {
-      for (const [key, value] of Object.entries(FIELDS_FORM_REGISTRATION)) {
-        if (!validationRules.value[key].every(rule => rule(formData.value[value.model]) === true)) {
-          return false;
-        }
-      }
-      return true;
-    };
+      ]
+    })
 
     const createMultipartFormData = obj => {
       const newFormData = new FormData();
@@ -116,14 +103,15 @@ export default {
     }
 
     const submitUserRegistrationForm = async () => {
-      if (!isFormValid()) {
+      const isFormValid = formUtils.formValidator(formData, validationRules);
+      if (!isFormValid) {
         return;
       }
 
       try {
         const multipartFormData = createMultipartFormData(formData);
-        const res = await authUserApi.registerUser(multipartFormData);
-        registration.value.done = res.status === 201;
+        const { status } = await authUserApi.registerUser(multipartFormData);
+        registration.value.done = status === 201;
       } catch (err) {
         errors.value = objUtils.createEmptyObject(errors.value);
         errors.value = objUtils.mergeObjects(errors.value, err.response.data);

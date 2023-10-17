@@ -8,13 +8,13 @@
         <v-text-field
             v-model="formData.username"
             :label="$t('placeholders.username')"
-            :rules="usernameRules"
+            :rules="VALIDATION_RULES.username"
         />
 
         <v-text-field
             v-model="formData.password"
             :label="$t('placeholders.password')"
-            :rules="passwordRules"
+            :rules="VALIDATION_RULES.password"
             type="password"
         />
 
@@ -53,7 +53,7 @@ import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n/dist/vue-i18n';
 import { ref } from 'vue';
 import { authUserApi, usersApi } from '@/api';
-import { auth, objUtils } from '@/utils';
+import { auth, formUtils, objUtils } from '@/utils';
 import { TYPE_SOCIAL_AUTH, VALIDATION_RULES } from '@/constants';
 import BaseButton from '@/components/BaseButton';
 import BaseLink from '@/components/BaseLink';
@@ -77,20 +77,11 @@ export default {
     });
     const errors = ref({ detail: '' });
 
-    const usernameRules = ref(VALIDATION_RULES.username);
-    const passwordRules = ref(VALIDATION_RULES.password);
-
-    const isFormValid = () => {
-      return (
-          usernameRules.value.every(rule => rule(formData.value.username) === true) &&
-          passwordRules.value.every(rule => rule(formData.value.password) === true)
-      )
-    };
-
     const submitUserLoginForm = async () => {
       errors.value = objUtils.createEmptyObject(errors.value);
 
-      if (!isFormValid()) {
+      const isFormValid = formUtils.formValidator(formData, ref(VALIDATION_RULES));
+      if (!isFormValid) {
         return;
       }
 
@@ -98,10 +89,10 @@ export default {
         const response = await authUserApi.jwtCreate(formData.value);
         auth.setTokens(response.data);
 
-        const res = await usersApi.getMyUser();
-        store.commit('authUser/setUserData', res.data);
+        const { data } = await usersApi.getMyUser();
+        store.commit('authUser/setUserData', data);
 
-        router.push(`/users/${res.data.id}`);
+        router.push(`/users/${data.id}`);
       } catch (err) {
         errors.value = objUtils.mergeObjects(errors.value, err.response.data);
       }
@@ -109,8 +100,7 @@ export default {
 
     return {
       t,
-      usernameRules,
-      passwordRules,
+      VALIDATION_RULES,
       formData,
       errors,
       isLoadingPage,
