@@ -29,10 +29,10 @@ export default {
   },
   mutations: {
     removeUserData(state) {
-      state.user = objUtils.createEmptyObjectWithNullId(state.user)
+      state.user = objUtils.createEmptyObjectWithNullId(state.user);
     },
     setUserData(state, payload) {
-      state.user = objUtils.mergeObjects(state.user, payload)
+      state.user = objUtils.mergeObjects(state.user, payload);
     },
   },
 };

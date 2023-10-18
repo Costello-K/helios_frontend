@@ -14,10 +14,16 @@
     "settings": "Settings",
     "logout": "Logout",
     "saveProfile": "Save profile",
+    "savePassword": "Save password",
     "reset": "Reset",
     "username": "username",
     "password": "password",
-    "applyNew": "Apply new"
+    "applyNew": "Apply new",
+    "deleteAccount": "Delete account",
+    "changePassword": "Change password",
+    "cancel": "Cancel",
+    "apply": "Apply",
+    "confirmDelete": "Confirm deletion"
   },
   "validations": {
     "usernameRequired": "Username is required",
@@ -36,7 +42,10 @@
     "confirmPassword": "Confirm password",
     "email": "E-mail",
     "firstName": "First name",
-    "lastName": "Last name"
+    "lastName": "Last name",
+    "currentPassword": "Current password",
+    "newPassword": "New password",
+    "confirmNewPassword": "Confirm new password"
   },
   "titles": {
     "users": "Users",
@@ -56,7 +65,7 @@
     "lastName": "Last name",
     "company": "Company",
     "username": "Username",
-    "avatar": "Avatar"
+    "avatar": "Avatar",
   },
   "links": {
     "goHome": "Go Back to Home",
@@ -84,6 +93,7 @@
     "username": "username | username",
     "hasBeenChanged": "has been changed.",
     "receiveAnEmail": "To activate your account, you should receive an email.",
-    "afterConfirmationActivation": "After confirmation of activation"
+    "afterConfirmationActivation": "After confirmation of activation",
+    "passwordChangedSuccessfully": "Password changed successfully!"
   }
 }

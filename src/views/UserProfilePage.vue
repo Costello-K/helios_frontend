@@ -39,12 +39,12 @@ export default {
     const myProfile = ref(false);
     const userData = ref({});
     const infoFields = ref([]);
-    const authUserId = ref(computed(()=> store.getters['authUser/getUserId']));
+    const authUserId = computed(()=> store.getters['authUser/getUserId']);
 
     const getUserData = async (userId) => {
       try {
-        const res = await usersApi.getUserProfile(userId);
-        return res.data;
+        const { data } = await usersApi.getUserProfile(userId);
+        return data;
       } catch (err) {
         console.error(err);
       }

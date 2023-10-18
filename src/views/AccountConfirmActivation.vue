@@ -34,8 +34,8 @@ export default {
     };
 
     const sendActivationRequest = async () => {
-      const res = await authUserApi.activationUserAccount(formData);
-      activation.value = res.status === 204;
+      const { status } = await authUserApi.activationUserAccount(formData);
+      activation.value = status === 204;
     };
 
     onMounted(async () => await sendActivationRequest());

@@ -14,10 +14,16 @@
     "settings": "Налаштування",
     "logout": "Вийти",
     "saveProfile": "Зберегти профіль",
+    "savePassword": "Зберегти пароль",
     "reset": "Скинути",
     "username": "юзернейм",
     "password": "пароль",
-    "applyNew": "Застосувати новий"
+    "applyNew": "Застосувати новий",
+    "deleteAccount": "Видалити профіль",
+    "changePassword": "Змінити пароль",
+    "cancel": "Скасувати",
+    "apply": "Застосувати",
+    "confirmDelete": "Підтвердити видалення"
   },
   "validations": {
     "usernameRequired": "Поле юзернейм є обов'язковим",
@@ -36,7 +42,10 @@
     "confirmPassword": "Підтвердити пароль",
     "email": "Емейл",
     "firstName": "Ім'я",
-    "lastName": "Прізвище"
+    "lastName": "Прізвище",
+    "currentPassword": "Поточний пароль",
+    "newPassword": "Новий пароль",
+    "confirmNewPassword": "Повторити новий пароль",
   },
   "titles": {
     "users": "Користувачі",
@@ -56,7 +65,7 @@
     "lastName": "Прізвище",
     "company": "Назва компанії",
     "username": "Юзернейм",
-    "avatar": "Аватар"
+    "avatar": "Аватар",
   },
   "links": {
     "goHome": "Повернутись на головну",
@@ -84,6 +93,7 @@
     "username": "Юзернейм | юзернейма",
     "hasBeenChanged": "успішно змінено.",
     "receiveAnEmail": "Щоб активувати обліковий запис, вам має надійти електронний лист.",
-    "afterConfirmationActivation": "Після підтвердження активації"
+    "afterConfirmationActivation": "Після підтвердження активації",
+    "passwordChangedSuccessfully": "Пароль успішно змінено!"
   }
 }
