@@ -27,3 +27,10 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.button-right {
+  display: flex;
+  justify-content: flex-end;
+}
+</style>

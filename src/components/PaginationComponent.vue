@@ -1,6 +1,6 @@
 <template>
   <div class="text-center">
-    <v-container>
+    <v-container v-if="totalPages > 1">
       <v-row justify="center">
         <v-col cols="8">
           <v-container class="max-width">

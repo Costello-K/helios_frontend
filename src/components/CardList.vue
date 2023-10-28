@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <h1 class="mb-10">{{ title }}</h1>
+    <h2 class="mb-10">{{ title }}</h2>
     <v-row>
       <v-col
           v-for="item in data"

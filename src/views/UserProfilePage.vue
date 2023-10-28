@@ -18,6 +18,18 @@
       </v-card>
     </div>
   </v-container>
+  <ModalWindow
+      v-if="myProfile"
+      :open-button-text="$t('buttons.createCompany')"
+      :close-button-text="$t('buttons.cancel')"
+  >
+    <template v-slot:default="{ closeModalWindow }">
+      <CompanyForm :closeModalWindow="closeModalWindow"/>
+    </template>
+  </ModalWindow>
+  <div v-if="myProfile">
+    <CompanyListPage/>
+  </div>
 </template>
 
 <script>
@@ -27,11 +39,17 @@ import { useStore } from 'vuex';
 import { usersApi } from '@/api';
 import { BASE_URL, MY_USER_INFO_FIELDS, USER_INFO_FIELDS } from '@/constants';
 import InfoLine from '@/components/InfoLine';
+import CompanyListPage from '@/views/CompanyListPage';
+import ModalWindow from '@/components/ModalWindow';
+import CompanyForm from '@/components/CompanyForm';
 
 export default {
   name: 'UserProfilePage',
   components: {
     InfoLine,
+    CompanyListPage,
+    ModalWindow,
+    CompanyForm,
   },
   setup() {
     const router = useRouter();

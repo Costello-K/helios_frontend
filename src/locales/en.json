@@ -23,7 +23,11 @@
     "changePassword": "Change password",
     "cancel": "Cancel",
     "apply": "Apply",
-    "confirmDelete": "Confirm deletion"
+    "confirmDelete": "Confirm deletion",
+    "createCompany": "Create company",
+    "create": "Create",
+    "edit": "Edit",
+    "delete": "Delete"
   },
   "validations": {
     "usernameRequired": "Username is required",
@@ -33,7 +37,9 @@
     "emailNotValid": "E-mail must be valid",
     "passwordNotMatch": "Passwords must match",
     "avatarSize": "Avatar size should be less than",
-    "fileExtensions": "Accepted file extensions"
+    "fileExtensions": "Accepted file extensions",
+    "nameRequired": "Name is required",
+    "descriptionRequired": "Description is required"
   },
   "placeholders": {
     "username": "Username",
@@ -45,7 +51,10 @@
     "lastName": "Last name",
     "currentPassword": "Current password",
     "newPassword": "New password",
-    "confirmNewPassword": "Confirm new password"
+    "confirmNewPassword": "Confirm new password",
+    "name": "Name",
+    "description": "Description",
+    "visibility": "Visibility"
   },
   "titles": {
     "users": "Users",
@@ -56,6 +65,7 @@
     "socialLogin": "Login via social networks",
     "companyProfile": "Company Profile",
     "userSettings": "User settings",
+    "company": "Company",
     "pageNotFound": "Page Not Found"
   },
   "fields": {
@@ -66,6 +76,10 @@
     "company": "Company",
     "username": "Username",
     "avatar": "Avatar",
+    "description": "Description",
+    "visibility": "Visibility",
+    "yes": "Yes",
+    "no": "No"
   },
   "links": {
     "goHome": "Go Back to Home",

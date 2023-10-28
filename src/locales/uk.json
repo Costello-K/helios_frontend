@@ -23,7 +23,11 @@
     "changePassword": "Змінити пароль",
     "cancel": "Скасувати",
     "apply": "Застосувати",
-    "confirmDelete": "Підтвердити видалення"
+    "confirmDelete": "Підтвердити видалення",
+    "createCompany": "Створити компанію",
+    "create": "Створити",
+    "edit": "Редагувати",
+    "delete": "Видалити"
   },
   "validations": {
     "usernameRequired": "Поле юзернейм є обов'язковим",
@@ -33,7 +37,9 @@
     "emailNotValid": "Емейл має бути валідним",
     "passwordNotMatch": "Паролі не співпадають",
     "avatarSize": "Аватар має бути менше",
-    "fileExtensions": "Дозволені розширення файлів"
+    "fileExtensions": "Дозволені розширення файлів",
+    "nameRequired": "Назва є обов'язковою",
+    "descriptionRequired": "Опис є обов'язковим"
   },
   "placeholders": {
     "username": "Юзернейм",
@@ -46,6 +52,9 @@
     "currentPassword": "Поточний пароль",
     "newPassword": "Новий пароль",
     "confirmNewPassword": "Повторити новий пароль",
+    "name": "Назва",
+    "description": "Опис",
+    "visibility": "Видимість"
   },
   "titles": {
     "users": "Користувачі",
@@ -56,6 +65,7 @@
     "socialLogin": "Увійти за допомогою соціальних мереж",
     "companyProfile": "Профіль компанії",
     "userSettings": "Налаштування користувача",
+    "company": "Компанія",
     "pageNotFound": "Сторінку не знайдено"
   },
   "fields": {
@@ -66,6 +76,10 @@
     "company": "Назва компанії",
     "username": "Юзернейм",
     "avatar": "Аватар",
+    "description": "Опис",
+    "visibility": "Видимість",
+    "yes": "Так",
+    "no": "Ні"
   },
   "links": {
     "goHome": "Повернутись на головну",

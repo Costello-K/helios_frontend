@@ -1,6 +1,6 @@
 import { axiosInstance } from '@/axios';
 import { BaseApiController } from '@/api/BaseApiController';
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
 import store from '@/store';
 
 class UsersApiController {
@@ -24,7 +24,7 @@ class UsersApiController {
   }
 
   async updateUserAvatar(formData) {
-    const authUserId = ref(computed(() => store.getters['authUser/getUserId']))
+    const authUserId = computed(() => store.getters['authUser/getUserId']);
     const path = `v1/users/${authUserId.value}/`;
     return this.baseApiClient.makeRequest(
       'PATCH',
