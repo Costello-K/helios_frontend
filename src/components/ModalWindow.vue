@@ -1,6 +1,9 @@
 <template>
   <div class="text-center">
-    <v-btn color="accent">
+    <v-btn
+        :block="true"
+        color="accent"
+    >
       {{ openButtonText }}
 
       <v-dialog

@@ -25,5 +25,27 @@ export default {
         state.companies = [...state.companies, payload];
       }
     },
+    updateCompanyListData(state, payload) {
+      const { id } = payload;
+      state.companies = state.companies.map(company =>
+        company.id === id
+          ? payload
+          : company
+      );
+    },
+    leaveCompany(state, id) {
+      state.companies = state.companies.map(company =>
+        company.id === id
+          ? {...company, is_member: false, is_admin: false}
+          : company
+      );
+    },
+    sendRequestToCompany(state, id) {
+      state.companies = state.companies.map(company =>
+        company.id === id
+          ? {...company, is_active_request: true}
+          : company
+      );
+    },
   },
 };
