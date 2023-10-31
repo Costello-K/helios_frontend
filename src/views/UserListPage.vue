@@ -38,13 +38,13 @@ export default {
   },
   setup(props) {
     const { t } = useI18n({ useScope: 'global' });
+    const { id } = router.currentRoute.value.params;
     const store = useStore();
     const router = useRouter();
     const totalPages = ref(1);
-    const users = computed(() => store.state.userList.users);
     const title = ref('');
-    const { id } = router.currentRoute.value.params;
     const tab = ref(props.tab);
+    const users = computed(() => store.state.userList.users);
 
     const userRequests = {
       'all-users': {

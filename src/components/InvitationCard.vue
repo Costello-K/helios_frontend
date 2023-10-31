@@ -24,7 +24,7 @@
         />
       </div>
       <div
-          v-if="is_pending_status"
+          v-if="isPendingStatus"
           class="align-self-center"
       >
         <CardModalWindow
@@ -75,14 +75,14 @@ export default {
     const store = useStore();
     const router = useRouter();
     const isCompanyRoute = router.currentRoute.value.path.includes('companies');
-    const is_pending_status = ref(props.invitation.status.toUpperCase() === INVITATION_STATUS.pending);
+    const isPendingStatus = ref(props.invitation.status.toUpperCase() === INVITATION_STATUS.pending);
 
     const updateInvitation = async (request) => {
       try {
         const { data, status } = await request();
         if (status === 200) {
           store.commit('invitationList/updateInvitationListData', data);
-          is_pending_status.value = false;
+          isPendingStatus.value = false;
         }
       } catch (err) {
         console.error(err);
@@ -107,7 +107,7 @@ export default {
 
     return {
       isCompanyRoute,
-      is_pending_status,
+      isPendingStatus,
       revokeInvitation,
       acceptInvitation,
       declineInvitation,

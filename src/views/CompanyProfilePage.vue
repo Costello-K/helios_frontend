@@ -7,7 +7,7 @@
     </v-toolbar>
     <div class="d-flex flex-row">
       <v-tabs
-          v-if="is_owner"
+          v-if="isOwner"
           v-model="tab"
           direction="vertical"
           color="primary"
@@ -34,7 +34,7 @@
                   :value="companyData[value.value]"
               />
               <InfoLine
-                  v-if="!is_owner"
+                  v-if="!isOwner"
                   :label="$t('fields.owner')"
                   :value="owner"
               />
@@ -45,7 +45,7 @@
               />
             </v-card>
           </v-container>
-          <template v-if="is_owner">
+          <template v-if="isOwner">
             <div class="button-right">
               <ModalWindow
                   :open-button-text="$t('buttons.edit')"
@@ -79,7 +79,7 @@
         </div>
 
         <v-window
-            v-if="is_owner"
+            v-if="isOwner"
             v-model="tab"
         >
           <v-window-item
@@ -136,7 +136,7 @@ export default {
   setup() {
     const router = useRouter();
     const store = useStore();
-    const is_owner = ref(false);
+    const isOwner = ref(false);
     const owner = ref('');
     const tab = ref(COMPANY_NAVBAR[0].value);
     const companyData = computed(() => store.state.company.company);
@@ -148,7 +148,7 @@ export default {
       try {
         const { data } = await companiesApi.getCompany(companyId);
         store.commit('company/setCompanyData', data);
-        is_owner.value = data.owner.id === authUserId.value;
+        isOwner.value = data.owner.id === authUserId.value;
         owner.value = getOwnerName(data.owner);
       } catch (err) {
         console.error(err);
@@ -180,7 +180,7 @@ export default {
 
     return {
       companyData,
-      is_owner,
+      isOwner,
       owner,
       tab,
       deleteCompany,

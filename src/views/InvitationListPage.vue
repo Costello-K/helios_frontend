@@ -39,7 +39,12 @@ export default {
       try {
         const { id } = router.currentRoute.value.params;
         const isCompanyRoute = router.currentRoute.value.path.includes('companies');
-        const { data: { total_pages, results } } = isCompanyRoute
+        const {
+          data: {
+            total_pages,
+            results,
+          },
+        } = isCompanyRoute
             ? await invitationsApi.getCompanyInvitationsList(id, page)
             : await invitationsApi.getMyInvitationsList(page)
 

@@ -79,9 +79,9 @@ export default {
   setup(props) {
     const router = useRouter();
     const store = useStore();
+    const { id } = router.currentRoute.value.params;
     const isCompanyRoute = router.currentRoute.value.path.includes('companies');
     const authUserId = computed(()=> store.getters['authUser/getUserId']);
-    const { id } = router.currentRoute.value.params;
 
     const updateUser = async (apiMethod, mutationType) => {
       try {
