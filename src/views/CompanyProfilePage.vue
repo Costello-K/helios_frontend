@@ -31,7 +31,7 @@
         <template v-slot:default="{ closeModalWindow }">
           <CompanyForm
               :closeModalWindow="closeModalWindow"
-              :is_edit="true"
+              :is-edit="true"
               :data="companyData"
           />
         </template>
@@ -69,10 +69,10 @@ export default {
   setup() {
     const router = useRouter();
     const store = useStore();
-    const companyData = computed(() => store.state.company.company);
     const is_owner = ref(false);
-    const authUserId = computed(()=> store.getters['authUser/getUserId']);
     const owner = ref('');
+    const companyData = computed(() => store.state.company.company);
+    const authUserId = computed(()=> store.getters['authUser/getUserId']);
 
     const getOwnerName = ({first_name, last_name}) => `${first_name} ${last_name}`;
 

@@ -38,7 +38,13 @@ export default {
     const getCompanies = async (page) => {
       try {
         const { id } = router.currentRoute.value.params;
-        const { data: { total_pages, results, page_size } } = await companiesApi.getListCompanies(page, id);
+        const {
+          data: {
+            total_pages,
+            results,
+            page_size,
+          },
+        } = await companiesApi.getListCompanies(page, id);
         totalPages.value = total_pages;
         return { results, page_size };
       } catch (err) {
