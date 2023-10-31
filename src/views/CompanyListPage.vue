@@ -42,9 +42,9 @@ export default {
     const store = useStore();
     const totalPages = ref(1);
     const title = ref('');
-    const companies = computed(() => store.state.companyList.companies);
-    const { id } = router.currentRoute.value.params;
     const tab = ref(props.tab);
+    const { id } = router.currentRoute.value.params;
+    const companies = computed(() => store.state.companyList.companies);
 
     const companyRequests = {
       'all-companies': {
@@ -70,7 +70,13 @@ export default {
         if (!props.tab) {
           tab.value = 'all-companies';
         }
-        const { data: { results, page_size, total_pages } } = await companyRequests[tab.value].request(page);
+        const {
+          data: {
+            results,
+            page_size,
+            total_pages,
+          },
+        } = await companyRequests[tab.value].request(page);
         totalPages.value = total_pages;
         return { results, page_size };
       } catch (err) {

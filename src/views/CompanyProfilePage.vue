@@ -54,7 +54,7 @@
                 <template v-slot:default="{ closeModalWindow }">
                   <CompanyForm
                       :closeModalWindow="closeModalWindow"
-                      :is_edit="true"
+                      :is-edit="true"
                       :data="companyData"
                   />
                 </template>

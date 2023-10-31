@@ -26,7 +26,7 @@
       <BaseButton
           type="submit"
           class="w-100"
-          :button-name="is_edit ? $t('buttons.edit') : $t('buttons.create')"
+          :button-name="isEdit ? $t('buttons.edit') : $t('buttons.create')"
       />
     </v-form>
   </v-sheet>
@@ -51,7 +51,7 @@ export default {
       type: Function,
       require: true,
     },
-    is_edit: {
+    isEdit: {
       type: Boolean,
       require: false,
     },
@@ -76,7 +76,7 @@ export default {
       description: '',
     });
 
-    if (props.is_edit && props.data) {
+    if (props.isEdit && props.data) {
       formData.value = objUtils.mergeObjects(formData.value, props.data);
     }
 
@@ -87,7 +87,7 @@ export default {
       }
 
       try {
-        if (props.is_edit) {
+        if (props.isEdit) {
           const { id } = router.currentRoute.value.params;
           const { data } = await companiesApi.updateCompany(id, formData.value);
           store.commit('company/setCompanyData', data);

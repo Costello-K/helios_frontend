@@ -66,7 +66,12 @@ export default {
         if (!props.tab) {
           tab.value = 'all-users';
         }
-        const { data: { total_pages, results } } = await userRequests[tab.value].request(page);
+        const {
+          data: {
+            total_pages,
+            results,
+          },
+        } = await userRequests[tab.value].request(page);
         totalPages.value = total_pages;
         return results;
       } catch (err) {
