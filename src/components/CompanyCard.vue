@@ -10,7 +10,7 @@
     />
     <CardInfoLine
       :label="$t('fields.owner')"
-      :value="company.owner"
+      :value="`${company.owner.first_name} ${company.owner.last_name}`"
     />
   </v-card>
 </template>

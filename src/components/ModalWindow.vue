@@ -10,13 +10,13 @@
       >
         <v-card>
           <v-card-text>
-            <slot/>
+            <slot :closeModalWindow="closeModalWindow"/>
           </v-card-text>
-          <v-card-actions>
+          <v-card-actions v-if="showCloseButton">
             <BaseButton
                 block
-                button-name=closeButtonText
-                @click="dialog = false"
+                :button-name="closeButtonText"
+                @click="closeModalWindow"
             />
           </v-card-actions>
         </v-card>
@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import { ref } from 'vue';
 import BaseButton from '@/components/BaseButton';
 
 export default {
@@ -37,8 +38,16 @@ export default {
     openButtonText: String,
     closeButtonText: String,
   },
-  data: () => ({
-    dialog: false,
-  }),
+  setup(props) {
+    const dialog = ref(false);
+    const showCloseButton = ref(!!props.closeButtonText);
+    const closeModalWindow = () => dialog.value = false;
+
+    return {
+      dialog,
+      closeModalWindow,
+      showCloseButton,
+    };
+  },
 };
 </script>

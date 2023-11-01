@@ -98,6 +98,9 @@ export const VALIDATION_RULES = {
       || t('validations.emailNotValid'),
   ],
   first_name: [v => !!v || t('validations.firstNameRequired')],
+  name: [v => !!v || t('validations.nameRequired')],
+  description: [v => !!v || t('validations.descriptionRequired')],
+  visibility: [],
   last_name: [],
   avatar: [
     v => !v
@@ -127,7 +130,7 @@ export const FIELDS_FORM_REGISTRATION = {
 // Company information fields
 export const COMPANY_INFO_FIELDS = [
   { name: 'fields.company', value: 'name' },
-  { name: 'fields.owner', value: 'owner' },
+  { name: 'fields.description', value: 'description' },
 ];
 
 // Immutable fields in user settings

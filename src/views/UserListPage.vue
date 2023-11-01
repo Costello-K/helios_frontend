@@ -35,7 +35,12 @@ export default {
 
     const getUsers = async (page) => {
       try {
-        const { data: { total_pages, results } } = await usersApi.getListUsers(page);
+        const {
+          data: {
+            total_pages,
+            results,
+          },
+        } = await usersApi.getListUsers(page);
         totalPages.value = total_pages;
         return results;
       } catch (err) {
