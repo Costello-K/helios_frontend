@@ -14,7 +14,7 @@
       >
         <v-tab
             v-for="(item, i) in COMPANY_NAVBAR"
-            :key="i"
+            :key="`${i}_${item.value}`"
             :value="item.value"
         >
           <v-icon :start="true">
@@ -28,10 +28,10 @@
           <v-container v-if="companyData">
             <v-card class="text-left elevation-0">
               <InfoLine
-                  v-for="(value, key) in COMPANY_INFO_FIELDS"
-                  :key="key"
-                  :label="$t(value.name)"
-                  :value="companyData[value.value]"
+                  v-for="(item, i) in COMPANY_INFO_FIELDS"
+                  :key="`${i}_${item.value}`"
+                  :label="$t(item.name)"
+                  :value="companyData[item.value]"
               />
               <InfoLine
                   v-if="!isOwner"
@@ -83,8 +83,8 @@
             v-model="tab"
         >
           <v-window-item
-              v-for="(item, i) in ['all-users', 'admins', 'members']"
-              :key="i"
+              v-for="(item, i) in TYPES_USER_LIST"
+              :key="`${i}_${item}`"
               :value="item">
             <UserListPage
                 v-if="tab === item"
@@ -139,6 +139,7 @@ export default {
     const isOwner = ref(false);
     const owner = ref('');
     const tab = ref(COMPANY_NAVBAR[0].value);
+    const TYPES_USER_LIST = ['all-users', 'admins', 'members']
     const companyData = computed(() => store.state.company.company);
     const authUserId = computed(()=> store.getters['authUser/getUserId']);
 
@@ -160,10 +161,8 @@ export default {
       await getCompanyData(id);
     });
 
-    watch(() => router.currentRoute.value.params.id, async (newId, oldId) => {
-      if (newId !== oldId) {
-        await getCompanyData(newId);
-      }
+    watch(() => router.currentRoute.value.params.id, async (newId) => {
+      await getCompanyData(newId);
     });
 
     const deleteCompany = async () => {
@@ -186,6 +185,7 @@ export default {
       deleteCompany,
       COMPANY_INFO_FIELDS,
       COMPANY_NAVBAR,
+      TYPES_USER_LIST,
     }
   }
 };

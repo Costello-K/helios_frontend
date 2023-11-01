@@ -12,7 +12,7 @@
             class="py-2"
         />
         <CardInfoLine
-            v-if="isCompanyRoute"
+            v-else
             :label="$t('fields.sender')"
             :value="`${request.sender.first_name} ${request.sender.last_name}`"
             class="py-2"
@@ -33,26 +33,26 @@
             :mainText="'texts.confirmRequestCancel'"
             :onClickFunction="cancelRequest"
         />
-        <CardModalWindow
-            v-if="isCompanyRoute"
-            :mainButtonText="'buttons.approve'"
-            :mainText="'texts.confirmRequestApprove'"
-            :onClickFunction="approveRequest"
-        />
-        <CardModalWindow
-            v-if="isCompanyRoute"
-            :mainButtonText="'buttons.reject'"
-            :mainText="'texts.confirmRequestReject'"
-            :onClickFunction="rejectRequest"
-            class="mt-3"
-        />
+        <template v-else>
+          <CardModalWindow
+              :mainButtonText="'buttons.approve'"
+              :mainText="'texts.confirmRequestApprove'"
+              :onClickFunction="approveRequest"
+          />
+          <CardModalWindow
+              :mainButtonText="'buttons.reject'"
+              :mainText="'texts.confirmRequestReject'"
+              :onClickFunction="rejectRequest"
+              class="mt-3"
+          />
+        </template>
       </div>
     </div>
   </v-card>
 </template>
 
 <script>
-import { ref, toRefs } from 'vue';
+import { computed, toRefs } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 import { requestsApi } from '@/api';
@@ -75,7 +75,7 @@ export default {
     const store = useStore();
     const router = useRouter();
     const isCompanyRoute = router.currentRoute.value.path.includes('companies');
-    const isPendingStatus = ref(props.request.status.toUpperCase() === REQUEST_STATUS.pending);
+    const isPendingStatus = computed(() => props.request.status.toUpperCase() === REQUEST_STATUS.pending);
 
     const updateRequest = async (request) => {
       try {

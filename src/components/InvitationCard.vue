@@ -12,7 +12,7 @@
             class="py-2"
         />
         <CardInfoLine
-            v-if="isCompanyRoute"
+            v-else
             :label="$t('fields.recipient')"
             :value="`${invitation.recipient.first_name} ${invitation.recipient.last_name}`"
             class="py-2"
@@ -33,26 +33,26 @@
             :mainText="'texts.confirmInvitationRevoke'"
             :onClickFunction="revokeInvitation"
         />
-        <CardModalWindow
-            v-if="!isCompanyRoute"
-            :mainButtonText="'buttons.accept'"
-            :mainText="'texts.confirmInvitationAccept'"
-            :onClickFunction="acceptInvitation"
-        />
-        <CardModalWindow
-            v-if="!isCompanyRoute"
-            :mainButtonText="'buttons.decline'"
-            :mainText="'texts.confirmInvitationDecline'"
-            :onClickFunction="declineInvitation"
-            class="mt-3"
-        />
+        <template v-else>
+          <CardModalWindow
+              :mainButtonText="'buttons.accept'"
+              :mainText="'texts.confirmInvitationAccept'"
+              :onClickFunction="acceptInvitation"
+          />
+          <CardModalWindow
+              :mainButtonText="'buttons.decline'"
+              :mainText="'texts.confirmInvitationDecline'"
+              :onClickFunction="declineInvitation"
+              class="mt-3"
+          />
+        </template>
       </div>
     </div>
   </v-card>
 </template>
 
 <script>
-import { ref, toRefs } from 'vue';
+import { computed, toRefs } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 import { invitationsApi } from '@/api';
@@ -75,7 +75,7 @@ export default {
     const store = useStore();
     const router = useRouter();
     const isCompanyRoute = router.currentRoute.value.path.includes('companies');
-    const isPendingStatus = ref(props.invitation.status.toUpperCase() === INVITATION_STATUS.pending);
+    const isPendingStatus = computed(() => props.invitation.status.toUpperCase() === INVITATION_STATUS.pending);
 
     const updateInvitation = async (request) => {
       try {

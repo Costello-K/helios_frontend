@@ -14,7 +14,7 @@
       >
         <v-tab
             v-for="(item, i) in USER_NAVBAR"
-            :key="i"
+            :key="`${i}_${item.value}`"
             :value="item.value"
         >
           <v-icon :start="true">
@@ -34,7 +34,7 @@
               <v-card className="text-left elevation-0">
                 <InfoLine
                     v-for="(field, i) in infoFields"
-                    :key="i"
+                    :key="`${i}_${field.name}`"
                     :label="$t(field.label)"
                     :value="userData[field.name]"
                 />
@@ -57,8 +57,8 @@
             v-model="tab"
         >
           <v-window-item
-              v-for="(item, i) in ['my-companies', 'all-companies', 'admins', 'members']"
-              :key="i"
+              v-for="(item, i) in TYPES_COMPANY_LIST"
+              :key="`${i}_${item}`"
               :value="item">
             <CompanyListPage
                 v-if="tab === item"
@@ -107,6 +107,7 @@ export default {
     const userData = ref({});
     const infoFields = ref([]);
     const tab = ref(COMPANY_NAVBAR[0].value);
+    const TYPES_COMPANY_LIST = ['my-companies', 'all-companies', 'admins', 'members']
     const authUserId = computed(()=> store.getters['authUser/getUserId']);
 
     const getUserData = async (userId) => {
@@ -134,10 +135,8 @@ export default {
       await getUsers(id);
     });
 
-    watch(() => router.currentRoute.value.params.id, async (newId, oldId) => {
-      if (newId !== oldId) {
-        await getUsers(newId);
-      }
+    watch(() => router.currentRoute.value.params.id, async (newId) => {
+      await getUsers(newId);
     });
 
     return {
@@ -147,6 +146,7 @@ export default {
       tab,
       BASE_URL,
       USER_NAVBAR,
+      TYPES_COMPANY_LIST,
     }
   }
 };
