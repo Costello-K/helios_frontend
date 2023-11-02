@@ -181,7 +181,7 @@ export default {
 
 <style scoped>
 .header {
-  background-color: #ededed;
+  background-color: rgba(168, 165, 165, 0.35);
   width: 100%;
 }
 .header-container {

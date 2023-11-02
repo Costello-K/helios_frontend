@@ -14,7 +14,7 @@ export default {
   props: {
     text: String,
     to: {
-      type: String,
+      type:  [String, Object],
       required: true,
     },
   },

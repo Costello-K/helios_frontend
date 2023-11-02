@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <v-toolbar color="grey">
+    <v-toolbar color="#ededed">
       <v-toolbar-title>
         {{ $t('titles.companyProfile') }}
       </v-toolbar-title>
@@ -48,8 +48,20 @@
           <template v-if="isOwner">
             <div class="button-right">
               <ModalWindow
+                  :open-button-text="$t('buttons.createQuiz')"
+                  :close-button-text="$t('buttons.cancel')"
+              >
+                <template v-slot:default="{ closeModalWindow }">
+                  <QuizForm
+                      :closeModalWindow="closeModalWindow"
+                  />
+                </template>
+              </ModalWindow>
+
+              <ModalWindow
                   :open-button-text="$t('buttons.edit')"
                   :close-button-text="$t('buttons.cancel')"
+                  class="mx-5"
               >
                 <template v-slot:default="{ closeModalWindow }">
                   <CompanyForm
@@ -63,7 +75,6 @@
               <ModalWindow
                   :open-button-text="$t('buttons.delete')"
                   :close-button-text="$t('buttons.cancel')"
-                  class="ml-5"
               >
                 <v-card-text class="mb-10">
                   {{ $t('texts.confirmCompanyDelete') }}
@@ -120,10 +131,12 @@ import UserListPage from '@/views/UserListPage';
 import RequestListPage from '@/views/RequestListPage';
 import InvitationListPage from '@/views/InvitationListPage';
 import QuizListPage from '@/views/QuizListPage';
+import QuizForm from '@/components/QuizForm';
 
 export default {
   name: 'CompanyProfilePage',
   components: {
+    QuizForm,
     UserListPage,
     InfoLine,
     BaseButton,

@@ -13,9 +13,12 @@
     "requests": "Запити",
     "quizzes": "Вікторини",
     "admins": "Адміністратори",
-    "members": "Учасники"
+    "members": "Учасники",
   },
   "buttons": {
+    "addAnswer": "Додати відповідь",
+    "addQuestion": "Додати питання",
+    "removeQuestion": "Видалити питання",
     "login": "Вхід",
     "registration": "Реєстрація",
     "myProfile": "Мій профіль",
@@ -31,8 +34,10 @@
     "changePassword": "Змінити пароль",
     "cancel": "Скасувати",
     "apply": "Застосувати",
+    "complete": "Завершити",
     "confirmDelete": "Підтвердити видалення",
     "createCompany": "Створити компанію",
+    "createQuiz": "Створити вікторину",
     "create": "Створити",
     "edit": "Редагувати",
     "delete": "Видалити",
@@ -49,7 +54,10 @@
     "request": "Запит",
     "removeFromCompany": "Видалити з компанії",
     "appointAdmin": "Назначити адміністратором",
-    "removeAdmin": "Видалити з адміністраторів"
+    "removeAdmin": "Видалити з адміністраторів",
+    "start": "Почати",
+    "update": "Оновити",
+    "remove": "Видалити",
   },
   "validations": {
     "usernameRequired": "Поле юзернейм є обов'язковим",
@@ -61,7 +69,15 @@
     "avatarSize": "Аватар має бути менше",
     "fileExtensions": "Дозволені розширення файлів",
     "nameRequired": "Назва є обов'язковою",
-    "descriptionRequired": "Опис є обов'язковим"
+    "descriptionRequired": "Опис є обов'язковим",
+    "answerRequired": "Текст відповіді є обов'язковим",
+    "questionTextRequired": "Текст запитання є обов'язковим",
+    "rightAnswerRequired": "В кожному питанні має бути відмічена принаймні одна правильна відповідь",
+    "minCountAnswers": "В кожному питанні має бути мінімум",
+    "minCountQuestions": "У вікторині має бути мінімум",
+    "answers": "відповіді",
+    "question": "Питання",
+    "questions": "питання",
   },
   "placeholders": {
     "username": "Юзернейм",
@@ -76,7 +92,8 @@
     "confirmNewPassword": "Повторити новий пароль",
     "name": "Назва",
     "description": "Опис",
-    "visibility": "Видимість"
+    "visibility": "Видимість",
+    "right": "Вірно",
   },
   "titles": {
     "users": "Користувачі",
@@ -93,7 +110,10 @@
     "invitations": "Запрошення",
     "admins": "Адміністратори",
     "members": "Учасники",
-    "myCompanies": "Мої компанії"
+    "myCompanies": "Мої компанії",
+    "quizzes": "Вікторини",
+    "quiz": "Вікторина",
+    "quizResult": "Результати проходження вікторини",
   },
   "fields": {
     "email": "Емейл",
@@ -109,13 +129,23 @@
     "recipient": "Отримувач",
     "status": "Статус",
     "yes": "Так",
-    "no": "Ні"
+    "no": "Ні",
+    "title": "Назва",
+    "frequency": "Частота проходження",
+    "startTime": "Дата та час початку",
+    "completeTime": "Дата та час завершення",
+    "correctAnswers": "Кількість вірних відповідей",
+    "totalQuestions": "Всього запитань",
+    "quizTime": "Час проходження",
+    "companyAverageScore": "Рейтинг в компанії",
+    "rating": "Рейтинг",
   },
   "links": {
     "goHome": "Повернутись на головну",
     "clickHereToLogin": "Натисніть, щоб увійти.",
     "forgotYourPassword": "Забули пароль?",
-    "forgotYourUsername": "Забули юзернейм?"
+    "forgotYourUsername": "Забули юзернейм?",
+    "returnToCompanyPage": "Повернутись на сторінку компанії",
   },
   "texts": {
     "about": {
@@ -136,6 +166,7 @@
     "password": "Пароль | пароля",
     "username": "Юзернейм | юзернейма",
     "hasBeenChanged": "успішно змінено.",
+    "withoutLimitation": "без обмежень",
     "receiveAnEmail": "Щоб активувати обліковий запис, вам має надійти електронний лист.",
     "afterConfirmationActivation": "Після підтвердження активації",
     "passwordChangedSuccessfully": "Пароль успішно змінено!",
@@ -151,6 +182,12 @@
     "confirmLeave": "Підтвердіть вихід з компанії.",
     "confirmRemoveFromCompany": "Підтвердити видалення користувача з компанії.",
     "confirmAppointAdmin": "Підтвердити призначення адміністратора.",
-    "confirmRemoveAdmin": "Підтвердьте видалення адміністратора."
+    "confirmRemoveAdmin": "Підтвердьте видалення адміністратора.",
+    "confirmStartQuiz": "Підтвердьте старт проходження вікторини.",
+    "confirmRemoveQuiz": "Підтвердьте видалення вікторини.",
+    "day": "дн",
+    "hour": "год",
+    "minute": "хв",
+    "second": "сек",
   }
 }

@@ -5,6 +5,7 @@ import companyList from './modules/companyList';
 import company from './modules/company';
 import invitationList from './modules/invitationList';
 import requestList from './modules/requestList';
+import quizList from './modules/quizList';
 
 export default new Store({
     modules: {
@@ -14,5 +15,6 @@ export default new Store({
         company,
         invitationList,
         requestList,
+        quizList,
     },
 });
