@@ -19,7 +19,7 @@ class CompaniesApiController {
   }
 
   async getCompany(id) {
-    const path = `/v1/companies/${id}/?user_id=${this.user_id.value}`;
+    const path = `/v1/companies/${id}/`;
     return this.baseApiClient.makeRequest('GET', path);
   }
 
@@ -35,6 +35,44 @@ class CompaniesApiController {
 
   async removeCompany(id) {
     const path = `/v1/companies/${id}/?user_id=${this.user_id.value}`;
+    return this.baseApiClient.makeRequest('DELETE', path);
+  }
+
+  async getCompanyAdminsList(id, page) {
+    const params = new URLSearchParams();
+    params.append('page', page);
+    params.append('company_id', id);
+
+    const path = `/v1/companies/${id}/admins/?${params.toString()}`;
+    return this.baseApiClient.makeRequest('GET', path);
+  }
+
+  async getCompanyMembersList(id, page) {
+    const params = new URLSearchParams();
+    params.append('page', page);
+    params.append('company_id', id);
+
+    const path = `/v1/companies/${id}/members/?${params.toString()}`;
+    return this.baseApiClient.makeRequest('GET', path);
+  }
+
+  async appointAdmin(id, user_id) {
+    const path = `/v1/companies/${id}/appoint_admin/${user_id}/`;
+    return this.baseApiClient.makeRequest('POST', path);
+  }
+
+  async removeAdmin(id, user_id) {
+    const path = `/v1/companies/${id}/remove_admin/${user_id}/`;
+    return this.baseApiClient.makeRequest('POST', path);
+  }
+
+  async removeMember(id, user_id) {
+    const path = `/v1/companies/${id}/remove_user/${user_id}/`;
+    return this.baseApiClient.makeRequest('DELETE', path);
+  }
+
+  async removeMe(id) {
+    const path = `/v1/companies/${id}/remove_me/`;
     return this.baseApiClient.makeRequest('DELETE', path);
   }
 }

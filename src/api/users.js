@@ -6,6 +6,7 @@ import store from '@/store';
 class UsersApiController {
   constructor(ApiController) {
     this.baseApiClient = ApiController;
+    this.authUserId = computed(() => store.getters['authUser/getUserId']);
   }
 
   async getMyUser() {
@@ -24,8 +25,7 @@ class UsersApiController {
   }
 
   async updateUserAvatar(formData) {
-    const authUserId = computed(() => store.getters['authUser/getUserId']);
-    const path = `v1/users/${authUserId.value}/`;
+    const path = `v1/users/${this.authUserId.value}/`;
     return this.baseApiClient.makeRequest(
       'PATCH',
       path,
@@ -49,8 +49,22 @@ class UsersApiController {
     return this.baseApiClient.makeRequest('GET', path);
   }
 
-  async getListUsers(page) {
-    const path = `/v1/users/?page=${page}`;
+  async getListUsers(page, company_id='') {
+    const params = new URLSearchParams();
+    params.append('page', page);
+    params.append('company_id', company_id);
+
+    const path = `/v1/users/?${params.toString()}`;
+    return this.baseApiClient.makeRequest('GET', path);
+  }
+
+  async getAdminCompaniesList(page) {
+    const path = `/v1/users/${this.authUserId.value}/admins/?${page}`;
+    return this.baseApiClient.makeRequest('GET', path);
+  }
+
+  async getMemberCompaniesList(page) {
+    const path = `/v1/users/${this.authUserId.value}/members/?${page}`;
     return this.baseApiClient.makeRequest('GET', path);
   }
 }

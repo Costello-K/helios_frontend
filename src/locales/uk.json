@@ -5,7 +5,15 @@
     "home": "Головна",
     "users": "Користувачі",
     "companies": "Компанії",
-    "about": "Про нас"
+    "about": "Про нас",
+    "addMember": "Додати учасників",
+    "addCompany": "Додати компанії",
+    "myCompany": "Мої компанії",
+    "invitations": "Запрошення",
+    "requests": "Запити",
+    "quizzes": "Вікторини",
+    "admins": "Адміністратори",
+    "members": "Учасники"
   },
   "buttons": {
     "login": "Вхід",
@@ -27,7 +35,21 @@
     "createCompany": "Створити компанію",
     "create": "Створити",
     "edit": "Редагувати",
-    "delete": "Видалити"
+    "delete": "Видалити",
+    "accept": "Прийняти",
+    "decline": "Відхилити",
+    "revoke": "Відкликати",
+    "approve": "Затвердити",
+    "reject": "Відхилити",
+    "cancel": "Скасувати",
+    "viewed": "Переглянуто",
+    "leave": "Покинути",
+    "confirm": "Підтвердити",
+    "invite": "Запросити",
+    "request": "Запит",
+    "removeFromCompany": "Видалити з компанії",
+    "appointAdmin": "Назначити адміністратором",
+    "removeAdmin": "Видалити з адміністраторів"
   },
   "validations": {
     "usernameRequired": "Поле юзернейм є обов'язковим",
@@ -66,7 +88,12 @@
     "companyProfile": "Профіль компанії",
     "userSettings": "Налаштування користувача",
     "company": "Компанія",
-    "pageNotFound": "Сторінку не знайдено"
+    "pageNotFound": "Сторінку не знайдено",
+    "requests": "Запити",
+    "invitations": "Запрошення",
+    "admins": "Адміністратори",
+    "members": "Учасники",
+    "myCompanies": "Мої компанії"
   },
   "fields": {
     "email": "Емейл",
@@ -78,6 +105,9 @@
     "avatar": "Аватар",
     "description": "Опис",
     "visibility": "Видимість",
+    "sender": "Відправник",
+    "recipient": "Отримувач",
+    "status": "Статус",
     "yes": "Так",
     "no": "Ні"
   },
@@ -108,6 +138,19 @@
     "hasBeenChanged": "успішно змінено.",
     "receiveAnEmail": "Щоб активувати обліковий запис, вам має надійти електронний лист.",
     "afterConfirmationActivation": "Після підтвердження активації",
-    "passwordChangedSuccessfully": "Пароль успішно змінено!"
+    "passwordChangedSuccessfully": "Пароль успішно змінено!",
+    "confirmCompanyDelete": "Підтвердіть видалення компанії.",
+    "confirmInvitationRevoke": "Підтвердіть відкликання запрошення.",
+    "confirmInvitationAccept": "Підтвердіть прийняття запрошення.",
+    "confirmInvitationDecline": "Підтвердіть відхилення запрошення.",
+    "confirmRequestCancel": "Підтвердіть скасування запиту.",
+    "confirmRequestApprove": "Підтвердіть затвердження запиту.",
+    "confirmRequestReject": "Підтвердіть відхилення запиту.",
+    "confirmSendInvite": "Підтвердіть надсилання запрошення.",
+    "confirmSendRequest": "Підтвердіть надсилання запиту.",
+    "confirmLeave": "Підтвердіть вихід з компанії.",
+    "confirmRemoveFromCompany": "Підтвердити видалення користувача з компанії.",
+    "confirmAppointAdmin": "Підтвердити призначення адміністратора.",
+    "confirmRemoveAdmin": "Підтвердьте видалення адміністратора."
   }
 }

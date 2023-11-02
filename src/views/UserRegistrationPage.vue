@@ -29,7 +29,6 @@
           :button-name="$t('buttons.registration')"
         />
       </v-form>
-
     </template>
     <template v-else>
       <p>{{ $t('texts.receiveAnEmail') }}</p>

@@ -4,6 +4,20 @@ const { t } = i18n.global;
 // Base URL for interacting with the backend
 export const BASE_URL = `http://${process.env.BACKEND_APP_HOST}:${process.env.BACKEND_APP_PORT}`
 
+export const REQUEST_STATUS = {
+  pending: 'PENDING',
+  approved: 'APPROVED',
+  rejected: 'REJECTED',
+  cancelled: 'CANCELLED',
+}
+
+export const INVITATION_STATUS = {
+  pending: 'PENDING',
+  accepted: 'ACCEPTED',
+  declined: 'DECLINED',
+  revoked: 'REVOKED',
+}
+
 // Names for access and refresh tokens in local storage
 export const NAME_ACCESS_TOKEN = 'accessToken';
 export const NAME_REFRESH_TOKEN = 'refreshToken';
@@ -141,4 +155,22 @@ export const CHANGE_PASSWORD_FIELDS = [
   { field: 'current_password',  label: 'currentPassword' },
   { field: 'new_password',  label: 'newPassword' },
   { field: 're_new_password',  label: 'confirmNewPassword' },
+];
+
+export const COMPANY_NAVBAR = [
+  { value: 'all-users', icon: 'mdi-account', text: 'navbar.addMember' },
+  { value: 'members', icon: 'mdi-account-group', text: 'navbar.members' },
+  { value: 'admins', icon: 'mdi-account-star', text: 'navbar.admins' },
+  { value: 'quizzes', icon: 'mdi-book-open-variant', text: 'navbar.quizzes' },
+  { value: 'invitations', icon: 'mdi-lock', text: 'navbar.invitations' },
+  { value: 'requests', icon: 'mdi-cursor-default-click-outline', text: 'navbar.requests' },
+];
+
+export const USER_NAVBAR = [
+  { value: 'my-companies', icon: 'mdi-folder-account', text: 'navbar.myCompany' },
+  { value: 'all-companies', icon: 'mdi-domain', text: 'navbar.companies' },
+  { value: 'admins', icon: 'mdi-account-star', text: 'navbar.admins' },
+  { value: 'members', icon: 'mdi-account-group', text: 'navbar.members' },
+  { value: 'invitations', icon: 'mdi-lock', text: 'navbar.invitations' },
+  { value: 'requests', icon: 'mdi-cursor-default-click-outline', text: 'navbar.requests' },
 ];

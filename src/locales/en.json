@@ -5,7 +5,15 @@
     "home": "Home",
     "users": "Users",
     "companies": "Companies",
-    "about": "About"
+    "about": "About",
+    "addMember": "Add members",
+    "addCompany": "Add companies",
+    "myCompany": "My companies",
+    "invitations": "Invitations",
+    "requests": "Requests",
+    "quizzes": "Quizzes",
+    "admins": "Admins",
+    "members": "Members"
   },
   "buttons": {
     "login": "Login",
@@ -27,7 +35,21 @@
     "createCompany": "Create company",
     "create": "Create",
     "edit": "Edit",
-    "delete": "Delete"
+    "delete": "Delete",
+    "accept": "Accept",
+    "decline": "Decline",
+    "revoke": "Revoke",
+    "approve": "Approve",
+    "reject": "Reject",
+    "cancel": "Cancel",
+    "viewed": "Viewed",
+    "leave": "Leave",
+    "confirm": "Confirm",
+    "invite": "Invite",
+    "request": "Request",
+    "removeFromCompany": "Remove from company",
+    "appointAdmin": "Appoint as admin",
+    "removeAdmin": "Remove from admins"
   },
   "validations": {
     "usernameRequired": "Username is required",
@@ -66,7 +88,12 @@
     "companyProfile": "Company Profile",
     "userSettings": "User settings",
     "company": "Company",
-    "pageNotFound": "Page Not Found"
+    "pageNotFound": "Page Not Found",
+    "requests": "Requests",
+    "invitations": "Invitations",
+    "admins": "Admins",
+    "members": "Members",
+    "myCompanies": "My companies"
   },
   "fields": {
     "email": "E-mail",
@@ -78,6 +105,9 @@
     "avatar": "Avatar",
     "description": "Description",
     "visibility": "Visibility",
+    "sender": "Sender",
+    "recipient": "Recipient",
+    "status": "Status",
     "yes": "Yes",
     "no": "No"
   },
@@ -108,6 +138,19 @@
     "hasBeenChanged": "has been changed.",
     "receiveAnEmail": "To activate your account, you should receive an email.",
     "afterConfirmationActivation": "After confirmation of activation",
-    "passwordChangedSuccessfully": "Password changed successfully!"
+    "passwordChangedSuccessfully": "Password changed successfully!",
+    "confirmCompanyDelete": "Confirm deletion of the company.",
+    "confirmInvitationRevoke": "Confirm the invitation revoke.",
+    "confirmInvitationAccept": "Confirm the invitation accept.",
+    "confirmInvitationDecline": "Confirm the invitation decline.",
+    "confirmRequestCancel": "Confirm the request cancel.",
+    "confirmRequestApprove": "Confirm the request approve.",
+    "confirmRequestReject": "Confirm the request reject.",
+    "confirmSendInvite": "Confirm sending the invitation.",
+    "confirmSendRequest": "Confirm sending the request.",
+    "confirmLeave": "Confirm leaving the company.",
+    "confirmRemoveFromCompany": "Confirm the removal of the user from the company.",
+    "confirmAppointAdmin": "Confirm the appointment of the administrator.",
+    "confirmRemoveAdmin": "Confirm the removal of the administrator."
   }
 }

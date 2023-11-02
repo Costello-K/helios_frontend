@@ -140,13 +140,13 @@ import {
 
 export default {
   setup() {
+    const {t, locale} = useI18n({useScope: 'global'});
     const store = useStore();
     const router = useRouter();
     const isAuthorized = computed(() => store.getters['authUser/isAuthorized']);
     const authUserId = computed(() => store.getters['authUser/getUserId']);
     const userFirstName = computed(() => store.getters['authUser/getUserFirstName']);
     const userEmail = computed(() => store.getters['authUser/getUserEmail']);
-    const {t, locale} = useI18n({useScope: 'global'});
 
     const logout = () => {
       auth.logoutUser();
