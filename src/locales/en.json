@@ -16,6 +16,9 @@
     "members": "Members"
   },
   "buttons": {
+    "addAnswer": "Add answer",
+    "addQuestion": "Add question",
+    "removeQuestion": "Remove question",
     "login": "Login",
     "registration": "Registration",
     "myProfile": "My profile",
@@ -31,8 +34,10 @@
     "changePassword": "Change password",
     "cancel": "Cancel",
     "apply": "Apply",
+    "complete": "Complete",
     "confirmDelete": "Confirm deletion",
     "createCompany": "Create company",
+    "createQuiz": "Create quiz",
     "create": "Create",
     "edit": "Edit",
     "delete": "Delete",
@@ -49,7 +54,10 @@
     "request": "Request",
     "removeFromCompany": "Remove from company",
     "appointAdmin": "Appoint as admin",
-    "removeAdmin": "Remove from admins"
+    "removeAdmin": "Remove from admins",
+    "start": "Start",
+    "update": "Update",
+    "remove": "Remove",
   },
   "validations": {
     "usernameRequired": "Username is required",
@@ -61,7 +69,15 @@
     "avatarSize": "Avatar size should be less than",
     "fileExtensions": "Accepted file extensions",
     "nameRequired": "Name is required",
-    "descriptionRequired": "Description is required"
+    "descriptionRequired": "Description is required",
+    "answerRequired": "The answer text is required",
+    "questionTextRequired": "The question text is required",
+    "rightAnswerRequired": "Each question must have at least one correct answer",
+    "minCountAnswers": "Each question must have at least",
+    "minCountQuestions": "The quiz should have at least",
+    "answers": "answers",
+    "question": "Question",
+    "questions": "questions",
   },
   "placeholders": {
     "username": "Username",
@@ -76,7 +92,8 @@
     "confirmNewPassword": "Confirm new password",
     "name": "Name",
     "description": "Description",
-    "visibility": "Visibility"
+    "visibility": "Visibility",
+    "right": "Right"
   },
   "titles": {
     "users": "Users",
@@ -93,7 +110,10 @@
     "invitations": "Invitations",
     "admins": "Admins",
     "members": "Members",
-    "myCompanies": "My companies"
+    "myCompanies": "My companies",
+    "quizzes": "Quizzes",
+    "quiz": "Quiz",
+    "quizResult": "Quiz results",
   },
   "fields": {
     "email": "E-mail",
@@ -109,13 +129,23 @@
     "recipient": "Recipient",
     "status": "Status",
     "yes": "Yes",
-    "no": "No"
+    "no": "No",
+    "title": "Name",
+    "frequency": "Frequency",
+    "startTime": "Start date and time",
+    "completeTime": "End date and time",
+    "correctAnswers": "Number of correct answers",
+    "totalQuestions": "Total number of questions",
+    "quizTime": "Passing time",
+    "companyAverageScore": "Rating in the company",
+    "rating": "Rating",
   },
   "links": {
     "goHome": "Go Back to Home",
     "clickHereToLogin": "Click here to login.",
     "forgotYourPassword": "Forgot your password?",
-    "forgotYourUsername": "Forgot your username?"
+    "forgotYourUsername": "Forgot your username?",
+    "returnToCompanyPage": "Return to the company page"
   },
   "texts": {
     "about": {
@@ -136,6 +166,7 @@
     "password": "password | password",
     "username": "username | username",
     "hasBeenChanged": "has been changed.",
+    "withoutLimitation": "without limitation",
     "receiveAnEmail": "To activate your account, you should receive an email.",
     "afterConfirmationActivation": "After confirmation of activation",
     "passwordChangedSuccessfully": "Password changed successfully!",
@@ -151,6 +182,12 @@
     "confirmLeave": "Confirm leaving the company.",
     "confirmRemoveFromCompany": "Confirm the removal of the user from the company.",
     "confirmAppointAdmin": "Confirm the appointment of the administrator.",
-    "confirmRemoveAdmin": "Confirm the removal of the administrator."
+    "confirmRemoveAdmin": "Confirm the removal of the administrator.",
+    "confirmStartQuiz": "Confirm the start of the quiz.",
+    "confirmRemoveQuiz": "Confirm the removal of the quiz.",
+    "day": "d",
+    "hour": "hr",
+    "minute": "min",
+    "second": "sec",
   }
 }
