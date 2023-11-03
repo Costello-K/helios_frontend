@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <v-toolbar color="grey">
+    <v-toolbar color="#ededed">
       <v-toolbar-title>
         {{ myProfile ? $t('titles.myProfile') : $t('titles.userProfile') }}
       </v-toolbar-title>

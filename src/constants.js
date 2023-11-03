@@ -4,6 +4,9 @@ const { t } = i18n.global;
 // Base URL for interacting with the backend
 export const BASE_URL = `http://${process.env.BACKEND_APP_HOST}:${process.env.BACKEND_APP_PORT}`
 
+export const MIN_COUNT_QUIZ_ANSWERS = 2;
+export const MIN_COUNT_QUIZ_QUESTIONS = 2;
+
 export const REQUEST_STATUS = {
   pending: 'PENDING',
   approved: 'APPROVED',
@@ -49,6 +52,11 @@ export const ROUTER_DATA = [
   { path: 'users/:id', pathToComponent: 'views/UserProfilePage', meta: { requiresAuth: true } },
   { path: 'companies', pathToComponent: 'views/CompanyListPage', meta: { requiresAuth: true } },
   { path: 'companies/:id', pathToComponent: 'views/CompanyProfilePage', meta: { requiresAuth: true } },
+  {
+    path: 'companies/:companyId/quizzes/:quizId',
+    pathToComponent: 'views/QuizPage',
+    meta: { requiresAuth: true },
+  },
   { path: 'about', pathToComponent: 'views/AboutPage'},
   { path: 'settings', pathToComponent: 'views/UserProfileSettingsPage', meta: { requiresAuth: true } },
   { path: '/:catchAll(.*)', pathToComponent: 'views/NotFoundPage' },
@@ -90,6 +98,19 @@ export const MY_USER_INFO_FIELDS = [
   ...USER_INFO_FIELDS
 ];
 
+export const USER_QUIZ_RESULT_TIME_FIELDS = [
+  { name: 'created_at', label: 'fields.startTime' },
+  { name: 'updated_at', label: 'fields.completeTime' },
+];
+
+export const USER_QUIZ_RESULT_INFO_FIELDS = [
+  { name: 'correct_answers', label: 'fields.correctAnswers' },
+  { name: 'total_questions', label: 'fields.totalQuestions' },
+  { name: 'company_average_score', label: 'fields.companyAverageScore' },
+  { name: 'user_rating', label: 'fields.rating' },
+  { name: 'progress_status', label: 'fields.status' },
+];
+
 // Data for social authorization types
 export const SOCIAL_AUTH_DATA = {
   google: {
@@ -113,7 +134,13 @@ export const VALIDATION_RULES = {
   ],
   first_name: [v => !!v || t('validations.firstNameRequired')],
   name: [v => !!v || t('validations.nameRequired')],
+  title: [v => !!v || t('validations.nameRequired')],
+  text: [v => !!v || t('validations.answerRequired')],
+  question_text: [v => !!v || t('validations.questionTextRequired')],
   description: [v => !!v || t('validations.descriptionRequired')],
+  frequency: [],
+  is_right: [],
+  id: [],
   visibility: [],
   last_name: [],
   avatar: [
