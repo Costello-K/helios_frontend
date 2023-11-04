@@ -7,20 +7,34 @@
     </v-toolbar>
     <div class="d-flex flex-row">
       <v-tabs
-          v-if="isOwner"
+          v-if="isOwner || companyData.is_admin"
           v-model="tab"
           direction="vertical"
           color="primary"
       >
-        <v-tab
-            v-for="(item, i) in COMPANY_NAVBAR"
-            :key="`${i}_${item.value}`"
-            :value="item.value"
-        >
+        <template v-if="isOwner">
+          <v-tab
+              v-for="(item, i) in COMPANY_NAVBAR"
+              :key="`${i}_${item.value}`"
+              :value="item.value"
+          >
+            <v-icon :start="true">
+              {{ item.icon }}
+            </v-icon>
+            {{ $t(item.text) }}
+          </v-tab>
+        </template>
+        <v-tab value="company-quizzes">
           <v-icon :start="true">
-            {{ item.icon }}
+            mdi-book-open-variant
           </v-icon>
-          {{ $t(item.text) }}
+          {{ $t('navbar.quizzes') }}
+        </v-tab>
+        <v-tab value="company-results-analytics">
+          <v-icon :start="true">
+            mdi-poll
+          </v-icon>
+          {{ $t('navbar.resultsAnalytics') }}
         </v-tab>
       </v-tabs>
       <div class="w-100">
@@ -45,7 +59,8 @@
               />
             </v-card>
           </v-container>
-          <template v-if="isOwner">
+
+          <template v-if="isOwner || companyData.is_admin">
             <div class="button-right">
               <ModalWindow
                   :open-button-text="$t('buttons.createQuiz')"
@@ -58,58 +73,75 @@
                 </template>
               </ModalWindow>
 
-              <ModalWindow
-                  :open-button-text="$t('buttons.edit')"
-                  :close-button-text="$t('buttons.cancel')"
-                  class="mx-5"
-              >
-                <template v-slot:default="{ closeModalWindow }">
-                  <CompanyForm
-                      :closeModalWindow="closeModalWindow"
-                      :is-edit="true"
-                      :data="companyData"
+              <template v-if="isOwner">
+                <ModalWindow
+                    :open-button-text="$t('buttons.edit')"
+                    :close-button-text="$t('buttons.cancel')"
+                    class="mx-5"
+                >
+                  <template v-slot:default="{ closeModalWindow }">
+                    <CompanyForm
+                        :closeModalWindow="closeModalWindow"
+                        :is-edit="true"
+                        :data="companyData"
+                    />
+                  </template>
+                </ModalWindow>
+                <ModalWindow
+                    :open-button-text="$t('buttons.delete')"
+                    :close-button-text="$t('buttons.cancel')"
+                >
+                  <v-card-text class="mb-10">
+                    {{ $t('texts.confirmCompanyDelete') }}
+                  </v-card-text>
+                  <BaseButton
+                      block
+                      :button-name="$t('buttons.confirm')"
+                      @click="deleteCompany"
                   />
-                </template>
-              </ModalWindow>
-
-              <ModalWindow
-                  :open-button-text="$t('buttons.delete')"
-                  :close-button-text="$t('buttons.cancel')"
-              >
-                <v-card-text class="mb-10">
-                  {{ $t('texts.confirmCompanyDelete') }}
-                </v-card-text>
-                <BaseButton
-                    block
-                    :button-name="$t('buttons.confirm')"
-                    @click="deleteCompany"
-                />
-              </ModalWindow>
+                </ModalWindow>
+              </template>
             </div>
           </template>
         </div>
 
         <v-window
-            v-if="isOwner"
+            v-if="isOwner || companyData.is_member"
             v-model="tab"
         >
-          <v-window-item
-              v-for="(item, i) in TYPES_USER_LIST"
-              :key="`${i}_${item}`"
-              :value="item">
-            <UserListPage
-                v-if="tab === item"
+          <template v-if="isOwner">
+            <v-window-item
+                v-for="(item, i) in TYPES_USER_LIST"
+                :key="`${i}_${item}`"
+                :value="item">
+              <UserListPage
+                  v-if="tab === item"
+                  :tab="tab"
+              />
+            </v-window-item>
+          </template>
+          <v-window-item value="company-quizzes">
+            <QuizListPage
+                v-if="tab === 'company-quizzes'"
                 :tab="tab"
             />
           </v-window-item>
-          <v-window-item value="quizzes">
-            <QuizListPage v-if="tab === 'quizzes'"/>
-          </v-window-item>
-          <v-window-item value="invitations">
-            <InvitationListPage v-if="tab === 'invitations'"/>
-          </v-window-item>
-          <v-window-item value="requests">
-            <RequestListPage v-if="tab === 'requests'"/>
+          <template v-if="isOwner">
+            <v-window-item value="invitations">
+              <InvitationListPage v-if="tab === 'invitations'"/>
+            </v-window-item>
+            <v-window-item value="requests">
+              <RequestListPage v-if="tab === 'requests'"/>
+            </v-window-item>
+          </template>
+          <v-window-item
+              v-if="isOwner || companyData.is_admin"
+              value="company-results-analytics"
+          >
+            <AnalyticsPage
+                v-if="tab === 'company-results-analytics'"
+                :tab="tab"
+            />
           </v-window-item>
         </v-window>
       </div>
@@ -132,6 +164,7 @@ import RequestListPage from '@/views/RequestListPage';
 import InvitationListPage from '@/views/InvitationListPage';
 import QuizListPage from '@/views/QuizListPage';
 import QuizForm from '@/components/QuizForm';
+import AnalyticsPage from '@/views/AnalyticsPage';
 
 export default {
   name: 'CompanyProfilePage',
@@ -145,6 +178,7 @@ export default {
     RequestListPage,
     InvitationListPage,
     QuizListPage,
+    AnalyticsPage,
   },
   setup() {
     const router = useRouter();

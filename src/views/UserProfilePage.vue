@@ -40,6 +40,10 @@
                 />
               </v-card>
             </div>
+            <StarRatingComponent
+                :rating="userData.rating"
+                class="ml-auto"
+            />
           </v-container>
           <ModalWindow
               v-if="myProfile"
@@ -71,6 +75,21 @@
           <v-window-item value="requests">
             <RequestListPage v-if="tab === 'requests'"/>
           </v-window-item>
+          <v-window-item value="user-quizzes">
+            <QuizListPage
+                v-if="tab === 'user-quizzes'"
+                :tab="tab"
+            />
+          </v-window-item>
+          <v-window-item value="user-quiz-results">
+            <QuizResultsListPage v-if="tab === 'user-quiz-results'"/>
+          </v-window-item>
+          <v-window-item value="user-results-analytics">
+            <AnalyticsPage
+                v-if="tab === 'user-results-analytics'"
+                :tab="tab"
+            />
+          </v-window-item>
         </v-window>
       </div>
     </div>
@@ -89,6 +108,10 @@ import ModalWindow from '@/components/ModalWindow';
 import CompanyForm from '@/components/CompanyForm';
 import InvitationListPage from '@/views/InvitationListPage';
 import RequestListPage from '@/views/RequestListPage';
+import StarRatingComponent from '@/components/StarRatingComponent';
+import QuizListPage from '@/views/QuizListPage';
+import AnalyticsPage from '@/views/AnalyticsPage';
+import QuizResultsListPage from '@/views/QuizResultsListPage';
 
 export default {
   name: 'UserProfilePage',
@@ -99,6 +122,10 @@ export default {
     CompanyForm,
     InvitationListPage,
     RequestListPage,
+    StarRatingComponent,
+    QuizListPage,
+    QuizResultsListPage,
+    AnalyticsPage,
   },
   setup() {
     const router = useRouter();

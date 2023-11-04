@@ -1,10 +1,10 @@
 <template>
   <CardList
-      :title="$t('titles.quizzes')"
-      :data="quizzes"
+      :title="$t('titles.quizResults')"
+      :data="quizResults"
   >
     <template v-slot:default="{ item }">
-      <QuizCard :quiz="item"/>
+      <QuizResultCard :quiz-result="item"/>
     </template>
   </CardList>
   <PaginationComponent
@@ -19,42 +19,31 @@ import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 import { quizzesApi } from '@/api';
 import CardList from '@/components/CardList';
-import QuizCard from '@/components/QuizCard';
+import QuizResultCard from '@/components/QuizResultCard';
 import PaginationComponent from '@/components/PaginationComponent';
 
 export default {
-  name: 'UserListPage',
+  name: 'QuizResultsListPage',
   components: {
     CardList,
-    QuizCard,
+    QuizResultCard,
     PaginationComponent,
   },
-  props: {
-    tab: {
-      type: String,
-      require: true,
-    },
-  },
-  setup(props) {
+  setup() {
     const store = useStore();
     const router = useRouter();
     const totalPages = ref(1);
-    const { id } = router.currentRoute.value.params;
-    const quizzes = computed(() => store.state.quizList.quizzes);
-
-    const quizRequests = {
-      'company-quizzes': async page => await quizzesApi.getListCompanyQuizzes(page, id),
-      'user-quizzes': async page => await quizzesApi.getListUserQuizzes(page, id),
-    };
+    const quizResults = computed(() => store.state.quizResultsList.quizResults);
 
     const getQuizzes = async (page) => {
       try {
+        const { id } = router.currentRoute.value.params;
         const {
           data: {
             total_pages,
             results,
           },
-        } = await quizRequests[props.tab](page);
+        } = await quizzesApi.getListUserQuizResults(page, id);
 
         totalPages.value = total_pages;
         return results;
@@ -64,16 +53,16 @@ export default {
     };
 
     const handlePageChange = async (newPage) => {
-      const newQuizzesData = await getQuizzes(newPage);
-      store.commit('quizList/setQuizListData', newQuizzesData);
+      const newQuizResultsData = await getQuizzes(newPage);
+      store.commit('quizResultsList/setQuizResultsListData', newQuizResultsData);
     };
 
     onMounted(async () => {
-      const newQuizzesData = await getQuizzes(1);
-      store.commit('quizList/setQuizListData', newQuizzesData);
+      const newQuizResultsData = await getQuizzes(1);
+      store.commit('quizResultsList/setQuizResultsListData', newQuizResultsData);
     });
 
-    return { quizzes, totalPages, handlePageChange }
+    return { quizResults, totalPages, handlePageChange }
   },
 };
 </script>

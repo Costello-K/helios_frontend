@@ -13,7 +13,9 @@
     "requests": "Requests",
     "quizzes": "Quizzes",
     "admins": "Admins",
-    "members": "Members"
+    "members": "Members",
+    "quizResults": "Quiz results",
+    "resultsAnalytics": "Results analytics",
   },
   "buttons": {
     "addAnswer": "Add answer",
@@ -36,6 +38,7 @@
     "apply": "Apply",
     "complete": "Complete",
     "confirmDelete": "Confirm deletion",
+    "continue": "Continue",
     "createCompany": "Create company",
     "createQuiz": "Create quiz",
     "create": "Create",
@@ -96,6 +99,7 @@
     "right": "Right"
   },
   "titles": {
+    "analytics": "Analytics",
     "users": "Users",
     "companies": "Companies",
     "about": "About Us",
@@ -114,6 +118,7 @@
     "quizzes": "Quizzes",
     "quiz": "Quiz",
     "quizResult": "Quiz results",
+    "quizResults": "Quiz results",
   },
   "fields": {
     "email": "E-mail",
@@ -136,8 +141,10 @@
     "completeTime": "End date and time",
     "correctAnswers": "Number of correct answers",
     "totalQuestions": "Total number of questions",
+    "quiz": "Quiz",
     "quizTime": "Passing time",
     "companyAverageScore": "Rating in the company",
+    "companyMember": "Company member",
     "rating": "Rating",
   },
   "links": {
@@ -189,5 +196,6 @@
     "hour": "hr",
     "minute": "min",
     "second": "sec",
+    "notStarted": "not started",
   }
 }

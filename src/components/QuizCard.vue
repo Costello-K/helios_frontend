@@ -3,7 +3,7 @@
     <div class="d-flex justify-space-between h-100">
       <div class="align-self-center w-100">
         <BaseLink
-            v-if="isOwner || quiz.company.is_admin"
+            v-if="!isUsersRout && (isOwner || quiz.company.is_admin)"
             :to="{
               path: `/companies/${quiz.company.id}/quizzes/${quiz.id}`,
               query: { preview: true }
@@ -17,6 +17,12 @@
             class="py-2"
         />
         <CardInfoLine
+            v-if="isUsersRout"
+            :label="$t('fields.company')"
+            :value="quiz.company.name"
+            class="py-2"
+        />
+        <CardInfoLine
             :label="$t('fields.description')"
             :value="(quiz.description).length > 200 ? `${quiz.description.slice(150)}...` : quiz.description"
             class="py-2"
@@ -26,20 +32,34 @@
             :value="quiz.frequency || $t('texts.withoutLimitation')"
             class="py-2"
         />
+        <template v-if="isUsersRout">
+          <CardInfoLine
+              v-if="isQuizResult"
+              :label="$t(`${isQuizResult.completed ? 'fields.completeTime' : 'fields.startTime'}`)"
+              :value="$filters.formatTime(lastUpdated)"
+              class="py-2"
+          />
+          <CardInfoLine
+              v-else
+              :label="$t('fields.status')"
+              :value="$t('texts.notStarted')"
+              class="py-2"
+          />
+        </template>
       </div>
       <div
-          v-if="isOwner || quiz.company.is_company_member"
+          v-if="isOwner || quiz.company.is_member"
           class="align-self-center"
       >
         <CardModalWindow
-            :mainButtonText="'buttons.start'"
+            :mainButtonText="isQuizResult && !isQuizResult.complete ? 'buttons.continue' : 'buttons.start'"
             :mainText="'texts.confirmStartQuiz'"
             :onClickFunction="() => $router.push({
               path: `/companies/${quiz.company.id}/quizzes/${quiz.id}`,
               query: { start: true }
             })"
         />
-        <template v-if="isOwner || quiz.company.is_company_admin">
+        <template v-if="!isUsersRout && (isOwner || quiz.company.is_admin)">
           <ModalWindow
               :open-button-text="$t('buttons.update')"
               :close-button-text="$t('buttons.cancel')"
@@ -66,7 +86,7 @@
 </template>
 
 <script>
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 import { quizzesApi } from '@/api';
@@ -92,7 +112,15 @@ export default {
     const store = useStore();
     const router = useRouter();
     const { id } = router.currentRoute.value.params;
-    const authUserId = computed(()=> store.getters['authUser/getUserId']);
+    const isQuizResult = ref(props.quiz.auth_user_last_completed);
+    const isUsersRout = router.currentRoute.value.path.includes('users');
+    const lastUpdated = computed(() => {
+      if (isQuizResult.value) {
+        return isQuizResult.value.completed ? isQuizResult.value.updated_at : isQuizResult.value.created_at;
+      }
+      return false;
+    });
+    const authUserId = computed(() => store.getters['authUser/getUserId']);
     const isOwner = props.quiz.company.owner.id === authUserId.value;
 
     const removeQuiz = async () => {
@@ -108,6 +136,9 @@ export default {
 
     return {
       isOwner,
+      isQuizResult,
+      lastUpdated,
+      isUsersRout,
       authUserId,
       removeQuiz,
     };

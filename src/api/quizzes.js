@@ -6,11 +6,19 @@ class QuizzesApiController {
     this.baseApiClient = ApiController;
   }
 
-  async getListQuizzes(page, company_id) {
+  async getListCompanyQuizzes(page, company_id) {
     const params = new URLSearchParams();
     params.append('page', page);
 
     const path = `/v1/companies/${company_id}/quizzes/?${params.toString()}`;
+    return this.baseApiClient.makeRequest('GET', path);
+  }
+
+  async getListUserQuizzes(page, user_id) {
+    const params = new URLSearchParams();
+    params.append('page', page);
+
+    const path = `/v1/users/${user_id}/quizzes/?${params.toString()}`;
     return this.baseApiClient.makeRequest('GET', path);
   }
 
@@ -42,6 +50,27 @@ class QuizzesApiController {
   async completeQuiz(company_id, quiz_id, formData) {
     const path = `/v1/companies/${company_id}/quizzes/${quiz_id}/complete/`;
     return this.baseApiClient.makeRequest('POST', path, formData);
+  }
+
+  async allCompanyQuizResults(company_id, user_id='') {
+    const params = new URLSearchParams();
+    params.append('user_id', user_id);
+
+    const path = `/v1/analytics/companies/${company_id}/?${params.toString()}`;
+    return this.baseApiClient.makeRequest('GET', path);
+  }
+
+  async allUserQuizResults(user_id) {
+    const path = `/v1/analytics/users/${user_id}/`;
+    return this.baseApiClient.makeRequest('GET', path);
+  }
+
+  async getListUserQuizResults(page, user_id) {
+    const params = new URLSearchParams();
+    params.append('page', page);
+
+    const path = `/v1/users/${user_id}/quizzes/results/?${params.toString()}`;
+    return this.baseApiClient.makeRequest('GET', path);
   }
 }
 

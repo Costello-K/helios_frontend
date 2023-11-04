@@ -5,8 +5,7 @@
       <v-col
           v-for="item in data"
           :key="item.id"
-          cols="7"
-          class="mx-auto"
+          class="mx-auto container-list"
       >
         <slot :item="item"/>
       </v-col>
@@ -23,3 +22,10 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.container-list {
+  min-width: 480px;
+  max-width: 600px;
+}
+</style>
