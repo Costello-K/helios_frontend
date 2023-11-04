@@ -125,30 +125,31 @@
         </v-form>
       </v-container>
 
-      <v-container class="user-property-wrapper mt-10">
-        <div class="user-property">
-          <BaseButton
-              :button-name="$t('buttons.deleteAccount')"
-              @click="switchForm('deleteAccount')"
-              class="mb-5 mx-auto"
-          />
+      <v-container class="d-flex user-property-wrapper mt-10 pb-10">
+        <div class="user-property justify-center">
+          <ModalWindow
+              :open-button-text="$t('buttons.deleteAccount')"
+              :close-button-text="$t('buttons.cancel')"
+          >
+            <v-form @submit.prevent="submitDeleteUserForm">
+              <v-card-text class="mb-10">
+                {{ $t('texts.confirmAccountDelete') }}
+              </v-card-text>
+              <v-text-field
+                  :label="$t('placeholders.currentPassword')"
+                  v-model="userDeleteFormData.current_password"
+                  :rules="validationRules.current_password"
+                  :error-messages="errors.current_password"
+                  type="password"
+              />
+              <BaseButton
+                  :button-name="$t('buttons.confirmDelete')"
+                  type="submit"
+                  block
+              />
+            </v-form>
+          </ModalWindow>
         </div>
-        <v-form
-            v-if="isOpenForm.deleteAccount"
-            @submit.prevent="submitDeleteUserForm"
-        >
-          <v-text-field
-              :label="$t('placeholders.currentPassword')"
-              v-model="userDeleteFormData.current_password"
-              :rules="validationRules.current_password"
-              :error-messages="errors.current_password"
-              type="password"
-          />
-          <GroupFormButtons
-              summit-button-name="buttons.confirmDelete"
-              :cancel-button-click-function="() => switchForm('deleteAccount')"
-          />
-        </v-form>
       </v-container>
 
     </v-card>
@@ -165,12 +166,14 @@ import { auth, objUtils, formUtils } from '@/utils';
 import { BASE_URL, VALIDATION_RULES, CHANGE_PASSWORD_FIELDS, NON_CHANGEABLE_USER_SETTINGS_FIELDS } from '@/constants';
 import BaseButton from '@/components/BaseButton';
 import GroupFormButtons from '@/components/GroupFormButtons';
+import ModalWindow from '@/components/ModalWindow';
 
 export default {
   name: 'SettingsUserProfilePage',
   components: {
     BaseButton,
     GroupFormButtons,
+    ModalWindow,
   },
   setup() {
     const { t } = useI18n({ useScope: 'global' });
@@ -182,7 +185,6 @@ export default {
       firstName: false,
       lastName: false,
       changePassword: false,
-      deleteAccount: false,
     });
     const authUser = computed(() => store.state.authUser.user);
     const avatarUpdateFormData = ref({ avatar: '' });
