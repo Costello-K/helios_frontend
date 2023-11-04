@@ -43,6 +43,7 @@
     "createQuiz": "Create quiz",
     "create": "Create",
     "edit": "Edit",
+    "export": "Export",
     "delete": "Delete",
     "accept": "Accept",
     "decline": "Decline",
@@ -124,6 +125,7 @@
     "email": "E-mail",
     "owner": "Owner",
     "firstName": "First name",
+    "fileFormat": "File format",
     "lastName": "Last name",
     "company": "Company",
     "username": "Username",
@@ -145,6 +147,7 @@
     "quizTime": "Passing time",
     "companyAverageScore": "Rating in the company",
     "companyMember": "Company member",
+    "companyQuiz": "Company quiz",
     "rating": "Rating",
   },
   "links": {

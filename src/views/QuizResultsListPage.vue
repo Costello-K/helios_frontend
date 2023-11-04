@@ -43,7 +43,7 @@ export default {
             total_pages,
             results,
           },
-        } = await quizzesApi.getListUserQuizResults(page, id);
+        } = await quizzesApi.getListUserQuizResults(id, {page});
 
         totalPages.value = total_pages;
         return results;
