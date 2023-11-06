@@ -21,8 +21,15 @@
             {{ item.icon }}
           </v-icon>
           {{ $t(item.text) }}
+          <div
+              v-if="unviewedNotificationsCount && item.value === 'notifications'"
+              :class="['notification-count', { 'small-height': unviewedNotificationsCount < 10 }]"
+          >
+            {{ unviewedNotificationsCount }}
+          </div>
         </v-tab>
       </v-tabs>
+
       <div class="w-100">
         <div class="pa-5">
           <v-container class="d-flex">
@@ -75,6 +82,9 @@
           <v-window-item value="requests">
             <RequestListPage v-if="tab === 'requests'"/>
           </v-window-item>
+          <v-window-item value="notifications">
+            <NotificationListPage v-if="tab === 'notifications'"/>
+          </v-window-item>
           <v-window-item value="user-quizzes">
             <QuizListPage
                 v-if="tab === 'user-quizzes'"
@@ -112,6 +122,7 @@ import StarRatingComponent from '@/components/StarRatingComponent';
 import QuizListPage from '@/views/QuizListPage';
 import AnalyticsPage from '@/views/AnalyticsPage';
 import QuizResultsListPage from '@/views/QuizResultsListPage';
+import NotificationListPage from '@/views/NotificationListPage';
 
 export default {
   name: 'UserProfilePage',
@@ -126,16 +137,21 @@ export default {
     QuizListPage,
     QuizResultsListPage,
     AnalyticsPage,
+    NotificationListPage,
   },
   setup() {
     const router = useRouter();
     const store = useStore();
     const myProfile = ref(false);
+    const showNotification = ref(false);
+    const textNotification = ref('');
     const userData = ref({});
     const infoFields = ref([]);
     const tab = ref(COMPANY_NAVBAR[0].value);
     const TYPES_COMPANY_LIST = ['my-companies', 'all-companies', 'admins', 'members']
     const authUserId = computed(()=> store.getters['authUser/getUserId']);
+    const unviewedNotificationsCount = computed(() =>
+        store.getters['notificationList/getUnviewedNotificationCount']);
 
     const getUserData = async (userId) => {
       try {
@@ -171,9 +187,12 @@ export default {
       userData,
       infoFields,
       tab,
+      unviewedNotificationsCount,
       BASE_URL,
       USER_NAVBAR,
       TYPES_COMPANY_LIST,
+      showNotification,
+      textNotification,
     }
   }
 };
@@ -190,5 +209,20 @@ export default {
 }
 .text-user-info {
   padding-left: 30px;
+}
+.notification-count {
+  width: 25px;
+  height: 25px;
+  margin-left: 5px;
+  color: white;
+  text-align: center;
+  line-height: 25px;
+  background-color: #198ae3;
+  border-radius: 50%
+}
+.notification-count.small-height {
+  width: 17px;
+  height: 17px;
+  line-height: 17px;
 }
 </style>

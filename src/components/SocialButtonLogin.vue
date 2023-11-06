@@ -65,6 +65,7 @@ export default {
         store.commit('authUser/setUserData', data);
 
         localStorage.removeItem(TYPE_SOCIAL_AUTH);
+        store.dispatch('webSocketService/connectWebSocket');
         router.push(`/users/${data.id}`);
       }
     });

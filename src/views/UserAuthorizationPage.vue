@@ -91,7 +91,7 @@ export default {
 
         const { data } = await usersApi.getMyUser();
         store.commit('authUser/setUserData', data);
-
+        store.dispatch('webSocketService/connectWebSocket');
         router.push(`/users/${data.id}`);
       } catch (err) {
         errors.value = objUtils.mergeObjects(errors.value, err.response.data);

@@ -92,6 +92,18 @@
                   >
                     {{ $t(item.title) }}
                   </v-btn>
+                  <v-btn
+                      @click="$router.push(`/users/${authUserId}/notifications`)"
+                      class="elevation-0 w-100"
+                  >
+                    {{ $t('buttons.notifications') }}
+                    <div
+                        v-if="unviewedNotificationsCount"
+                        :class="['notification-count', { 'small-height': unviewedNotificationsCount < 10 }]"
+                    >
+                        {{ unviewedNotificationsCount }}
+                    </div>
+                  </v-btn>
                 </template>
 
                 <v-btn
@@ -123,6 +135,8 @@
       <router-view/>
     </Suspense>
   </v-container>
+
+  <NotificationMessage/>
 </template>
 
 <script>
@@ -137,8 +151,13 @@ import {
   HEADER_DROPDOWN_MENU_NON_AUTHORIZED_USER,
   I18N_LANGUAGES,
 } from '@/constants';
+import NotificationMessage from '@/components/NotificationMessage';
 
 export default {
+  name: 'NavbarComponent',
+  components: {
+    NotificationMessage,
+  },
   setup() {
     const {t, locale} = useI18n({useScope: 'global'});
     const store = useStore();
@@ -147,6 +166,8 @@ export default {
     const authUserId = computed(() => store.getters['authUser/getUserId']);
     const userFirstName = computed(() => store.getters['authUser/getUserFirstName']);
     const userEmail = computed(() => store.getters['authUser/getUserEmail']);
+    const unviewedNotificationsCount = computed(() =>
+        store.getters['notificationList/getUnviewedNotificationCount']);
 
     const logout = () => {
       auth.logoutUser();
@@ -171,6 +192,7 @@ export default {
       userEmail,
       isAuthorized,
       authUserId,
+      unviewedNotificationsCount,
       logout,
       myProfile,
       switchLang,
@@ -203,5 +225,20 @@ export default {
 .dropdown-menu-container {
   display: flex;
   flex-direction: column;
+}
+.notification-count {
+  width: 25px;
+  height: 25px;
+  margin-left: 5px;
+  color: white;
+  text-align: center;
+  line-height: 25px;
+  background-color: #198ae3;
+  border-radius: 50%
+}
+.notification-count.small-height {
+  width: 17px;
+  height: 17px;
+  line-height: 17px;
 }
 </style>

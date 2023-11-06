@@ -7,6 +7,8 @@ import invitationList from './modules/invitationList';
 import requestList from './modules/requestList';
 import quizList from './modules/quizList';
 import quizResultsList from './modules/quizResultsList';
+import notificationList from './modules/notificationList';
+import webSocketService from './modules/webSocketService';
 
 export default new Store({
     modules: {
@@ -18,5 +20,7 @@ export default new Store({
         requestList,
         quizList,
         quizResultsList,
+        notificationList,
+        webSocketService,
     },
 });

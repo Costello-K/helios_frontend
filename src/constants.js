@@ -26,6 +26,11 @@ export const INVITATION_STATUS = {
   revoked: 'REVOKED',
 }
 
+export const NOTIFICATION_STATUS = {
+  sent: 'SENT',
+  viewed: 'VIEWED',
+};
+
 // Names for access and refresh tokens in local storage
 export const NAME_ACCESS_TOKEN = 'accessToken';
 export const NAME_REFRESH_TOKEN = 'refreshToken';
@@ -55,6 +60,11 @@ export const ROUTER_DATA = [
   { path: 'authorization', pathToComponent: 'views/UserAuthorizationPage', meta: { requiresAuth: false } },
   { path: 'users', pathToComponent: 'views/UserListPage', meta: { requiresAuth: true } },
   { path: 'users/:id', pathToComponent: 'views/UserProfilePage', meta: { requiresAuth: true } },
+  {
+    path: 'users/:id/notifications',
+    pathToComponent: 'views/NotificationListPage',
+    meta: { requiresAuth: true }
+  },
   { path: 'companies', pathToComponent: 'views/CompanyListPage', meta: { requiresAuth: true } },
   { path: 'companies/:id', pathToComponent: 'views/CompanyProfilePage', meta: { requiresAuth: true } },
   {
@@ -204,6 +214,7 @@ export const USER_NAVBAR = [
   { value: 'members', icon: 'mdi-account-group', text: 'navbar.members' },
   { value: 'invitations', icon: 'mdi-lock', text: 'navbar.invitations' },
   { value: 'requests', icon: 'mdi-cursor-default-click-outline', text: 'navbar.requests' },
+  { value: 'notifications', icon: 'mdi-bell-ring', text: 'navbar.notifications' },
   { value: 'user-quizzes', icon: 'mdi-book-open-variant', text: 'navbar.quizzes' },
   { value: 'user-quiz-results', icon: 'mdi-file-chart', text: 'navbar.quizResults' },
   { value: 'user-results-analytics', icon: 'mdi-poll', text: 'navbar.resultsAnalytics' },
