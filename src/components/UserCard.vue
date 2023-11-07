@@ -1,5 +1,5 @@
 <template>
-  <v-card class="card-hover pa-2 px-4 h-100">
+  <v-card class="card-hover pa-2 px-4">
     <div class="d-flex justify-space-between h-100">
       <v-avatar
           class="align-self-center mx-3 my-1"
@@ -53,11 +53,31 @@
         />
       </div>
     </div>
+    <div v-if="isCompanyRoute && user.is_company_member">
+      <template v-if="isQuizResult">
+        <CardInfoLine
+            :label="$t('fields.quiz')"
+            :value="isQuizResult.quiz_title"
+            class="pt-2 pb-0"
+        />
+        <CardInfoLine
+            :label="$t(`${isQuizResult.completed ? 'fields.completeTime' : 'fields.startTime'}`)"
+            :value="$filters.formatTime(lastUpdated)"
+            class="pt-2 pb-0"
+        />
+      </template>
+      <CardInfoLine
+          v-else
+          :label="$t('fields.status')"
+          :value="$t('texts.notStarted')"
+          class="pt-2 pb-0"
+      />
+    </div>
   </v-card>
 </template>
 
 <script>
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 import { invitationsApi, companiesApi } from '@/api';
@@ -79,9 +99,16 @@ export default {
   setup(props) {
     const router = useRouter();
     const store = useStore();
+    const isQuizResult = ref(props.user.last_company_quiz_for_user);
     const { id } = router.currentRoute.value.params;
     const isCompanyRoute = router.currentRoute.value.path.includes('companies');
     const authUserId = computed(()=> store.getters['authUser/getUserId']);
+    const lastUpdated = computed(() => {
+      if (isQuizResult.value) {
+        return isQuizResult.value.completed ? isQuizResult.value.updated_at : isQuizResult.value.created_at;
+      }
+      return false;
+    })
 
     const updateUser = async (apiMethod, mutationType) => {
       try {
@@ -125,6 +152,8 @@ export default {
     return {
       isCompanyRoute,
       authUserId,
+      isQuizResult,
+      lastUpdated,
       invitationsApi,
       sendInvite,
       removeUserFromCompany,

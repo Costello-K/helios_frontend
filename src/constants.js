@@ -188,7 +188,6 @@ export const COMPANY_NAVBAR = [
   { value: 'all-users', icon: 'mdi-account', text: 'navbar.addMember' },
   { value: 'members', icon: 'mdi-account-group', text: 'navbar.members' },
   { value: 'admins', icon: 'mdi-account-star', text: 'navbar.admins' },
-  { value: 'quizzes', icon: 'mdi-book-open-variant', text: 'navbar.quizzes' },
   { value: 'invitations', icon: 'mdi-lock', text: 'navbar.invitations' },
   { value: 'requests', icon: 'mdi-cursor-default-click-outline', text: 'navbar.requests' },
 ];
@@ -200,4 +199,7 @@ export const USER_NAVBAR = [
   { value: 'members', icon: 'mdi-account-group', text: 'navbar.members' },
   { value: 'invitations', icon: 'mdi-lock', text: 'navbar.invitations' },
   { value: 'requests', icon: 'mdi-cursor-default-click-outline', text: 'navbar.requests' },
+  { value: 'user-quizzes', icon: 'mdi-book-open-variant', text: 'navbar.quizzes' },
+  { value: 'user-quiz-results', icon: 'mdi-file-chart', text: 'navbar.quizResults' },
+  { value: 'user-results-analytics', icon: 'mdi-poll', text: 'navbar.resultsAnalytics' },
 ];

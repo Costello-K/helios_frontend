@@ -11,6 +11,7 @@ export default {
       last_name: '',
       email: '',
       avatar: '',
+      rating: '',
     },
   }),
   getters: {

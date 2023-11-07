@@ -15,3 +15,7 @@ export default {
     };
   },
 };
+
+export function formatDate(dateTime) {
+  return dayjs.utc(dateTime).tz(dayjs.tz.guess()).format('YYYY-MM-DD');
+}

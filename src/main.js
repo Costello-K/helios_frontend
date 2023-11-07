@@ -8,9 +8,10 @@ import store from './store';
 import datetimeFilters from './datetimeFilters';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { faEdit, faTrash, faCamera } from '@fortawesome/free-solid-svg-icons';
+import { faStar, faEdit, faTrash, faCamera } from '@fortawesome/free-solid-svg-icons';
+import { faStar as faStarRegular } from '@fortawesome/free-regular-svg-icons';
 
-library.add(faEdit, faTrash, faCamera);
+library.add(faStarRegular, faStar, faEdit, faTrash, faCamera);
 loadFonts();
 
 createApp(App)

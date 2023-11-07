@@ -160,7 +160,7 @@ import { computed, ref } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 import { usersApi } from '@/api';
-import { useI18n } from 'vue-i18n/dist/vue-i18n';
+import { useI18n } from 'vue-i18n';
 import { auth, objUtils, formUtils } from '@/utils';
 import { BASE_URL, VALIDATION_RULES, CHANGE_PASSWORD_FIELDS, NON_CHANGEABLE_USER_SETTINGS_FIELDS } from '@/constants';
 import BaseButton from '@/components/BaseButton';
