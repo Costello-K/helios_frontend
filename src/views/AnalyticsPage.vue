@@ -145,16 +145,16 @@ export default {
       'user-results-analytics': async (params) => await quizzesApi.getListUserQuizResults(id, params),
     };
 
-    const getCompanySubtitle = company => {
-      return `${company.id}_${company.description.slice(0, 20)}`
+    const getCompanySubtitle = ({ id, description }) => {
+      return `${id}_${description.slice(0, 20)}`
     };
 
-    const getQuizSubtitle = quiz => {
-      return `${quiz.id}_Company: ${quiz.company.name}_${quiz.description.slice(0, 10)}`
+    const getQuizSubtitle = ({ id, company, description }) => {
+      return `${id}_Company: ${company.name}_${description.slice(0, 10)}`
     };
 
-    const getUserSubtitle = user => {
-      return `${user.id}_${user.first_name}_${user.last_name}`
+    const getUserSubtitle = ({ id, first_name, last_name }) => {
+      return `${id}_${first_name}_${last_name}`
     };
 
     const getQuizResultsRequests = async () => {
