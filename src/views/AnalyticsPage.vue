@@ -137,8 +137,8 @@ export default {
     const isCompanyRoute = router.currentRoute.value.path.includes('companies');
 
     const quizResultsRequests = {
-      'company-results-analytics': async () => await quizzesApi.allCompanyQuizResults(id),
-      'user-results-analytics': async () => await quizzesApi.allUserQuizResults(id),
+      'company-results-analytics': async () => await quizzesApi.getTotalCompanyQuizResults(id),
+      'user-results-analytics': async () => await quizzesApi.getTotalUserQuizResults(id),
     };
     const exportResults = {
       'company-results-analytics': async (params) => await quizzesApi.getCompanyUserQuizResults(id, params),
