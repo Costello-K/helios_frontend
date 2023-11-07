@@ -15,7 +15,7 @@
       <template v-slot:item="{ props, item }">
         <v-list-item
             v-bind="props"
-            :subtitle="`${item.raw.id}_${item.raw.first_name}_${item.raw.last_name}`"
+            :subtitle="getUserSubtitle(item.raw)"
         />
       </template>
     </v-select>
@@ -36,7 +36,7 @@
             <template v-slot:item="{ props, item }">
               <v-list-item
                   v-bind="props"
-                  :subtitle="`${item.raw.id}_${item.raw.description.slice(0, 20)}`"
+                  :subtitle="getCompanySubtitle(item.raw)"
               />
             </template>
           </v-select>
@@ -54,7 +54,7 @@
             <template v-slot:item="{ props, item }">
               <v-list-item
                   v-bind="props"
-                  :subtitle="`${item.raw.id}_${item.raw.first_name}_${item.raw.last_name}`"
+                  :subtitle="getUserSubtitle(item.raw)"
               />
             </template>
           </v-select>
@@ -71,7 +71,7 @@
           <template v-slot:item="{ props, item }">
             <v-list-item
                 v-bind="props"
-                :subtitle="`${item.raw.id}_Company: ${item.raw.company.name}_${item.raw.description.slice(0, 10)}`"
+                :subtitle="getQuizSubtitle(item.raw)"
             />
           </template>
         </v-select>
@@ -137,12 +137,24 @@ export default {
     const isCompanyRoute = router.currentRoute.value.path.includes('companies');
 
     const quizResultsRequests = {
-      'company-results-analytics': async () => await quizzesApi.allCompanyQuizResults(id),
-      'user-results-analytics': async () => await quizzesApi.allUserQuizResults(id),
+      'company-results-analytics': async () => await quizzesApi.getTotalCompanyQuizResults(id),
+      'user-results-analytics': async () => await quizzesApi.getTotalUserQuizResults(id),
     };
     const exportResults = {
       'company-results-analytics': async (params) => await quizzesApi.getCompanyUserQuizResults(id, params),
       'user-results-analytics': async (params) => await quizzesApi.getListUserQuizResults(id, params),
+    };
+
+    const getCompanySubtitle = ({ id, description }) => {
+      return `${id}_${description.slice(0, 20)}`
+    };
+
+    const getQuizSubtitle = ({ id, company, description }) => {
+      return `${id}_Company: ${company.name}_${description.slice(0, 10)}`
+    };
+
+    const getUserSubtitle = ({ id, first_name, last_name }) => {
+      return `${id}_${first_name}_${last_name}`
     };
 
     const getQuizResultsRequests = async () => {
@@ -285,6 +297,9 @@ export default {
       selectFormat,
       selectCompany,
       companyQuizzes,
+      getCompanySubtitle,
+      getQuizSubtitle,
+      getUserSubtitle,
       updateChart,
       exportFile,
       EXPORT_FILE_FORMAT,

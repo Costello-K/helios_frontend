@@ -52,7 +52,7 @@ class QuizzesApiController {
     return this.baseApiClient.makeRequest('POST', path, formData);
   }
 
-  async allCompanyQuizResults(company_id, user_id='') {
+  async getTotalCompanyQuizResults(company_id, user_id='') {
     const params = new URLSearchParams();
     params.append('user_id', user_id);
 
@@ -60,7 +60,7 @@ class QuizzesApiController {
     return this.baseApiClient.makeRequest('GET', path);
   }
 
-  async allUserQuizResults(user_id) {
+  async getTotalUserQuizResults(user_id) {
     const path = `/v1/analytics/users/${user_id}/`;
     return this.baseApiClient.makeRequest('GET', path);
   }
