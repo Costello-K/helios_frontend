@@ -6,7 +6,7 @@
     <div class="button-content">
       <slot/>
       <span class="social-login-text">
-        Continue with {{ socialData.title }}
+        {{ `${$t('buttons.continueWith')} ${socialData.title}` }}
       </span>
     </div>
   </div>
@@ -15,7 +15,6 @@
 <script>
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
-import { useI18n } from 'vue-i18n/dist/vue-i18n';
 import { ref, onMounted } from 'vue';
 import { socialAuthUserApi, usersApi } from '@/api';
 import { auth, queryParamUtils } from '@/utils';
@@ -27,7 +26,6 @@ export default {
     social: Object
   },
   setup(props) {
-    const { t } = useI18n({ useScope: 'global' });
     const store = useStore();
     const router = useRouter();
     const authCode = ref(null);
@@ -71,7 +69,6 @@ export default {
     });
 
     return {
-      t,
       socialData,
       setTypeSocialAuth,
       SOCIAL_AUTH_DATA,

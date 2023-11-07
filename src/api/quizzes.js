@@ -67,10 +67,10 @@ class QuizzesApiController {
 
   async getListUserQuizResults(user_id, { page, company_id, quiz_id, export_format }={}) {
     const params = new URLSearchParams();
-    if (page) params.append('page', page);
-    if (company_id) params.append('company_id', company_id);
-    if (quiz_id) params.append('quiz_id', quiz_id);
-    if (export_format) params.append('export_format', export_format);
+    page && params.append('page', page);
+    company_id && params.append('company_id', company_id);
+    quiz_id && params.append('quiz_id', quiz_id);
+    export_format && params.append('export_format', export_format);
 
     const path = `/v1/users/${user_id}/quizzes/results/?${params.toString()}`;
     return this.baseApiClient.makeRequest('GET', path);
@@ -78,10 +78,10 @@ class QuizzesApiController {
 
   async getCompanyUserQuizResults(company_id, { page, user_id, quiz_id, export_format }={}) {
     const params = new URLSearchParams();
-    if (page) params.append('page', page);
-    if (user_id) params.append('user_id', user_id);
-    if (quiz_id) params.append('quiz_id', quiz_id);
-    if (export_format) params.append('export_format', export_format);
+    page && params.append('page', page);
+    user_id && params.append('user_id', user_id);
+    quiz_id && params.append('quiz_id', quiz_id);
+    export_format && params.append('export_format', export_format);
 
     const path = `/v1/companies/${company_id}/quizzes/results/?${params.toString()}`;
     return this.baseApiClient.makeRequest('GET', path);

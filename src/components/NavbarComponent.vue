@@ -166,8 +166,9 @@ export default {
     const authUserId = computed(() => store.getters['authUser/getUserId']);
     const userFirstName = computed(() => store.getters['authUser/getUserFirstName']);
     const userEmail = computed(() => store.getters['authUser/getUserEmail']);
-    const unviewedNotificationsCount = computed(() =>
-        store.getters['notificationList/getUnviewedNotificationCount']);
+    const unviewedNotificationsCount = computed(() => {
+      return store.getters['notificationList/getUnviewedNotificationCount'];
+    });
 
     const logout = () => {
       auth.logoutUser();

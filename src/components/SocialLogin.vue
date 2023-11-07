@@ -26,7 +26,6 @@
 </template>
 
 <script>
-import { useI18n } from 'vue-i18n/dist/vue-i18n';
 import { SOCIAL_AUTH_DATA } from '@/constants';
 import SocialButtonLogin from '@/components/SocialButtonLogin';
 
@@ -36,10 +35,7 @@ export default {
     SocialButtonLogin,
   },
   setup() {
-    const { t } = useI18n({ useScope: 'global' });
-
     return {
-      t,
       SOCIAL_AUTH_DATA,
     };
   },

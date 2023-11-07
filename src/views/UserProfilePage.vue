@@ -148,10 +148,11 @@ export default {
     const userData = ref({});
     const infoFields = ref([]);
     const tab = ref(COMPANY_NAVBAR[0].value);
-    const TYPES_COMPANY_LIST = ['my-companies', 'all-companies', 'admins', 'members']
+    const TYPES_COMPANY_LIST = ['my-companies', 'all-companies', 'admins', 'members'];
     const authUserId = computed(()=> store.getters['authUser/getUserId']);
-    const unviewedNotificationsCount = computed(() =>
-        store.getters['notificationList/getUnviewedNotificationCount']);
+    const unviewedNotificationsCount = computed(() => {
+      return store.getters['notificationList/getUnviewedNotificationCount'];
+    });
 
     const getUserData = async (userId) => {
       try {

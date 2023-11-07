@@ -5,7 +5,7 @@
   >
     <div class="d-flex justify-space-between title-container">
       <h4 class="align-self-center title">
-        {{ $t('title.newNotification') }}
+        {{ $t('titles.newNotification') }}
       </h4>
       <button
           @click="closeMessageBox"
@@ -40,8 +40,9 @@ export default {
     const showMessageBox = ref(false);
     const textNotification = ref('');
     const countdown = ref(100);
-    const countUnviewedNotifications = computed(() =>
-        store.getters['notificationList/getUnviewedNotificationCount']);
+    const countUnviewedNotifications = computed(() => {
+      return store.getters['notificationList/getUnviewedNotificationCount'];
+    });
 
     const closeMessageBox = () => {
       showMessageBox.value = false;
@@ -89,9 +90,9 @@ export default {
   border-radius: 10px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
   transform: translateY(150%);
-  animation: ani 1s forwards;
+  animation: slideUpAnimation 1s forwards;
 }
-@keyframes ani {
+@keyframes slideUpAnimation {
   0% {transform: translateY(150%);}
   100% {transform: translateX(0);}
 }

@@ -7,6 +7,8 @@ export const BASE_URL = `http://${process.env.BACKEND_APP_HOST}:${process.env.BA
 export const MIN_COUNT_QUIZ_ANSWERS = 2;
 export const MIN_COUNT_QUIZ_QUESTIONS = 2;
 
+export const NUMBER_OF_RATING_STARS = 5;
+
 export const EXPORT_FILE_FORMAT = [
   { format: 'json' },
   { format: 'csv' },
