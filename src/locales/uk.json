@@ -178,6 +178,7 @@
     "afterConfirmationActivation": "Після підтвердження активації",
     "passwordChangedSuccessfully": "Пароль успішно змінено!",
     "confirmCompanyDelete": "Підтвердіть видалення компанії.",
+    "confirmAccountDelete": "Підтвердіть видалення акаунта.",
     "confirmInvitationRevoke": "Підтвердіть відкликання запрошення.",
     "confirmInvitationAccept": "Підтвердіть прийняття запрошення.",
     "confirmInvitationDecline": "Підтвердіть відхилення запрошення.",

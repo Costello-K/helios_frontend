@@ -178,6 +178,7 @@
     "afterConfirmationActivation": "After confirmation of activation",
     "passwordChangedSuccessfully": "Password changed successfully!",
     "confirmCompanyDelete": "Confirm deletion of the company.",
+    "confirmAccountDelete": "Confirm deletion of the account.",
     "confirmInvitationRevoke": "Confirm the invitation revoke.",
     "confirmInvitationAccept": "Confirm the invitation accept.",
     "confirmInvitationDecline": "Confirm the invitation decline.",
