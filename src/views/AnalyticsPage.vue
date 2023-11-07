@@ -15,7 +15,7 @@
       <template v-slot:item="{ props, item }">
         <v-list-item
             v-bind="props"
-            :subtitle="`${item.raw.id}_${item.raw.first_name}_${item.raw.last_name}`"
+            :subtitle="getUserSubtitle(item.raw)"
         />
       </template>
     </v-select>
@@ -36,7 +36,7 @@
             <template v-slot:item="{ props, item }">
               <v-list-item
                   v-bind="props"
-                  :subtitle="`${item.raw.id}_${item.raw.description.slice(0, 20)}`"
+                  :subtitle="getCompanySubtitle(item.raw)"
               />
             </template>
           </v-select>
@@ -54,7 +54,7 @@
             <template v-slot:item="{ props, item }">
               <v-list-item
                   v-bind="props"
-                  :subtitle="`${item.raw.id}_${item.raw.first_name}_${item.raw.last_name}`"
+                  :subtitle="getUserSubtitle(item.raw)"
               />
             </template>
           </v-select>
@@ -71,7 +71,7 @@
           <template v-slot:item="{ props, item }">
             <v-list-item
                 v-bind="props"
-                :subtitle="`${item.raw.id}_Company: ${item.raw.company.name}_${item.raw.description.slice(0, 10)}`"
+                :subtitle="getQuizSubtitle(item.raw)"
             />
           </template>
         </v-select>
@@ -143,6 +143,18 @@ export default {
     const exportResults = {
       'company-results-analytics': async (params) => await quizzesApi.getCompanyUserQuizResults(id, params),
       'user-results-analytics': async (params) => await quizzesApi.getListUserQuizResults(id, params),
+    };
+
+    const getCompanySubtitle = company => {
+      return `${company.id}_${company.description.slice(0, 20)}`
+    };
+
+    const getQuizSubtitle = quiz => {
+      return `${quiz.id}_Company: ${quiz.company.name}_${quiz.description.slice(0, 10)}`
+    };
+
+    const getUserSubtitle = user => {
+      return `${user.id}_${user.first_name}_${user.last_name}`
     };
 
     const getQuizResultsRequests = async () => {
@@ -285,6 +297,9 @@ export default {
       selectFormat,
       selectCompany,
       companyQuizzes,
+      getCompanySubtitle,
+      getQuizSubtitle,
+      getUserSubtitle,
       updateChart,
       exportFile,
       EXPORT_FILE_FORMAT,
