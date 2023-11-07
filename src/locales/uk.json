@@ -43,6 +43,7 @@
     "createQuiz": "Створити вікторину",
     "create": "Створити",
     "edit": "Редагувати",
+    "export": "Експорт",
     "delete": "Видалити",
     "accept": "Прийняти",
     "decline": "Відхилити",
@@ -124,6 +125,7 @@
     "email": "Емейл",
     "owner": "Власник",
     "firstName": "Ім'я",
+    "fileFormat": "Формат файлу",
     "lastName": "Прізвище",
     "company": "Назва компанії",
     "username": "Юзернейм",
@@ -145,6 +147,7 @@
     "quizTime": "Час проходження",
     "companyAverageScore": "Рейтинг в компанії",
     "companyMember": "Учасник компанії",
+    "companyQuiz": "Вікторина компанії",
     "rating": "Рейтинг"
   },
   "links": {
