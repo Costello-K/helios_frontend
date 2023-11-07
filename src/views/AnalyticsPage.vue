@@ -49,8 +49,8 @@ export default {
     const { id } = router.currentRoute.value.params;
 
     const quizResultsRequests = {
-      'company-results-analytics': async () => await quizzesApi.allCompanyQuizResults(id),
-      'user-results-analytics': async () => await quizzesApi.allUserQuizResults(id),
+      'company-results-analytics': async () => await quizzesApi.getTotalCompanyQuizResults(id),
+      'user-results-analytics': async () => await quizzesApi.getTotalUserQuizResults(id),
     };
 
     const getQuizResultsRequests = async () => {
