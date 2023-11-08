@@ -34,7 +34,6 @@
 <script>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { useI18n } from 'vue-i18n/dist/vue-i18n';
 import { authUserApi } from '@/api';
 import { objUtils } from '@/utils';
 import { VALIDATION_RULES } from '@/constants';
@@ -46,7 +45,6 @@ export default {
     BaseButton,
   },
   setup() {
-    const { t } = useI18n({ useScope: 'global' });
     const confirmEmail = ref(false);
     const router = useRouter();
     const formData = ref({ email: '' });
@@ -70,7 +68,6 @@ export default {
     };
 
     return {
-      t,
       property,
       emailRules,
       confirmEmail,

@@ -50,7 +50,6 @@
 <script>
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
-import { useI18n } from 'vue-i18n/dist/vue-i18n';
 import { ref } from 'vue';
 import { authUserApi, usersApi } from '@/api';
 import { auth, formUtils, objUtils } from '@/utils';
@@ -67,7 +66,6 @@ export default {
     BaseLink,
   },
   setup() {
-    const { t } = useI18n({ useScope: 'global' });
     const store = useStore();
     const router = useRouter();
     const isLoadingPage = ref(localStorage.getItem(TYPE_SOCIAL_AUTH));
@@ -91,7 +89,7 @@ export default {
 
         const { data } = await usersApi.getMyUser();
         store.commit('authUser/setUserData', data);
-
+        store.dispatch('webSocketService/connectWebSocket');
         router.push(`/users/${data.id}`);
       } catch (err) {
         errors.value = objUtils.mergeObjects(errors.value, err.response.data);
@@ -99,7 +97,6 @@ export default {
     };
 
     return {
-      t,
       VALIDATION_RULES,
       formData,
       errors,

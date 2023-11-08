@@ -3,7 +3,7 @@
     <div class="stars-container">
       <div class="stars">
         <div
-            v-for="i in 5"
+            v-for="i in NUMBER_OF_RATING_STARS"
             :key="i"
         >
           <font-awesome-icon
@@ -18,7 +18,7 @@
       />
       <div class="stars">
         <div
-            v-for="i in 5"
+            v-for="i in NUMBER_OF_RATING_STARS"
             :key="i"
         >
           <font-awesome-icon
@@ -32,12 +32,19 @@
 </template>
 
 <script>
+import { NUMBER_OF_RATING_STARS } from '@/constants';
+
 export default {
   name: 'StarRatingComponent',
   props: {
     rating: {
       type: [Number, String, null],
-      required: true
+      required: true,
+    }
+  },
+  setup() {
+    return {
+      NUMBER_OF_RATING_STARS,
     }
   },
 };
