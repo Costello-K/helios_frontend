@@ -31,8 +31,10 @@ export default {
           commit('notificationList/setNotificationListData', notificationsData, {root: true});
         } else if (notificationsData?.create) {
           commit('notificationList/addNotification', notificationsData, {root: true});
-        } else {
+        } else if (notificationsData?.update) {
           commit('notificationList/updateNotification', notificationsData, {root: true});
+        } else {
+          console.error(`Error: ${notificationsData?.error}`);
         }
       };
 
@@ -45,6 +47,7 @@ export default {
       };
     },
     updateStatusNotification({ state }, payload) {
+      payload['update'] = true;
       state.notificationSocket.send(JSON.stringify(payload));
     },
   },

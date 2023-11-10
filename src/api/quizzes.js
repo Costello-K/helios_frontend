@@ -22,8 +22,11 @@ class QuizzesApiController {
     return this.baseApiClient.makeRequest('GET', path);
   }
 
-  async createQuiz(company_id, formData) {
-    const path = `/v1/companies/${company_id}/quizzes/`;
+  async createQuiz(company_id, formData, export_file='') {
+    const params = new URLSearchParams();
+    export_file && params.append('export_file', export_file);
+
+    const path = `/v1/companies/${company_id}/quizzes/?${params.toString()}`;
     return this.baseApiClient.makeRequest('POST', path, formData);
   }
 
@@ -32,8 +35,11 @@ class QuizzesApiController {
     return this.baseApiClient.makeRequest('GET', path);
   }
 
-  async updateQuiz(company_id, quiz_id, formData) {
-    const path = `/v1/companies/${company_id}/quizzes/${quiz_id}/`;
+  async updateQuiz(company_id, quiz_id, formData, export_file='') {
+    const params = new URLSearchParams();
+    export_file && params.append('export_file', export_file);
+
+    const path = `/v1/companies/${company_id}/quizzes/${quiz_id}/?${params.toString()}`;
     return this.baseApiClient.makeRequest('PATCH', path, formData);
   }
 

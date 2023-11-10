@@ -93,8 +93,46 @@
       </template>
 
       <BaseButton
+          class="w-100 mt-10"
+          :button-name="$t('buttons.uploadFromExcelFile')"
+          @click="switchForm"
+      />
+      <v-form
+          v-if="isOpenForm"
+          @submit.prevent="submitUploadExcelForm"
+          class="mt-7"
+      >
+        <div
+            v-if="isFileErrors"
+            class="my-2"
+        >
+          <v-card-text
+              v-for="(error, key) in fileErrors"
+              :key="`${key}_${error}`"
+              class="py-0 red"
+          >
+              {{ `${error}` && `${key}: ${JSON.stringify(error)}` }}
+          </v-card-text>
+        </div>
+        <v-file-input
+            v-model="fileData.excelFile"
+            :label="$t('placeholders.excelFile')"
+            :rules="VALIDATION_RULES.excelFile"
+            :error-messages="fileErrors.file"
+            prepend-icon="mdi-file-excel"
+            show-size
+            accept=".xls, .xlsx"
+        />
+        <GroupFormButtons
+            type="submit"
+            :summit-button-name="isEdit ? $t('buttons.edit') : $t('buttons.create')"
+            :cancel-button-click-function="switchForm"
+        />
+      </v-form>
+
+      <BaseButton
           type="submit"
-          class="w-100 mt-15"
+          class="w-100 mt-5"
           :button-name="isEdit ? $t('buttons.edit') : $t('buttons.create')"
       />
     </v-form>
@@ -102,19 +140,21 @@
 </template>
 
 <script>
-import { onMounted, ref} from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { quizzesApi } from '@/api';
-import { formUtils } from '@/utils';
+import { formUtils, objUtils } from '@/utils';
 import { MIN_COUNT_QUIZ_ANSWERS, MIN_COUNT_QUIZ_QUESTIONS, VALIDATION_RULES } from '@/constants';
 import BaseButton from '@/components/BaseButton';
+import GroupFormButtons from '@/components/GroupFormButtons';
 
 export default {
   name: 'QuizForm',
   components: {
     BaseButton,
+    GroupFormButtons,
   },
   props: {
     closeModalWindow: {
@@ -133,10 +173,18 @@ export default {
   setup(props) {
     const store = useStore();
     const router = useRouter();
+    const isOpenForm = ref(false);
     const { id } = router.currentRoute.value.params;
     const { t } = useI18n({ useScope: 'global' });
     const errors = ref({});
     const commonErrors = ref([]);
+    const fileData = ref({ excelFile: '' });
+    const fileErrors = ref({
+      file: '',
+      title: '',
+      description: '',
+      questions: '',
+    });
     const formData = ref({
       title: '',
       description: '',
@@ -159,7 +207,6 @@ export default {
         },
       ],
     });
-
     const addQuestion = () => {
       formData.value.questions.push({
         id: null,
@@ -170,6 +217,8 @@ export default {
         ],
       });
     };
+    const isFileErrors = computed(() => Object.values(fileErrors).some(error => error !== ''));
+
     const removeQuestion = index => formData.value.questions.splice(index, 1);
     const addAnswer = questionIndex => {
       formData.value.questions[questionIndex].answers.push({text: '', is_right: false});
@@ -177,6 +226,7 @@ export default {
     const removeAnswer = (questionIndex, answerIndex) => {
       formData.value.questions[questionIndex].answers.splice(answerIndex, 1);
     };
+    const switchForm = () => isOpenForm.value = !isOpenForm.value;
 
     const commonValidation = formData => {
       if (formData.questions.length < MIN_COUNT_QUIZ_QUESTIONS) {
@@ -222,6 +272,32 @@ export default {
       }
     });
 
+    const submitUploadExcelForm = async () => {
+      const isFormValid = formUtils.formValidator(fileData, ref(VALIDATION_RULES));
+
+      if (isFormValid && fileData.value.excelFile && fileData.value.excelFile[0]) {
+        const newFormData = new FormData();
+        newFormData.append('file', fileData.value.excelFile[0]);
+
+        try {
+          const { data, status } = props?.isEdit
+              ? await quizzesApi.updateQuiz(id, props.data.id, newFormData, 'file')
+              : await quizzesApi.createQuiz(id, newFormData, 'file')
+
+          if (status === 200) {
+            store.commit(`quizList/updateQuizListData`, data);
+          } else if (status === 201) {
+            store.commit(`quizList/addQuizList`, data.quizzes);
+          }
+
+          props.closeModalWindow();
+        } catch (err) {
+          fileErrors.value = objUtils.createEmptyObject(fileErrors.value);
+          fileErrors.value = objUtils.mergeObjects(fileErrors.value, err.response.data);
+        }
+      }
+    };
+
     const submitQuizForm = async () => {
       commonErrors.value = [];
       errors.value = {};
@@ -258,7 +334,7 @@ export default {
         if (status === 200) {
           store.commit(`quizList/updateQuizListData`, data);
         } else if (status === 201) {
-          store.commit(`quizList/addQuiz`, data);
+          store.commit(`quizList/addQuizList`, data);
         }
 
         props.closeModalWindow();
@@ -276,7 +352,11 @@ export default {
 
     return {
       errors,
+      fileErrors,
+      isFileErrors,
       commonErrors,
+      isOpenForm,
+      fileData,
       formData,
       VALIDATION_RULES,
       addQuestion,
@@ -284,6 +364,8 @@ export default {
       addAnswer,
       removeAnswer,
       submitQuizForm,
+      switchForm,
+      submitUploadExcelForm,
     };
   },
 };

@@ -40,9 +40,11 @@ export const NAME_REFRESH_TOKEN = 'refreshToken';
 // Name for type social auth in local storage
 export const TYPE_SOCIAL_AUTH = 'typeSocialAuth';
 
-// Maximum avatar file size in Mb
+// Maximum file size in Mb
 export const LIMIT_AVATAR_SIZE = 2;
 const maxFileSize = LIMIT_AVATAR_SIZE * 1024 * 1024;
+export const LIMIT_EXCEL_FILE_SIZE = 0.5;
+const maxExcelFileSize = LIMIT_EXCEL_FILE_SIZE * 1024 * 1024;
 
 // Application routes
 export const ROUTER_DATA = [
@@ -169,6 +171,16 @@ export const VALIDATION_RULES = {
       || !v.length
       || /\.(png|jpeg|jpg|PNG|JPEG|JPG)$/.test(v[0].name)
       || `${t('validations.fileExtensions')}: .png, .jpeg, .jpg`,
+  ],
+  excelFile: [
+    v => !v
+      || !v.length
+      || v[0].size <= maxExcelFileSize
+      || `${t('validations.fileSize')} ${LIMIT_EXCEL_FILE_SIZE} Mb`,
+    v => !v
+      || !v.length
+      || /\.(xls|xlsx)$/.test(v[0].name)
+      || `${t('validations.fileExtensions')}: .xls, .xlsx`,
   ],
   password: [v => !!v || t('validations.passwordRequired')],
   current_password: [v => !!v || t('validations.passwordRequired')],
