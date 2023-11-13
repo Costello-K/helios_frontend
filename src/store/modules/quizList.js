@@ -15,9 +15,9 @@ export default {
     setQuizPageSize(state, payload) {
       state.page_size = payload;
     },
-    addQuiz(state, payload) {
+    addQuizList(state, payload) {
       if (state.quizzes.length < state.page_size) {
-        state.quizzes = [...state.quizzes, payload];
+        state.quizzes = [...state.quizzes, ...payload].slice(state.page_size);
       }
     },
     removeQuiz(state, id) {
