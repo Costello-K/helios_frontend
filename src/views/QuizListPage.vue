@@ -23,7 +23,7 @@ import QuizCard from '@/components/QuizCard';
 import PaginationComponent from '@/components/PaginationComponent';
 
 export default {
-  name: 'UserListPage',
+  name: 'QuizListPage',
   components: {
     CardList,
     QuizCard,

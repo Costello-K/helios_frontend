@@ -1,5 +1,5 @@
 <template>
-  <div v-show="!isLoadingPage">
+  <div>
     <v-sheet
         width="350"
         class="mx-auto mt-15"
@@ -53,7 +53,7 @@ import { useRouter } from 'vue-router';
 import { ref } from 'vue';
 import { authUserApi, usersApi } from '@/api';
 import { auth, formUtils, objUtils } from '@/utils';
-import { TYPE_SOCIAL_AUTH, VALIDATION_RULES } from '@/constants';
+import { VALIDATION_RULES } from '@/constants';
 import BaseButton from '@/components/BaseButton';
 import BaseLink from '@/components/BaseLink';
 import SocialLogin from '@/components/SocialLogin';
@@ -68,7 +68,6 @@ export default {
   setup() {
     const store = useStore();
     const router = useRouter();
-    const isLoadingPage = ref(localStorage.getItem(TYPE_SOCIAL_AUTH));
     const formData = ref({
       username: '',
       password: '',
@@ -100,7 +99,6 @@ export default {
       VALIDATION_RULES,
       formData,
       errors,
-      isLoadingPage,
       submitUserLoginForm,
     };
   },

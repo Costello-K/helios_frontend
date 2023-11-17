@@ -8,9 +8,7 @@ class SocialAuthApiController {
 
   // Get the URL for authentication through OAuth2.
   async getAuthUrl(typeSocialAuth) {
-    const frontHost = process.env.FRONTEND_APP_HOST;
-    const frontPort = process.env.FRONTEND_APP_PORT;
-    const path = `/auth/o/${typeSocialAuth}/?redirect_uri=http://${frontHost}:${frontPort}/authorization`;
+    const path = `/auth/o/${typeSocialAuth}/?redirect_uri=${process.env.FRONTEND_APP_URL}/authorization`;
     return this.baseApiClient.makeRequest('GET', path, {}, { withCredentials: true });
   }
 

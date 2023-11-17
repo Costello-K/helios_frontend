@@ -2,7 +2,7 @@ import i18n from './i18n';
 const { t } = i18n.global;
 
 // Base URL for interacting with the backend
-export const BASE_URL = `http://${process.env.BACKEND_APP_HOST}:${process.env.BACKEND_APP_PORT}`
+export const BASE_URL = process.env.BACKEND_APP_URL
 
 export const MIN_COUNT_QUIZ_ANSWERS = 2;
 export const MIN_COUNT_QUIZ_QUESTIONS = 2;
@@ -157,7 +157,7 @@ export const VALIDATION_RULES = {
   text: [v => !!v || t('validations.answerRequired')],
   question_text: [v => !!v || t('validations.questionTextRequired')],
   description: [v => !!v || t('validations.descriptionRequired')],
-  frequency: [],
+  frequency: [v => !v || /^[1-9]\d*$/.test(v) || t('validations.mustBePositiveInteger')],
   is_right: [],
   id: [],
   visibility: [],
