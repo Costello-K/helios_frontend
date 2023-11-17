@@ -83,11 +83,12 @@
     "answerRequired": "Текст відповіді є обов'язковим",
     "questionTextRequired": "Текст запитання є обов'язковим",
     "rightAnswerRequired": "В кожному питанні має бути відмічена принаймні одна правильна відповідь",
+    "mustBePositiveInteger": "Має бути позитивне ціле число",
     "minCountAnswers": "В кожному питанні має бути мінімум",
     "minCountQuestions": "У вікторині має бути мінімум",
     "answers": "відповіді",
     "question": "Питання",
-    "questions": "питання",
+    "questions": "питання"
   },
   "placeholders": {
     "username": "Юзернейм",

@@ -16,8 +16,8 @@ export default {
     connectWebSocket({ commit, state, rootState }) {
       const userId = rootState.authUser.user.id;
       state.notificationSocket = new WebSocket(
-        `ws://${process.env.BACKEND_APP_HOST}:${process.env.BACKEND_APP_PORT}/ws/notifications/${userId}/`,
-        );
+        `${process.env.BACKEND_WEBSOCKET_APP_URL}/ws/notifications/${userId}/`,
+      );
 
       state.notificationSocket.onopen = () => {
         commit('setConnectWebSocketStatus');

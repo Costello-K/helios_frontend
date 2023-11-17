@@ -58,6 +58,7 @@ export default {
           auth.setTokens(response.data);
         } catch (err) {
           console.error(err)
+          localStorage.removeItem(TYPE_SOCIAL_AUTH);
         }
         const { data } = await usersApi.getMyUser();
         store.commit('authUser/setUserData', data);

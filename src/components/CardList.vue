@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="list-wrapper">
     <h2 class="mb-10">{{ title }}</h2>
     <v-row>
       <v-col
@@ -24,8 +24,10 @@ export default {
 </script>
 
 <style scoped>
+.list-wrapper {
+  max-width: 600px;
+}
 .container-list {
   min-width: 480px;
-  max-width: 600px;
 }
 </style>

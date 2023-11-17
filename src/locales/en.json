@@ -83,6 +83,7 @@
     "answerRequired": "The answer text is required",
     "questionTextRequired": "The question text is required",
     "rightAnswerRequired": "Each question must have at least one correct answer",
+    "mustBePositiveInteger": "Must be a positive integer",
     "minCountAnswers": "Each question must have at least",
     "minCountQuestions": "The quiz should have at least",
     "answers": "answers",

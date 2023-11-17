@@ -50,7 +50,7 @@ export default {
     };
 
     watch(countUnviewedNotifications, (newValue, oldValue) => {
-      if (newValue > oldValue && initialized.value) {
+      if (newValue > oldValue && initialized.value || newValue === 1 && !oldValue) {
         const lastNotification = computed(() => store.getters['notificationList/getLastNotification']);
         textNotification.value = lastNotification.value.text;
         countdown.value = 100;

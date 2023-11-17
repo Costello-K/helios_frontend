@@ -52,7 +52,7 @@
           class="align-self-center"
       >
         <CardModalWindow
-            :mainButtonText="isQuizResult && !isQuizResult.complete ? 'buttons.continue' : 'buttons.start'"
+            :mainButtonText="isQuizResult && !isQuizResult.completed ? 'buttons.continue' : 'buttons.start'"
             :mainText="'texts.confirmStartQuiz'"
             :onClickFunction="() => $router.push({
               path: `/companies/${quiz.company.id}/quizzes/${quiz.id}`,
