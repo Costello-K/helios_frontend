@@ -17,7 +17,7 @@ export default {
     },
     addQuizList(state, payload) {
       if (state.quizzes.length < state.page_size) {
-        state.quizzes = [...state.quizzes, ...payload].slice(state.page_size);
+        state.quizzes = [...state.quizzes, ...payload].slice(0, state.page_size);
       }
     },
     removeQuiz(state, id) {
