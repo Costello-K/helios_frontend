@@ -1,9 +1,6 @@
 name: Deployment to AWS S3 Bucket
 
-on:
-  pull_request:
-    branches: develop
-    types: closed
+on: [push]
 
 jobs:
   build:
