@@ -1,9 +1,6 @@
 name: Deployment to AWS S3 Bucket
 
-on:
-  pull_request:
-    branches: develop
-    types: closed
+on: [push]
 
 jobs:
   build:
@@ -21,6 +18,11 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+
+      - name: Create .env file
+        run: |
+          touch .env
+          echo "${{ secrets.PROD_ENV_FILE }}" > .env
 
       - name: Build Vue.js application
         run: npm run build
