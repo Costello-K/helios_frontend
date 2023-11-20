@@ -9,6 +9,7 @@ import quizList from './modules/quizList';
 import quizResultsList from './modules/quizResultsList';
 import notificationList from './modules/notificationList';
 import webSocketService from './modules/webSocketService';
+import createPersistedState from 'vuex-persistedstate';
 
 export default new Store({
     modules: {
@@ -23,4 +24,5 @@ export default new Store({
         notificationList,
         webSocketService,
     },
+    plugins: [createPersistedState()],
 });
