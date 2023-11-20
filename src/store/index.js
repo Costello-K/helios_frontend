@@ -24,5 +24,11 @@ export default new Store({
         notificationList,
         webSocketService,
     },
-    plugins: [createPersistedState()],
+    plugins: [
+        createPersistedState({
+            rehydrated: store => {
+                store.dispatch('webSocketService/connectWebSocket');
+            },
+        }),
+    ],
 });
