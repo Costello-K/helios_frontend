@@ -205,6 +205,7 @@ export default {
   margin-bottom: 15px;
 }
 .avatar {
+  min-width: 120px;
   max-width: 200px;
   max-height: 200px;
   width: auto;
