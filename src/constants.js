@@ -41,7 +41,7 @@ export const NAME_REFRESH_TOKEN = 'refreshToken';
 export const TYPE_SOCIAL_AUTH = 'typeSocialAuth';
 
 // Maximum file size in Mb
-export const LIMIT_AVATAR_SIZE = 2;
+export const LIMIT_AVATAR_SIZE = 4;
 const maxFileSize = LIMIT_AVATAR_SIZE * 1024 * 1024;
 export const LIMIT_EXCEL_FILE_SIZE = 0.5;
 const maxExcelFileSize = LIMIT_EXCEL_FILE_SIZE * 1024 * 1024;

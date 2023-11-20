@@ -203,15 +203,6 @@ export default {
       }
     };
 
-    onMounted(async () => {
-      const { id } = router.currentRoute.value.params;
-      await getCompanyData(id);
-    });
-
-    watch(() => router.currentRoute.value.params.id, async (newId) => {
-      await getCompanyData(newId);
-    });
-
     const deleteCompany = async () => {
       try {
         const { id } = router.currentRoute.value.params;
@@ -223,6 +214,15 @@ export default {
         console.error(err);
       }
     }
+
+    onMounted(async () => {
+      const { id } = router.currentRoute.value.params;
+      await getCompanyData(id);
+    });
+
+    watch(router.currentRoute.value.params.id, async (newId) => {
+      await getCompanyData(newId);
+    });
 
     return {
       companyData,

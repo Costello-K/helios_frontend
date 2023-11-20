@@ -1,62 +1,65 @@
 <template>
-  <div>
-    <v-sheet
-        width="350"
-        class="mx-auto mt-15"
-    >
-      <v-form @submit.prevent="submitUserLoginForm">
-        <v-text-field
-            v-model="formData.username"
-            :label="$t('placeholders.username')"
-            :rules="VALIDATION_RULES.username"
-        />
+    <PageLoaderComponent v-if="isLoading"/>
 
-        <v-text-field
-            v-model="formData.password"
-            :label="$t('placeholders.password')"
-            :rules="VALIDATION_RULES.password"
-            type="password"
-        />
+    <div v-show="!isLoading">
+      <v-sheet
+          width="350"
+          class="mx-auto mt-15"
+      >
+        <v-form @submit.prevent="submitUserLoginForm">
+          <v-text-field
+              v-model="formData.username"
+              :label="$t('placeholders.username')"
+              :rules="VALIDATION_RULES.username"
+          />
 
-        <div style="position: relative" >
-          <p class="login-error">
-            {{ errors.detail }}
-          </p>
-        </div>
+          <v-text-field
+              v-model="formData.password"
+              :label="$t('placeholders.password')"
+              :rules="VALIDATION_RULES.password"
+              type="password"
+          />
 
-        <BaseButton
-            type="submit"
-            class="mt-5 w-100"
-            :button-name="$t('buttons.login')"
-        />
-      </v-form>
-      <p class="mt-4">
-        <BaseLink
-            to="/auth/users/reset/password"
-            :text="$t('links.forgotYourPassword')"
-        />
-      </p>
-      <p class="mt-4">
-        <BaseLink
-            to="/auth/users/reset/username"
-            :text="$t('links.forgotYourUsername')"
-        />
-      </p>
-      <SocialLogin/>
-    </v-sheet>
-  </div>
+          <div style="position: relative" >
+            <p class="login-error">
+              {{ errors.detail }}
+            </p>
+          </div>
+
+          <BaseButton
+              type="submit"
+              class="mt-5 w-100"
+              :button-name="$t('buttons.login')"
+          />
+        </v-form>
+        <p class="mt-4">
+          <BaseLink
+              to="/auth/users/reset/password"
+              :text="$t('links.forgotYourPassword')"
+          />
+        </p>
+        <p class="mt-4">
+          <BaseLink
+              to="/auth/users/reset/username"
+              :text="$t('links.forgotYourUsername')"
+          />
+        </p>
+        <SocialLogin/>
+      </v-sheet>
+    </div>
 </template>
 
 <script>
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { authUserApi, usersApi } from '@/api';
-import { auth, formUtils, objUtils } from '@/utils';
+import { auth, formUtils, objUtils, queryParamUtils } from '@/utils';
 import { VALIDATION_RULES } from '@/constants';
 import BaseButton from '@/components/BaseButton';
 import BaseLink from '@/components/BaseLink';
 import SocialLogin from '@/components/SocialLogin';
+import PageLoaderComponent from '@/components/PageLoaderComponent';
 
 export default {
   name: 'UserAuthorizationPage',
@@ -64,10 +67,12 @@ export default {
     SocialLogin,
     BaseButton,
     BaseLink,
+    PageLoaderComponent,
   },
   setup() {
     const store = useStore();
     const router = useRouter();
+    const isLoading = ref(false);
     const formData = ref({
       username: '',
       password: '',
@@ -95,7 +100,17 @@ export default {
       }
     };
 
+    onMounted(async () => {
+      const authCode = queryParamUtils.getQueryParam('code');
+      const authState = queryParamUtils.getQueryParam('state');
+
+      if (authCode && authState) {
+        isLoading.value = true;
+      }
+    });
+
     return {
+      isLoading,
       VALIDATION_RULES,
       formData,
       errors,

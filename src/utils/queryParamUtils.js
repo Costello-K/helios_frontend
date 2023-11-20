@@ -1,4 +1,11 @@
 /**
+ * Get a query parameter from the current URL.
+ */
+export const getQueryParam = paramName => {
+  return new URLSearchParams(window.location.search).get(paramName);
+};
+
+/**
  * Get and remove a query parameter from the current URL.
  * @param {string} paramName - The name of the query parameter to retrieve and remove.
  * @returns {string|null} - The value of the query parameter or null if it doesn't exist.

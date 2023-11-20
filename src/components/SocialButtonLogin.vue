@@ -44,11 +44,11 @@ export default {
     }
 
     onMounted(async () => {
-      authCode.value = queryParamUtils.getAndRemoveQueryParam('code');
-      authState.value = queryParamUtils.getAndRemoveQueryParam('state');
+      authCode.value = queryParamUtils.getQueryParam('code');
+      authState.value = queryParamUtils.getQueryParam('state');
+      const nameSocialAuth = localStorage.getItem(TYPE_SOCIAL_AUTH);
 
-      if (authCode.value && authState.value) {
-        const nameSocialAuth = localStorage.getItem(TYPE_SOCIAL_AUTH);
+      if (authCode.value && authState.value && nameSocialAuth === socialData.value.name) {
         try {
           const response = await socialAuthUserApi.getTokens(
               nameSocialAuth,

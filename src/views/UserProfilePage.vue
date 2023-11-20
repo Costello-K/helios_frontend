@@ -31,7 +31,7 @@
       </v-tabs>
 
       <div class="w-100">
-        <div class="pa-5">
+        <div :class="['pa-5', { 'user-profile-container': tab !== 'my-companies' }]">
           <v-container class="d-flex">
             <v-img
                 :src="`${BASE_URL}${userData.avatar}`"
@@ -53,7 +53,7 @@
             />
           </v-container>
           <ModalWindow
-              v-if="myProfile"
+              v-if="myProfile && tab === 'my-companies'"
               :open-button-text="$t('buttons.createCompany')"
               :close-button-text="$t('buttons.cancel')"
           >
@@ -200,6 +200,10 @@ export default {
 </script>
 
 <style scoped>
+.user-profile-container {
+  border-bottom: 2px solid grey;
+  margin-bottom: 15px;
+}
 .avatar {
   max-width: 200px;
   max-height: 200px;
