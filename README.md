@@ -1,9 +1,9 @@
 ## Project name:
-### Frontend internship at "Meduzzen" company
+### Helios
 
 ## Project description:
 
-This project is an application for conducting quizzes. Users can create companies, manage their employees, and create assessment quizzes for their employees. In addition, the system provides a function to notify employees about new quizzes. The project is built using Vue.
+This project is an application for testing company members. Any users can create companies. Company owners can manage their employees, appoint administrators, and create quizzes to assess their employees. A notification system for employees about new quizzes, analytics of completed quizzes, and export of analytics are implemented. Creating and editing quizzes is possible through importing an Excel file. Social authentication is present. Password reset, account activation through email confirmation are implemented. There is a user settings page with the ability to edit any information, including the avatar. The project is built using Vue.
 
 ## Development Tools:
 
@@ -14,7 +14,7 @@ This project is an application for conducting quizzes. Users can create companie
 
 ### 1. Clone the repository
 ```
-https://github.com/Costello90/internship_meduzzen_frontend.git
+https://github.com/Costello90/helios_frontend.git
 ```
 ### 2. Project setup
 ```
