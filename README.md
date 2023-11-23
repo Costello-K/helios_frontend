@@ -14,7 +14,7 @@ This project is an application for testing company members. Any users can create
 
 ### 1. Clone the repository
 ```
-https://github.com/Costello90/helios_frontend.git
+https://github.com/Costello-K/helios_frontend.git
 ```
 ### 2. Project setup
 ```
